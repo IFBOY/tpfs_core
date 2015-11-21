@@ -570,6 +570,12 @@
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
+		<!-- add by hedj 解决导出EXCEL时，缺少JAR包的问题 -->
+		<dependency>
+			<groupId>org.apache.xmlbeans</groupId>
+			<artifactId>xmlbeans</artifactId>
+			<version>2.6.0</version>
+		</dependency>
 		
 		<!-- image util -->
 		<dependency>
