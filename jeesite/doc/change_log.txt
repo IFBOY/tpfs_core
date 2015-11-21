@@ -1,5 +1,5 @@
 1 解决 在线办公-通告管理-通知添加 保证失败的问题。OaNotifyRecordDao.xml 注释80~82行。
-2 解决导出EXCEL，下载导入用户模板EXCEL时，报错的问题，添加xmlbeans.jar
+2 解决用户列表导出EXCEL，下载导入用户模板EXCEL时，报错的问题。原因：缺少org.apache.xmlbeans : xmlbeans.jar
   在POM文件513行添加以下依耐
 		<dependency>
 			<groupId>org.apache.xmlbeans</groupId>
