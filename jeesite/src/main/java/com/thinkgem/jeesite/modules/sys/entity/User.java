@@ -31,7 +31,7 @@ public class User extends DataEntity<User> {
 	private static final long serialVersionUID = 1L;
 	private Office company;	// 归属公司
 	private Office office;	// 归属部门
-	private String loginName;// 登录名
+	private String loginName;// 用户名
 	private String password;// 密码
 	private String no;		// 工号
 	private String name;	// 姓名
@@ -39,6 +39,7 @@ public class User extends DataEntity<User> {
 	private String phone;	// 电话
 	private String mobile;	// 手机
 	private String userType;// 用户类型
+	private String sex="1";//用户性别
 	private String loginIp;	// 最后登陆IP
 	private Date loginDate;	// 最后登陆日期
 	private String loginFlag;	// 是否允许登陆
@@ -53,6 +54,9 @@ public class User extends DataEntity<User> {
 	private Role role;	// 根据角色查询用户条件
 	
 	private List<Role> roleList = Lists.newArrayList(); // 拥有角色列表
+	
+	private String typeUser;
+	private String userSex;
 
 	public User() {
 		super();
@@ -96,8 +100,8 @@ public class User extends DataEntity<User> {
 	}
 
 	@JsonIgnore
-	@NotNull(message="归属公司不能为空")
-	@ExcelField(title="归属公司", align=2, sort=20)
+	@NotNull(message="归属学校不能为空")
+	@ExcelField(title="归属学校", align=2, sort=20)
 	public Office getCompany() {
 		return company;
 	}
@@ -107,8 +111,8 @@ public class User extends DataEntity<User> {
 	}
 	
 	@JsonIgnore
-	@NotNull(message="归属部门不能为空")
-	@ExcelField(title="归属部门", align=2, sort=25)
+	@NotNull(message="归属学院不能为空")
+	@ExcelField(title="归属学院", align=2, sort=25)
 	public Office getOffice() {
 		return office;
 	}
@@ -117,8 +121,8 @@ public class User extends DataEntity<User> {
 		this.office = office;
 	}
 
-	@Length(min=1, max=100, message="登录名长度必须介于 1 和 100 之间")
-	@ExcelField(title="登录名", align=2, sort=30)
+	@Length(min=1, max=100, message="用户名长度必须介于 1 和 100 之间")
+	@ExcelField(title="用户名/学号", align=2, sort=30)
 	public String getLoginName() {
 		return loginName;
 	}
@@ -143,7 +147,6 @@ public class User extends DataEntity<User> {
 		return name;
 	}
 	
-	@Length(min=1, max=100, message="工号长度必须介于 1 和 100 之间")
 	@ExcelField(title="工号", align=2, sort=45)
 	public String getNo() {
 		return no;
@@ -201,6 +204,15 @@ public class User extends DataEntity<User> {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	@Length(min=0, max=10, message="性别长度必须介于 1 和 10之间")
+	@ExcelField(title="性别", align=2, sort=80, dictType="sex")
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	@ExcelField(title="创建时间", type=0, align=1, sort=90)
@@ -282,6 +294,23 @@ public class User extends DataEntity<User> {
 	
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
+	}
+
+
+	public String getTypeUser() {
+		return typeUser;
+	}
+
+	public void setTypeUser(String typeUser) {
+		this.typeUser = typeUser;
+	}
+
+	public String getUserSex() {
+		return userSex;
+	}
+
+	public void setUserSex(String userSex) {
+		this.userSex = userSex;
 	}
 
 	@JsonIgnore

@@ -64,12 +64,15 @@
     	a.office_id AS "office.id",
     	a.login_name,
     	a.password,
+    	sd1.label as typeUser,
     	a.no,
 		a.name,
+		sd2.label as userSex,
 		a.email,
 		a.phone,
 		a.mobile,
 		a.user_type,
+		a.sex,
 		a.login_ip,
 		a.login_date,
 		a.remarks,
@@ -118,7 +121,10 @@
 		LEFT JOIN sys_user cu ON cu.id = c.primary_person
 		LEFT JOIN sys_user cu2 ON cu2.id = c.deputy_person
 		LEFT JOIN sys_user ou ON ou.id = o.primary_person
-		LEFT JOIN sys_user ou2 ON ou2.id = o.deputy_person<!-- 
+		LEFT JOIN sys_user ou2 ON ou2.id = o.deputy_person
+		LEFT JOIN sys_dict sd1 ON sd1.value = a.user_type and sd1.type='sys_user_type'
+		LEFT JOIN sys_dict sd2 ON sd2.value = a.sex and sd2.type='sex'
+		<!-- 
 		LEFT JOIN sys_user_role ur ON ur.user_id = a.id
         LEFT JOIN sys_role r ON r.id = ur.role_id -->
     </sql>
@@ -183,6 +189,17 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>
 		</if>
+		<choose>
+			<when test="userType != null and userType != ''">
+				AND a.user_type= #{userType}
+			</when>
+			<otherwise>
+				AND a.user_type in('1','2','3')
+			</otherwise>
+		</choose>
+		<if test="userType != null and userType != ''">
+			AND a.user_type= #{userType}
+		</if>
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
 		<choose>
@@ -233,6 +250,7 @@
 			password, 
 			no, 
 			name, 
+			sex,
 			email, 
 			phone, 
 			mobile, 
@@ -253,6 +271,7 @@
 			#{password}, 
 			#{no}, 
 			#{name}, 
+			#{sex}, 
 			#{email}, 
 			#{phone}, 
 			#{mobile}, 
@@ -277,6 +296,7 @@
 			password = #{password}, 
 			no = #{no}, 
 			name = #{name}, 
+			sex=#{sex},
 			email = #{email}, 
 			phone = #{phone}, 
 			mobile = #{mobile}, 

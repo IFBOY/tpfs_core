@@ -61,6 +61,7 @@
 					title="部门" url="/sys/office/treeData?type=2" cssClass="required" notAllowSelectParent="true"/>
 			</div>
 		</div>
+		<!-- 取消工号
 		<div class="control-group">
 			<label class="control-label">工号:</label>
 			<div class="controls">
@@ -68,6 +69,7 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
+		 -->
 		<div class="control-group">
 			<label class="control-label">姓名:</label>
 			<div class="controls">
@@ -76,7 +78,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">登录名:</label>
+			<label class="control-label">用户名/学号:</label>
 			<div class="controls">
 				<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
 				<form:input path="loginName" htmlEscape="false" maxlength="50" class="required userName"/>
@@ -96,6 +98,13 @@
 			<div class="controls">
 				<input id="confirmNewPassword" name="confirmNewPassword" type="password" value="" maxlength="50" minlength="3" equalTo="#newPassword"/>
 				<c:if test="${empty user.id}"><span class="help-inline"><font color="red">*</font> </span></c:if>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">性别:</label>
+			<div class="controls">
+				<form:radiobutton path="sex" value="1"/>男  
+                <form:radiobutton path="sex" value="0"/>女 
 			</div>
 		</div>
 		<div class="control-group">

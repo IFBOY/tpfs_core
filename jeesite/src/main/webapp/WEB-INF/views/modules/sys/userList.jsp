@@ -49,7 +49,12 @@
 		<ul class="ul-form">
 			<li><label>归属学校：</label><sys:treeselect id="company" name="company.id" value="${user.company.id}" labelName="company.name" labelValue="${user.company.name}" 
 				title="公司" url="/sys/office/treeData?type=1" cssClass="input-small" allowClear="true"/></li>
-			<li><label>登录名：</label><form:input path="loginName" htmlEscape="false" maxlength="50" class="input-medium"/></li>
+			<li><label>用户名：</label><form:input path="loginName" htmlEscape="false" maxlength="30" class="input-medium"/></li>
+			<li><label>用户类型：</label><form:select path="userType" class="input-medium">
+					<form:option value="1" selected="true">系统管理员</form:option>					
+					<form:option value="2">学校管理员</form:option>
+					<form:option value="3">学院管理员</form:option>
+                    <form:option value="4">学生</form:option>				</form:select></li>
 			<li class="clearfix"></li>
 			<li><label>归属系院：</label><sys:treeselect id="office" name="office.id" value="${user.office.id}" labelName="office.name" labelValue="${user.office.name}" 
 				title="部门" url="/sys/office/treeData?type=2" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/></li>
@@ -61,8 +66,11 @@
 		</ul>
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>归属学校</th><th>归属系院</th><th class="sort-column login_name">登录名</th><th class="sort-column name">姓名</th><th>电话</th><th>手机</th><%--<th>角色</th> --%><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+	
+	<c:choose>
+	   <c:when test="${user.userType=='4'}">
+	   <table id="contentTable" class="table table-striped table-bordered table-condensed">
+		<thead><tr><th>归属学校</th><th>归属系院</th><th>学号</th><th>姓名</th><th>用户类型</th><th>性别</th><th>手机</th><%--<th>角色</th> --%><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="user">
 			<tr>
@@ -70,6 +78,30 @@
 				<td>${user.office.name}</td>
 				<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
 				<td>${user.name}</td>
+				<td>${user.typeUser}</td>
+				<td>${user.userSex}</td>
+				<td>${user.mobile}</td><%--
+				<td>${user.roleNames}</td> --%>
+				<shiro:hasPermission name="sys:user:edit"><td>
+    				<a href="${ctx}/sys/user/form?id=${user.id}">修改</a>
+					<a href="${ctx}/sys/user/delete?id=${user.id}" onclick="return confirmx('确认要删除该用户吗？', this.href)">删除</a>
+				</td></shiro:hasPermission>
+			</tr>
+		</c:forEach>
+		</tbody>
+	    </table>
+	   </c:when>
+	   <c:otherwise>
+	   <table id="contentTable" class="table table-striped table-bordered table-condensed">
+		<thead><tr><th>归属学校</th><th>归属系院</th><th>用户名</th><th>姓名</th><th>用户类型</th><th>电话</th><th>手机</th><%--<th>角色</th> --%><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+		<tbody>
+		<c:forEach items="${page.list}" var="user">
+			<tr>
+				<td>${user.company.name}</td>
+				<td>${user.office.name}</td>
+				<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
+				<td>${user.name}</td>
+				<td>${user.typeUser}</td>
 				<td>${user.phone}</td>
 				<td>${user.mobile}</td><%--
 				<td>${user.roleNames}</td> --%>
@@ -81,6 +113,8 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	   </c:otherwise>
+	</c:choose>
 	<div class="pagination">${page}</div>
 </body>
 </html>
