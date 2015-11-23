@@ -61,7 +61,7 @@
 <body>
 	<div class="accordion-group">
 	    <div class="accordion-heading">
-	    	<a class="accordion-toggle">栏目列表</a>
+	    	<a class="accordion-toggle">知识范畴</a>
 	    </div>
 	    <div class="accordion-body">
 			<div class="accordion-inner">

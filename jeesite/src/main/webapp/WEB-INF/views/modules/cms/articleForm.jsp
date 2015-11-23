@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>文章管理</title>
+	<title>知识管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -38,8 +38,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/cms/article/?category.id=${article.category.id}">文章列表</a></li>
-		<li class="active"><a href="<c:url value='${fns:getAdminPath()}/cms/article/form?id=${article.id}&category.id=${article.category.id}'><c:param name='category.name' value='${article.category.name}'/></c:url>">文章<shiro:hasPermission name="cms:article:edit">${not empty article.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="cms:article:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/cms/article/?category.id=${article.category.id}">知识列表</a></li>
+		<li class="active"><a href="<c:url value='${fns:getAdminPath()}/cms/article/form?id=${article.id}&category.id=${article.category.id}'><c:param name='category.name' value='${article.category.name}'/></c:url>">知识<shiro:hasPermission name="cms:article:edit">${not empty article.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="cms:article:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="article" action="${ctx}/cms/article/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -73,10 +73,10 @@
             </div>
         </div>
 		<div class="control-group">
-			<label class="control-label">关键字:</label>
+			<label class="control-label">标签:</label>
 			<div class="controls">
 				<form:input path="keywords" htmlEscape="false" maxlength="200" class="input-xlarge"/>
-				<span class="help-inline">多个关键字，用空格分隔。</span>
+				<span class="help-inline">多个标签，用空格分隔。</span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -94,7 +94,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">摘要:</label>
+			<label class="control-label">定义:</label>
 			<div class="controls">
 				<form:textarea path="description" htmlEscape="false" rows="4" maxlength="200" class="input-xxlarge"/>
 			</div>
@@ -107,7 +107,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">正文:</label>
+			<label class="control-label">内容:</label>
 			<div class="controls">
 				<form:textarea id="content" htmlEscape="true" path="articleData.content" rows="4" maxlength="200" class="input-xxlarge"/>
 				<sys:ckeditor replace="content" uploadPath="/cms/article" />
@@ -120,7 +120,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">相关文章:</label>
+			<label class="control-label">相关知识:</label>
 			<div class="controls">
 				<form:hidden id="articleDataRelation" path="articleData.relation" htmlEscape="false" maxlength="200" class="input-xlarge"/>
 				<ol id="articleSelectList"></ol>
