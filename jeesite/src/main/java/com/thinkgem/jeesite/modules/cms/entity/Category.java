@@ -54,12 +54,12 @@ public class Category extends TreeEntity<Category> {
 
 	public Category(){
 		super();
-		this.module = "";
+		this.module = "article";
 		this.sort = 30;
 		this.inMenu = Global.HIDE;
-		this.inList = Global.SHOW;
+		this.inList = Global.HIDE;
 		this.showModes = "0";
-		this.allowComment = Global.NO;
+		this.allowComment = Global.YES;
 		this.delFlag = DEL_FLAG_NORMAL;
 		this.isAudit = Global.NO;
 	}
