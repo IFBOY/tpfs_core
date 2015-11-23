@@ -33,7 +33,7 @@
 		<input type="hidden" id="cid" name="cid" value="${cid}"/>
 		<input type="hidden" id="a" name="a" value="${not empty t?t:'0'}"/>
 		<div class="sel">
-			<a href="javascript:" onclick="$('#t').val('article');$('.sel a').removeClass('act');$(this).addClass('act')" class="${empty t || t eq 'article'?'act':''}">文章搜索</a> &nbsp;
+			<a href="javascript:" onclick="$('#t').val('article');$('.sel a').removeClass('act');$(this).addClass('act')" class="${empty t || t eq 'article'?'act':''}">知识搜索</a> &nbsp;
 			<a href="javascript:" onclick="$('#t').val('guestbook');$('.sel a').removeClass('act');$(this).addClass('act')" class="${t eq 'guestbook'?'act':''}">留言搜索</a>
 		</div>
 		<c:choose>

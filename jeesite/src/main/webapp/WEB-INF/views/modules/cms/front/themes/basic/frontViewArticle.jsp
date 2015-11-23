@@ -56,7 +56,7 @@
 	     </div>
 	     <div class="row">
 	       <div class="span10">
-			<h5>相关文章</h5>
+			<h5>相关知识</h5>
 			<ol><c:forEach items="${relationList}" var="relation">
 				<li style="float:left;width:230px;"><a href="${ctx}/view-${relation[0]}-${relation[1]}${urlSuffix}">${fns:abbr(relation[2],30)}</a></li>
 			</c:forEach></ol>
