@@ -80,17 +80,17 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">权重:</label>
+			<label class="control-label">排序:</label>
 			<div class="controls">
 				<form:input path="weight" htmlEscape="false" maxlength="200" class="input-mini required digits"/>&nbsp;
-				<span>
+				<%-- <span>
 					<input id="weightTop" type="checkbox" onclick="$('#weight').val(this.checked?'999':'0')"><label for="weightTop">置顶</label>
 				</span>
 				&nbsp;过期时间：
 				<input id="weightDate" name="weightDate" type="text" readonly="readonly" maxlength="20" class="input-small Wdate"
 					value="<fmt:formatDate value="${article.weightDate}" pattern="yyyy-MM-dd"/>"
-					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/>
-				<span class="help-inline">数值越大排序越靠前，过期时间可为空，过期后取消置顶。</span>
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true});"/> --%>
+				<span class="help-inline">数值越小排序越靠前</span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -113,12 +113,12 @@
 				<sys:ckeditor replace="content" uploadPath="/cms/article" />
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">来源:</label>
 			<div class="controls">
 				<form:input path="articleData.copyfrom" htmlEscape="false" maxlength="200" class="input-xlarge"/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">相关知识:</label>
 			<div class="controls">
@@ -166,7 +166,7 @@
 				</script>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">是否允许评论:</label>
 			<div class="controls">
 				<form:radiobuttons path="articleData.allowComment" items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -177,7 +177,7 @@
 			<div class="controls">
 				<form:checkboxes path="posidList" items="${fns:getDictList('cms_posid')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 			</div>
-		</div>
+		</div> 
 		<div class="control-group">
 			<label class="control-label">发布时间:</label>
 			<div class="controls">
@@ -214,6 +214,7 @@
                 </div>
             </div>
 		</shiro:hasPermission>
+		--%>
 		<c:if test="${not empty article.id}">
 			<div class="control-group">
 				<label class="control-label">查看评论:</label>
