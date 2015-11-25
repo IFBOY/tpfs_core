@@ -45,6 +45,8 @@
 		<dict value="Double" label="Double"/>
 		<dict value="java.util.Date" label="Date"/>
 		<dict value="com.thinkgem.jeesite.modules.sys.entity.User" label="User"/>
+		<dict value="com.thinkgem.jeesite.modules.knowledge.entity.KnoCate" label="KnoCate"/>
+		<dict value="com.thinkgem.jeesite.modules.cms.entity.Article" label="Article"/>
 		<dict value="com.thinkgem.jeesite.modules.sys.entity.Office" label="Office"/>
 		<dict value="com.thinkgem.jeesite.modules.sys.entity.Area" label="Area"/>
 		<dict value="This" label="ThisObj" description="生成当前对象"/>
