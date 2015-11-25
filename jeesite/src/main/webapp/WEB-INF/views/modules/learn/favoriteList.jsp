@@ -26,10 +26,10 @@
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
 			<li><label>用户名：</label>
-				<form:input path="user.id" htmlEscape="false" maxlength="64" class="input-medium"/>
+				<form:input path="user.name" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
-			<li><label>文章题目：</label>
-				<form:input path="article.id" htmlEscape="false" maxlength="64" class="input-medium"/>
+			<li><label>文章标题：</label>
+				<form:input path="article.title" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>更新时间：</label>
 				<input name="beginUpdateDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
@@ -48,7 +48,7 @@
 		<thead>
 			<tr>
 				<th>用户名</th>
-				<th>文章题目</th>
+				<th>文章标题</th>
 				<th>创建者</th>
 				<th>创建时间</th>
 				<th>更新者</th>
@@ -61,19 +61,19 @@
 		<c:forEach items="${page.list}" var="favorite">
 			<tr>
 				<td><a href="${ctx}/learn/favorite/form?id=${favorite.id}">
-					${favorite.user.id}
+					${favorite.user.name}
 				</a></td>
 				<td>
-					${favorite.article.id}
+					${favorite.article.title}
 				</td>
 				<td>
-					${favorite.createBy}
+					${favorite.createBy.name}
 				</td>
 				<td>
-					${favorite.createDate}
+					<fmt:formatDate value="${favorite.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<td>
-					${favorite.updateBy}
+					${favorite.updateBy.name}
 				</td>
 				<td>
 					<fmt:formatDate value="${favorite.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>

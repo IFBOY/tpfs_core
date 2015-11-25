@@ -18,8 +18,8 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class Favorite extends DataEntity<Favorite> {
 	
 	private static final long serialVersionUID = 1L;
-	private User user;		// 用户名
-	private Article article;		// 文章题目
+	private User user;		// 用户ID
+	private Article article;		// 文章ID
 	private Date beginUpdateDate;		// 开始 更新时间
 	private Date endUpdateDate;		// 结束 更新时间
 	
@@ -31,7 +31,7 @@ public class Favorite extends DataEntity<Favorite> {
 		super(id);
 	}
 
-	@NotNull(message="用户名不能为空")
+	@NotNull(message="用户ID不能为空")
 	public User getUser() {
 		return user;
 	}
@@ -40,7 +40,7 @@ public class Favorite extends DataEntity<Favorite> {
 		this.user = user;
 	}
 	
-	@NotNull(message="文章题目不能为空")
+	@NotNull(message="文章ID不能为空")
 	public Article getArticle() {
 		return article;
 	}

@@ -34,14 +34,15 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
-			<label class="control-label">用户名：</label>
+			<label class="control-label">用户：</label>
 			<div class="controls">
-				<form:input path="user.id" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<sys:treeselect id="user" name="user.id" value="${favorite.user.id}" labelName="user.name" labelValue="${favorite.user.name}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="required" allowClear="true" notAllowSelectParent="true"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">文章题目：</label>
+			<label class="control-label">文章ID：</label>
 			<div class="controls">
 				<form:input path="article.id" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
