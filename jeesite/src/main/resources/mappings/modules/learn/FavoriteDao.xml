@@ -43,8 +43,8 @@
 			<if test="user != null and user.id != null and user.id != ''">
 				AND u.name LIKE 
 					<if test="dbName == 'oracle'">'%'||#{user.name}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{user.title}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{user.title},'%')</if>
+					<if test="dbName == 'mssql'">'%'+#{user.name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{user.name},'%')</if>
 			</if>
 			<if test="article != null and article.id != null and article.id != ''">
 				AND m.title LIKE 

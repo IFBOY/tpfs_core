@@ -25,7 +25,7 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>用户名：</label>
+			<li><label>姓名：</label>
 				<form:input path="user.name" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>文章标题：</label>
@@ -47,7 +47,7 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户名</th>
+				<th>姓名</th>
 				<th>文章标题</th>
 				<th>创建者</th>
 				<th>创建时间</th>
