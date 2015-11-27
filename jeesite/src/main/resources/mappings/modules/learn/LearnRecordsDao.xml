@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.learn.dao.LearnRecordsDao">
+    
+	<sql id="learnRecordsColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.article_id AS "article.id",
+		m.title AS "article.title",
+		a.difficulty_degree AS "difficultyDegree",
+		a.help_degree AS "helpDegree",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.learn_minutes AS "learnMinutes",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		u2.name AS "user.name",
+		u1.name AS "createBy.name",
+		u3.name AS "updateBy.name"
+	</sql>
+	
+	<sql id="learnRecordsJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+		JOIN sys_user u ON u.id = a.user_id
+		LEFT JOIN sys_user u1 ON u1.id=a.create_by
+		LEFT JOIN sys_user u3 ON u3.id=a.update_by	
+		JOIN cms_article m ON m.id = a.article_id 	
+	</sql>
+    
+	<select id="get" resultType="LearnRecords">
+		SELECT 
+			<include refid="learnRecordsColumns"/>
+		FROM cms_learn_records a
+		<include refid="learnRecordsJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="LearnRecords">
+		SELECT 
+			<include refid="learnRecordsColumns"/>
+		FROM cms_learn_records a
+		<include refid="learnRecordsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="user != null and user.id != null and user.id != ''">
+				AND a.user_id LIKE 
+					<if test="dbName == 'oracle'">'%'||#{user.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{user.id}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{user.id},'%')</if>
+			</if>
+			<if test="article != null and article.id != null and article.id != ''">
+				AND a.article_id LIKE 
+					<if test="dbName == 'oracle'">'%'||#{article.id}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{article.id}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{article.id},'%')</if>
+			</if>
+			<if test="beginUpdateDate != null and endUpdateDate != null and beginUpdateDate != '' and endUpdateDate != ''">
+				AND a.update_date BETWEEN #{beginUpdateDate} AND #{endUpdateDate}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="LearnRecords">
+		SELECT 
+			<include refid="learnRecordsColumns"/>
+		FROM cms_learn_records a
+		<include refid="learnRecordsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_learn_records(
+			id,
+			user_id,
+			article_id,
+			difficulty_degree,
+			help_degree,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			learn_minutes,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{article.id},
+			#{difficultyDegree},
+			#{helpDegree},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{learnMinutes},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_learn_records SET 	
+			user_id = #{user.id},
+			article_id = #{article.id},
+			difficulty_degree = #{difficultyDegree},
+			help_degree = #{helpDegree},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			learn_minutes = #{learnMinutes},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE cms_learn_records SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
