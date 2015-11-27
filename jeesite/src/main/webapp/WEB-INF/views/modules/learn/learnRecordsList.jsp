@@ -25,12 +25,12 @@
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
-			<li><label>用户：</label>
+			<li><label>姓名：</label>
 				<sys:treeselect id="user" name="user.id" value="${learnRecords.user.id}" labelName="user.name" labelValue="${learnRecords.user.name}"
 					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
 			</li>
-			<li><label>文章：</label>
-				<form:input path="article.id" htmlEscape="false" maxlength="64" class="input-medium"/>
+			<li><label>文章标题：</label>
+				<form:input path="article.title" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>更新时间：</label>
 				<input name="beginUpdateDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
@@ -48,8 +48,8 @@
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
-				<th>用户</th>
-				<th>文章</th>
+				<th>姓名</th>
+				<th>文章标题</th>
 				<th>困难度</th>
 				<th>帮助度</th>
 				<th>学习时长</th>

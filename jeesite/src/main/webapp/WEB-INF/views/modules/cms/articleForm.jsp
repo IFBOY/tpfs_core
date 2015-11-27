@@ -49,9 +49,9 @@
 			<div class="controls">
                 <sys:treeselect id="category" name="category.id" value="${article.category.id}" labelName="category.name" labelValue="${article.category.name}"
 					title="栏目" url="/cms/category/treeData" module="article" selectScopeModule="true" notAllowSelectRoot="false" notAllowSelectParent="true" cssClass="required"/>&nbsp;
-                <span>
+                <!-- <span>
                     <input id="url" type="checkbox" onclick="if(this.checked){$('#linkBody').show()}else{$('#linkBody').hide()}$('#link').val()"><label for="url">外部链接</label>
-                </span>
+                </span> -->
 			</div>
 		</div>
 		<div class="control-group">
@@ -65,13 +65,13 @@
 				</form:select>
 			</div>
 		</div>
-        <div id="linkBody" class="control-group" style="display:none">
+        <%-- <div id="linkBody" class="control-group" style="display:none">
             <label class="control-label">外部链接:</label>
             <div class="controls">
                 <form:input path="link" htmlEscape="false" maxlength="200" class="input-xlarge"/>
                 <span class="help-inline">绝对或相对地址。</span>
             </div>
-        </div>
+        </div> --%>
 		<div class="control-group">
 			<label class="control-label">标签:</label>
 			<div class="controls">
