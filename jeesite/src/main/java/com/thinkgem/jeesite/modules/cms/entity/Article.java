@@ -36,6 +36,7 @@ public class Article extends DataEntity<Article> {
 	private Integer weight;	// 权重，越大越靠前
 	private Date weightDate;// 权重期限，超过期限，将weight设置为0
 	private Integer hits;	// 点击数
+	private Integer shareNumber;	// 分享次数
 	private String posid;	// 推荐位，多选（1：首页焦点图；2：栏目页文章推荐；）
     private String customContentView;	// 自定义内容视图
    	private String viewConfig;	// 视图参数
@@ -51,6 +52,7 @@ public class Article extends DataEntity<Article> {
 		super();
 		this.weight = 0;
 		this.hits = 0;
+		this.shareNumber = 0;
 		this.posid = "";
 	}
 
@@ -172,6 +174,14 @@ public class Article extends DataEntity<Article> {
 		this.hits = hits;
 	}
 
+	public Integer getShareNumber() {
+		return shareNumber;
+	}
+
+	public void setShareNumber(Integer shareNumber) {
+		this.shareNumber = shareNumber;
+	}
+	
 	@Length(min=0, max=10)
 	public String getPosid() {
 		return posid;
