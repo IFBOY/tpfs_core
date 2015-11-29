@@ -83,7 +83,7 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.weight DESC, a.update_date DESC
+				ORDER BY a.weight ASC, a.update_date DESC
 			</otherwise>
 		</choose>
 	</select>
@@ -119,7 +119,7 @@
 			weight,
 			weight_date,
 			hits,
-			shareNumber,
+			share_number,
 			posid,
 			custom_content_view,
 			view_config,

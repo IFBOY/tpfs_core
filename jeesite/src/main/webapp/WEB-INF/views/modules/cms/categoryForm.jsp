@@ -40,13 +40,13 @@
 					title="机构" url="/sys/office/treeData" cssClass="required"/>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">上级栏目:</label>
 			<div class="controls">
                 <sys:treeselect id="category" name="parent.id" value="${category.parent.id}" labelName="parent.name" labelValue="${category.parent.name}"
 					title="栏目" url="/cms/category/treeData" extId="${category.id}" cssClass="required"/>
 			</div>
-		</div>
+		</div> --%>
 		<%-- <div class="control-group">
 			<label class="control-label">栏目模型:</label>
 			<div class="controls">
