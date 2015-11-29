@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>评论管理</title>
+	<title>批注管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		function view(href){
@@ -25,19 +25,19 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/cms/comment/">评论列表</a></li><%--
-		<shiro:hasPermission name="cms:comment:edit"><li><a href="${ctx}/cms/comment/form?id=${comment.id}">评论添加</a></li></shiro:hasPermission> --%>
+		<li class="active"><a href="${ctx}/cms/comment/">批注列表</a></li><%--
+		<shiro:hasPermission name="cms:comment:edit"><li><a href="${ctx}/cms/comment/form?id=${comment.id}">批注添加</a></li></shiro:hasPermission> --%>
 	</ul>
 	<form:form id="searchForm" modelAttribute="comment" action="${ctx}/cms/comment/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<label>文档标题：</label><form:input path="title" htmlEscape="false" maxlength="50" class="input-small"/>&nbsp;
 		<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>&nbsp;&nbsp;
-		<label>状态：</label><form:radiobuttons onclick="$('#searchForm').submit();" path="delFlag" items="${fns:getDictList('cms_del_flag')}" itemLabel="label" itemValue="value" htmlEscape="false" />
+		<%-- <label>状态：</label><form:radiobuttons onclick="$('#searchForm').submit();" path="delFlag" items="${fns:getDictList('cms_del_flag')}" itemLabel="label" itemValue="value" htmlEscape="false" /> --%>
 	</form:form>
 	<sys:message content="${message}"/>
 	<table id="contentTable" class="table table-bordered table-condensed">
-		<thead><tr><th>评论内容</th><th>文档标题</th><th>评论人</th><th>评论IP</th><th>评论时间</th><th nowrap="nowrap">操作</th></tr></thead>
+		<thead><tr><th>批注内容</th><th>文档标题</th><th>批注人</th><th>批注IP</th><th>批注时间</th><th nowrap="nowrap">操作</th></tr></thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="comment">
 			<tr>
