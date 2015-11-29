@@ -14,7 +14,7 @@
 				validateCode: {remote: "${pageContext.request.contextPath}/servlet/validateCodeServlet"}
 			},
 			messages: {
-				content: {required: "请填写评论内容"},
+				content: {required: "请填写批注内容"},
 				validateCode: {remote: "验证码不正确", required: "请填写验证码"}
 			},
 			submitHandler: function(form){
@@ -48,7 +48,7 @@
 		}
 	}
 </script>
-<h5>评论列表</h5>
+<h5>批注列表</h5>
 <ul>
 	<c:forEach items="${page.list}" var="comment">
 		<li>
@@ -59,11 +59,11 @@
 		</li>
 	</c:forEach>
 	<c:if test="${fn:length(page.list) eq 0}">
-		<li>暂时还没有人评论！</li>
+		<li>暂时还没有人批注！</li>
 	</c:if>
 </ul>
 <div class="pagination">${page}</div>
-<h5>我要评论</h5>
+<h5>我要批注</h5>
 <div id="commentForm0"></div>
 <script id="commentFormTpl" type="text/javascript"><!--/*-->
 	<form:form action="${ctx}/comment" method="post" class="form-horizontal">
