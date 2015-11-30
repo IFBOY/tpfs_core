@@ -6,7 +6,7 @@
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		function viewComment(href){
-			top.$.jBox.open('iframe:'+href,'查看评论',$(top.document).width()-220,$(top.document).height()-120,{
+			top.$.jBox.open('iframe:'+href,'查看批注',$(top.document).width()-220,$(top.document).height()-120,{
 				buttons:{"关闭":true},
 				loaded:function(h){
 					$(".jbox-content", top.document).css("overflow-y","hidden");
@@ -52,10 +52,12 @@
 				<td>${article.user.name}</td>
 				<td><fmt:formatDate value="${article.updateDate}" type="both"/></td>
 				<td>
+				    <!--  
 					<a href="${pageContext.request.contextPath}${fns:getFrontPath()}/view-${article.category.id}-${article.id}${fns:getUrlSuffix()}" target="_blank">访问</a>
+					-->
 					<shiro:hasPermission name="cms:article:edit">
 						<c:if test="${article.category.allowComment eq '1'}"><shiro:hasPermission name="cms:comment:view">
-							<a href="${ctx}/cms/comment/?module=article&contentId=${article.id}&delFlag=2" onclick="return viewComment(this.href);">评论</a>
+							<a href="${ctx}/cms/comment/?module=article&contentId=${article.id}&delFlag=2" onclick="return viewComment(this.href);">批注</a>
 						</shiro:hasPermission></c:if>
 	    				<a href="${ctx}/cms/article/form?id=${article.id}">修改</a>
 	    				<shiro:hasPermission name="cms:article:audit">
