@@ -345,7 +345,12 @@ public class User extends DataEntity<User> {
 	public static boolean isAdmin(String id){
 		return id != null && "1".equals(id);
 	}
-	
+	public boolean isAdminForT(){
+		return isAdminForT(this.id);
+	}
+	public static boolean isAdminForT(String id){
+		return id != null && "b830a711cece4434871cc103349a82c4".equals(id);
+	}
 	@Override
 	public String toString() {
 		return id;

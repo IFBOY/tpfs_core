@@ -145,7 +145,7 @@ public class UserController extends BaseController {
 		}
 		if (UserUtils.getUser().getId().equals(user.getId())){
 			addMessage(redirectAttributes, "删除用户失败, 不允许删除当前用户");
-		}else if (User.isAdmin(user.getId())){
+		}else if (User.isAdmin(user.getId())||User.isAdminForT(user.getId())){
 			addMessage(redirectAttributes, "删除用户失败, 不允许删除超级管理员用户");
 		}else{
 			systemService.deleteUser(user);
