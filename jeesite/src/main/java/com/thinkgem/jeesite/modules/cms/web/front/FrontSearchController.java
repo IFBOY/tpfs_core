@@ -51,7 +51,7 @@ public class FrontSearchController extends BaseController{
 		
 		// 重建索引（需要超级管理员权限）
 		if ("cmd:reindex".equals(q)){
-			if (UserUtils.getUser().isAdmin()){
+			if (UserUtils.getUser().isAdmin()||UserUtils.getUser().isAdminForT()){
 				// 文章模型
 				if (StringUtils.isBlank(t) || "article".equals(t)){
 					articleService.createIndex();
