@@ -194,7 +194,7 @@
 				AND a.user_type= #{userType}
 			</when>
 			<otherwise>
-				AND a.user_type in('1','2','3')
+				AND a.user_type in('4')
 			</otherwise>
 		</choose>
 		<if test="userType != null and userType != ''">
