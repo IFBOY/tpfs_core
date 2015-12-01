@@ -48,7 +48,7 @@
 				<td><fmt:formatDate value="${comment.createDate}" type="both"/></td>
 				<td><shiro:hasPermission name="cms:comment:edit">
 					<c:if test="${comment.delFlag ne '2'}"><a href="${ctx}/cms/comment/delete?id=${comment.id}${comment.delFlag ne 0?'&isRe=true':''}" 
-						onclick="return confirmx('确认要${comment.delFlag ne 0?'恢复审核':'删除'}该审核吗？', this.href)">${comment.delFlag ne 0?'恢复审核':'删除'}</a></c:if>
+						onclick="return confirmx('确认要${comment.delFlag ne 0?'恢复审核':'删除'}该批注吗？', this.href)">${comment.delFlag ne 0?'恢复审核':'删除'}</a></c:if>
 					<c:if test="${comment.delFlag eq '2'}"><a href="${ctx}/cms/comment/save?id=${comment.id}">审核通过</a></c:if></shiro:hasPermission>
 				</td>
 			</tr>
