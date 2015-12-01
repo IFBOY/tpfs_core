@@ -72,7 +72,7 @@
 		<input type="hidden" name="title" value="${comment.title}"/>
 		<input type="hidden" name="replyId"/>
 		<div class="control-group">
-			<label class="control-label">留言内容:</label>
+			<label class="control-label">批注内容:</label>
 			<div class="controls">
 				<textarea name="content" rows="4" maxlength="200" class="txt required" style="width:400px;"></textarea>
 			</div>

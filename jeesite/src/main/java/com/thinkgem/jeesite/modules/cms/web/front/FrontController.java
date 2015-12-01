@@ -298,7 +298,7 @@ public class FrontController extends BaseController{
 				}
 				comment.setIp(request.getRemoteAddr());
 				comment.setCreateDate(new Date());
-				comment.setDelFlag(Comment.DEL_FLAG_AUDIT);
+				comment.setDelFlag(Comment.DEL_FLAG_NORMAL);
 				commentService.save(comment);
 				return "{result:1, message:'提交成功。'}";
 			}else{
