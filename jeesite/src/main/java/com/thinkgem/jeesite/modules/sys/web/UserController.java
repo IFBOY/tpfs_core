@@ -197,8 +197,9 @@ public class UserController extends BaseController {
 			List<User> list = ei.getDataList(User.class);
 			for (User user : list){
 				try{
-					if ("true".equals(checkLoginName("", user.getLoginName()))){
-						user.setPassword(SystemService.entryptPassword("123456"));
+					String loginName=user.getLoginName();
+					if ("true".equals(checkLoginName("", loginName))){
+						user.setPassword(SystemService.entryptPassword(loginName.substring(loginName.length()-6,loginName.length())));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveUser(user);
 						successNum++;
