@@ -26,7 +26,7 @@ import com.thinkgem.jeesite.modules.sys.utils.DictUtils;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
- * 评论Controller
+ * 批注Controller
  * @author ThinkGem
  * @version 2013-3-23
  */
@@ -65,7 +65,7 @@ public class CommentController extends BaseController {
 			comment.setDelFlag(Comment.DEL_FLAG_NORMAL);
 			commentService.save(comment);
 			addMessage(redirectAttributes, DictUtils.getDictLabel(comment.getDelFlag(), "cms_del_flag", "保存")
-					+"评论'" + StringUtils.abbr(StringUtils.replaceHtml(comment.getContent()),50) + "'成功");
+					+"批注'" + StringUtils.abbr(StringUtils.replaceHtml(comment.getContent()),50) + "'成功");
 		}
 		return "redirect:" + adminPath + "/cms/comment/?repage&delFlag=2";
 	}
@@ -74,8 +74,8 @@ public class CommentController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(Comment comment, @RequestParam(required=false) Boolean isRe, RedirectAttributes redirectAttributes) {
 		commentService.delete(comment, isRe);
-		addMessage(redirectAttributes, (isRe!=null&&isRe?"恢复审核":"删除")+"评论成功");
-		return "redirect:" + adminPath + "/cms/comment/?repage&delFlag=2";
+		addMessage(redirectAttributes, (isRe!=null&&isRe?"恢复审核":"删除")+"批注成功");
+		return "redirect:" + adminPath + "/cms/comment/?repage";
 	}
 
 }
