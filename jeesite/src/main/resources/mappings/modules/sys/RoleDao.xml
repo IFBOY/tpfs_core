@@ -98,6 +98,7 @@
 		LEFT JOIN sys_user u ON u.id = ur.user_id
 		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.useable=#{useable}
+		AND a.name!='超级管理员'
 		<if test="user != null and user.id !=null and user.id != ''">
 			AND u.id = #{user.id}
 		</if>
