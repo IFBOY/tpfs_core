@@ -56,14 +56,14 @@
 		</div>
 		<div class="control-group">
 			<label class="control-label">标题:</label>
-			<%-- <div class="controls">
+			<div class="controls">
 				<form:input path="title" htmlEscape="false" maxlength="200" class="input-xxlarge measure-input required"/>
 				&nbsp;<label>颜色:</label>
 				<form:select path="color" class="input-mini">
 					<form:option value="" label="默认"/>
 					<form:options items="${fns:getDictList('color')}" itemLabel="label" itemValue="value" htmlEscape="false" />
 				</form:select>
-			</div> --%>
+			</div>
 		</div>
         <%-- <div id="linkBody" class="control-group" style="display:none">
             <label class="control-label">外部链接:</label>
@@ -99,6 +99,7 @@
 				<form:textarea path="description" htmlEscape="false" rows="4" maxlength="200" class="input-xxlarge"/>
 			</div>
 		</div>
+		<!--  
 		<div class="control-group">
 			<label class="control-label">缩略图:</label>
 			<div class="controls">
@@ -106,6 +107,7 @@
 				<sys:ckfinder input="image" type="thumb" uploadPath="/cms/article" selectMultiple="false"/>
 			</div>
 		</div>
+		-->
 		<div class="control-group">
 			<label class="control-label">内容:</label>
 			<div class="controls">
@@ -214,15 +216,15 @@
                 </div>
             </div>
 		</shiro:hasPermission>
-		--%>
+		
 		<c:if test="${not empty article.id}">
 			<div class="control-group">
-				<label class="control-label">查看评论:</label>
+				<label class="control-label">查看批注:</label>
 				<div class="controls">
 					<input id="btnComment" class="btn" type="button" value="查看评论" onclick="viewComment('${ctx}/cms/comment/?module=article&contentId=${article.id}&status=0')"/>
 					<script type="text/javascript">
 						function viewComment(href){
-							top.$.jBox.open('iframe:'+href,'查看评论',$(top.document).width()-220,$(top.document).height()-180,{
+							top.$.jBox.open('iframe:'+href,'查看批注',$(top.document).width()-220,$(top.document).height()-180,{
 								buttons:{"关闭":true},
 								loaded:function(h){
 									$(".jbox-content", top.document).css("overflow-y","hidden");
@@ -236,6 +238,7 @@
 				</div>
 			</div>
 		</c:if>
+		--%>
 		<div class="form-actions">
 			<shiro:hasPermission name="cms:article:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>

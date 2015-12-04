@@ -100,6 +100,10 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:menu:edit")
 	@RequestMapping(value = "delete")
 	public String delete(Menu menu, RedirectAttributes redirectAttributes) {
+		if(!UserUtils.getUser().isAdmin()){
+			addMessage(redirectAttributes, "越权操作，只有超级管理员才能删除！");
+			return "redirect:" + adminPath + "/sys/menu/";
+		}
 		if(Global.isDemoMode()){
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/menu/";

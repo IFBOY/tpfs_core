@@ -57,7 +57,9 @@
 					-->
 					<shiro:hasPermission name="cms:article:edit">
 						<c:if test="${article.category.allowComment eq '1'}"><shiro:hasPermission name="cms:comment:view">
-							<a href="${ctx}/cms/comment/?module=article&contentId=${article.id}&delFlag=2" onclick="return viewComment(this.href);">批注</a>
+						<!-- 
+						<a href="${ctx}/cms/comment/?module=article&contentId=${article.id}&delFlag=2" onclick="return viewComment(this.href);">批注</a>
+						 -->
 						</shiro:hasPermission></c:if>
 	    				<a href="${ctx}/cms/article/form?id=${article.id}">修改</a>
 	    				<shiro:hasPermission name="cms:article:audit">
