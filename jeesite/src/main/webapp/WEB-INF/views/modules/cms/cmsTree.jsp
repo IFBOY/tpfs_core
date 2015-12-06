@@ -47,6 +47,9 @@
 				tree.expandNode(nodes[i], true, true, false);
 			}
 			wSize();
+			var curMenu = tree.getNodes()[0];
+			tree.selectNode(curMenu);
+			parent.$('#cmsMainFrame').attr('src',curMenu.url);
 		});
 		$(window).resize(function(){
 			wSize();

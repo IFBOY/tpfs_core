@@ -13,7 +13,7 @@
 		</div>
 		<div id="openClose" class="close">&nbsp;</div>
 		<div id="right">
-			<iframe id="cmsMainFrame" name="cmsMainFrame" src="${ctx}/cms/none" style="overflow:visible;"
+			<iframe id="cmsMainFrame" name="cmsMainFrame" src="" style="overflow:visible;"
 				scrolling="yes" frameborder="no" width="100%"></iframe>
 		</div>
 	</div>
