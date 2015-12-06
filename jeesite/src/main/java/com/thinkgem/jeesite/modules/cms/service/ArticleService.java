@@ -184,7 +184,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 					Double maxWeight = dao.findMaxWeight(maxWeightArt);
 					if(maxWeight>=sort){
 						preWeight = articleList.get(0).getWeight();
-						nextWeight = Double.valueOf(preWeight+1);
+						nextWeight = Double.valueOf(Math.floor(preWeight+1));
 						resultWeight = (preWeight+nextWeight)/2;
 					}else{
 						resultWeight = Double.valueOf(sort);
