@@ -55,8 +55,20 @@
 		</if>
 	</select>
 	
+	<select id="findMaxWeight" resultType="Double">
+		SELECT MAX(t.weight) from  cms_article t where t.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="category.id != null and category.id != ''">
+			AND t.category_id = #{category.id}
+		</if>
+	</select>
+	
 	<select id="findList" resultType="Article">
 		SELECT 
+			(SELECT count(1) from cms_article c where c.weight &lt;=a.weight 
+			<if test="category.id != null and category.id != ''">
+				AND c.category_id = #{category.id}
+			</if>
+			) as sort,
 			<include refid="cmsArticleColumns"/>
 		FROM cms_article a
 		<include refid="cmsArticleJoins"/>
