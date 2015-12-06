@@ -42,6 +42,19 @@
 		WHERE a.id = #{id}
 	</select>
 	
+	<select id="findSort" resultType="Integer">
+		SELECT count(1) from  cms_article t where t.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="category.id != null and category.id != ''">
+			AND t.category_id = #{category.id}
+		</if>
+		<if test="weight != null and weight>0">
+			AND t.weight &lt;= #{weight}
+		</if>
+		<if test="id != null and id != ''">
+			AND t.id != #{id}
+		</if>
+	</select>
+	
 	<select id="findList" resultType="Article">
 		SELECT 
 			<include refid="cmsArticleColumns"/>
@@ -86,6 +99,20 @@
 				ORDER BY a.weight ASC, a.update_date DESC
 			</otherwise>
 		</choose>
+	</select>
+	
+	<select id="findBetweenList" resultType="Article">
+		SELECT 
+			<include refid="cmsArticleColumns"/>
+		FROM cms_article a
+		<include refid="cmsArticleJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="category.id != null and category.id != ''">
+				AND a.category_id = #{category.id}
+			</if>
+		</where>
+		ORDER BY a.weight ASC, a.update_date DESC
 	</select>
 	
 	<select id="findAllList" resultType="Article">

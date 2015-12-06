@@ -33,7 +33,8 @@ public class Article extends DataEntity<Article> {
 	private String image;	// 文章图片
 	private String keywords;// 关键字
 	private String description;// 描述、摘要
-	private Integer weight;	// 权重，越大越靠前
+	private Double weight;	// 权重，越小越靠前
+	private Integer sort;	// 排序值，无数据库对应字段，根据weight排序计算得来。
 	private Date weightDate;// 权重期限，超过期限，将weight设置为0
 	private Integer hits;	// 点击数
 	private Integer shareNumber;	// 分享次数
@@ -50,7 +51,7 @@ public class Article extends DataEntity<Article> {
     
 	public Article() {
 		super();
-		this.weight = 0;
+		this.weight = 0.0;
 		this.hits = 0;
 		this.shareNumber = 0;
 		this.posid = "";
@@ -150,11 +151,11 @@ public class Article extends DataEntity<Article> {
 	}
 
 	@NotNull
-	public Integer getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Integer weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 
@@ -244,6 +245,14 @@ public class Article extends DataEntity<Article> {
    	public String getImageSrc() {
         return CmsUtils.formatImageSrcToWeb(this.image);
    	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 	
 }
 

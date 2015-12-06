@@ -6,19 +6,29 @@
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
-            if($("#link").val()){
+            /* if($("#link").val()){
                 $('#linkBody').show();
                 $('#url').attr("checked", true);
-            }
+            } */
 			$("#title").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){
-                    if ($("#categoryId").val()==""){
-                        $("#categoryName").focus();
-                        top.$.jBox.tip('请选择归属栏目','warning');
-                    }else if (CKEDITOR.instances.content.getData()=="" && $("#link").val().trim()==""){
+                   if ($("#sort").val()>${article.page.count} || $("#sort").val()==0){
+                    	$("#sort").focus();
+                        top.$.jBox.tip('序号必须连续，当前最大序号应为 : ${article.page.count}','warning');
+                    }else if (CKEDITOR.instances.content.getData()==""){
                         top.$.jBox.tip('请填写正文','warning');
                     }else{
+                    	//修改时，如果修改了序号将weight设置为0
+                        if('${article.id}'!=''){
+                        	var oldSort = ${article.sort};
+                        	var newSort = $("#sort").val();
+                        	if(newSort>oldSort){ //往后调整时，需要后台特殊处理
+                        		$("#weight").val('-1.0');
+                        	}else if(newSort<oldSort){
+                        		$("#weight").val('0.0');
+                        	}
+                        }
                         loading('正在提交，请稍等...');
                         form.submit();
                     }
@@ -43,6 +53,7 @@
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="article" action="${ctx}/cms/article/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
+		<form:hidden path="weight"/>
 		<sys:message content="${message}"/>
 		<div class="control-group">
 			<label class="control-label">归属栏目:</label>
@@ -82,7 +93,7 @@
 		<div class="control-group">
 			<label class="control-label">排序:</label>
 			<div class="controls">
-				<form:input path="weight" htmlEscape="false" maxlength="200" class="input-mini required digits"/>&nbsp;
+				<form:input path="sort" id="sort" htmlEscape="false" maxlength="200" class="input-mini required digits"/>&nbsp;
 				<%-- <span>
 					<input id="weightTop" type="checkbox" onclick="$('#weight').val(this.checked?'999':'0')"><label for="weightTop">置顶</label>
 				</span>

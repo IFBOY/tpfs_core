@@ -145,6 +145,61 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	 * 点击数加一
 	 */
 	@Transactional(readOnly = false)
+	public Double findWeight(Article article) {
+		Integer sort = article.getSort();
+		Double resultWeight;
+		Double preWeight = 0.0;
+		Double nextWeight = 0.0;
+		int firstResult = sort == 1 ? 0 : sort-2;
+		if(sort != null & sort>0){
+			if(sort==1){
+				preWeight = 0.0;
+			}
+		}
+		Page<Article> page = new Page<Article>();
+		page.setPageSize(2);
+		page.setFirstResult(firstResult);
+		article.setPage(page);
+		List<Article> articleList = dao.findBetweenList(article);
+		if(sort-article.getPage().getCount()>1){
+			resultWeight=Double.valueOf(article.getPage().getCount()+1);
+		}else if(articleList == null || articleList.size()==0){
+			resultWeight = 1.0;
+		} else if(sort == 1 ){
+			nextWeight = articleList.get(0).getWeight();
+			resultWeight = nextWeight / 2;
+		}else{//序号大于1
+			if(article.getPage().getCount()>=sort){//插入到已有的序号
+				preWeight = articleList.get(0).getWeight();
+				nextWeight = articleList.get(1).getWeight();
+				resultWeight = (preWeight+nextWeight)/2;
+			}else{//正常放到最后
+				if(StringUtils.isNotBlank(article.getId())){
+					preWeight = articleList.get(0).getWeight();
+					nextWeight = Double.valueOf(sort);
+					resultWeight = (preWeight+nextWeight)/2;
+				}else{
+					resultWeight = Double.valueOf(sort);
+				}
+			}
+		}
+		return resultWeight;
+	}
+	
+	/**
+	 * 根据Weight和分类ID获取序号
+	 * @param article
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public Integer findSort(Article article) {
+		return dao.findSort(article);
+	}
+	
+	/**
+	 * 获取序号
+	 */
+	@Transactional(readOnly = false)
 	public void updateHitsAddOne(String id) {
 		dao.updateHitsAddOne(id);
 	}

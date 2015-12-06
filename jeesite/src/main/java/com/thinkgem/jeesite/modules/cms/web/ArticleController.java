@@ -95,6 +95,20 @@ public class ArticleController extends BaseController {
 //		if (article.getCategory()=null && StringUtils.isNotBlank(article.getCategory().getId())){
 //			Category category = categoryService.get(article.getCategory().getId());
 //		}
+		
+		Integer sort = articleService.findSort(article);
+		article.setSort(sort+1);
+		
+		//获取总记录数，加1后即为下一个序号，保存到page的count，用于在前台验证
+		Article countArt = new Article();
+		countArt.setWeight(0.0);
+		countArt.setCategory(article.getCategory());
+		Integer nextSort = articleService.findSort(countArt);
+		if(StringUtils.isBlank(article.getId())){
+			nextSort = nextSort+1;
+		}
+		article.setPage(new Page<Article>(1,1,nextSort));
+		
         model.addAttribute("contentViewList",getTplContent());
         model.addAttribute("article_DEFAULT_TEMPLATE",Article.DEFAULT_TEMPLATE);
 		model.addAttribute("article", article);
@@ -108,6 +122,20 @@ public class ArticleController extends BaseController {
 		if (!beanValidator(model, article)){
 			return form(article, model);
 		}
+		if(StringUtils.isBlank(article.getId())){ //添加
+			Double wei = articleService.findWeight(article);
+			article.setWeight(wei);
+		}else{//修改
+			if(article.getWeight() !=null && article.getWeight()==-1.0){  //序号往后调
+				article.setSort(article.getSort()+1); //
+				Double wei = articleService.findWeight(article);
+				article.setWeight(wei);
+			}else if(article.getWeight() !=null && article.getWeight()==0.0){
+				Double wei = articleService.findWeight(article);
+				article.setWeight(wei);
+			}
+		}
+		
 		articleService.save(article);
 		addMessage(redirectAttributes, "保存文章'" + StringUtils.abbr(article.getTitle(),50) + "'成功");
 		String categoryId = article.getCategory()!=null?article.getCategory().getId():null;

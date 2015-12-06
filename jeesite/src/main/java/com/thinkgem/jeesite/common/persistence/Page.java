@@ -34,6 +34,8 @@ public class Page<T> {
 	private int prev;// 上一页索引
 	private int next;// 下一页索引
 	
+	private int firstResult =-1; //
+	
 	private boolean firstPage;//是否是第一页
 	private boolean lastPage;//是否是最后一页
 
@@ -515,12 +517,24 @@ public class Page<T> {
 	 * 获取 Hibernate FirstResult
 	 */
 	public int getFirstResult(){
-		int firstResult = (getPageNo() - 1) * getPageSize();
+		if(firstResult>-1){
+			return firstResult;
+		}
+		firstResult = (getPageNo() - 1) * getPageSize();
 		if (firstResult >= getCount()) {
 			firstResult = 0;
 		}
 		return firstResult;
 	}
+	
+	/**
+	 * 
+	 * @param firstResult
+	 */
+	public void setFirstResult(int firstResult) {
+		this.firstResult = firstResult;
+	}
+	
 	/**
 	 * 获取 Hibernate MaxResults
 	 */
