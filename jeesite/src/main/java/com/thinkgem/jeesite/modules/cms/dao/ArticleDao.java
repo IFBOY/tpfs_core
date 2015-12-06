@@ -38,5 +38,7 @@ public interface ArticleDao extends CrudDao<Article> {
 	public List<Article> findBetweenList(Article article);
 
 	public Integer findSort(Article article);
+	
+	public Double findMaxWeight(Article article);
 
 }
