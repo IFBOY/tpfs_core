@@ -51,9 +51,9 @@
 				title="公司" url="/sys/office/treeData?type=1" cssClass="input-small" allowClear="true"/></li>
 			<li><label>用户名：</label><form:input path="loginName" htmlEscape="false" maxlength="30" class="input-medium"/></li>
 			<li><label>用户类型：</label><form:select path="userType" class="input-medium">
-					<form:option value="1">系统管理员</form:option>					
-					<form:option value="2">学校管理员</form:option>
-					<form:option value="3">学院管理员</form:option>
+					<form:option value="1">超级管理员</form:option>					
+					<form:option value="2">管理员</form:option>
+					<form:option value="3">录入人员</form:option>
                     <form:option value="4" selected="true">学生</form:option>	</form:select></li>
 			<li class="clearfix"></li>
 			<li><label>归属系院：</label><sys:treeselect id="office" name="office.id" value="${user.office.id}" labelName="office.name" labelValue="${user.office.name}" 
