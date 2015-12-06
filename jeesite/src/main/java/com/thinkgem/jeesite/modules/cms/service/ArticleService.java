@@ -142,7 +142,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	}
 	
 	/**
-	 * 点击数加一
+	 * 根据分类和排序获取排序权重
 	 */
 	@Transactional(readOnly = false)
 	public Double findWeight(Article article) {
