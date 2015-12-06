@@ -174,12 +174,21 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 				nextWeight = articleList.get(1).getWeight();
 				resultWeight = (preWeight+nextWeight)/2;
 			}else{//正常放到最后
-				if(StringUtils.isNotBlank(article.getId())){
+				if(StringUtils.isNotBlank(article.getId())){ //修改
 					preWeight = articleList.get(0).getWeight();
 					nextWeight = Double.valueOf(sort);
 					resultWeight = (preWeight+nextWeight)/2;
-				}else{
-					resultWeight = Double.valueOf(sort);
+				}else{// 添加
+					Article maxWeightArt = new Article();
+					maxWeightArt.setCategory(article.getCategory());
+					Double maxWeight = dao.findMaxWeight(maxWeightArt);
+					if(maxWeight>=sort){
+						preWeight = articleList.get(0).getWeight();
+						nextWeight = Double.valueOf(preWeight+1);
+						resultWeight = (preWeight+nextWeight)/2;
+					}else{
+						resultWeight = Double.valueOf(sort);
+					}
 				}
 			}
 		}
