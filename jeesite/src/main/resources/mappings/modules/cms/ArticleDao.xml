@@ -64,7 +64,7 @@
 	
 	<select id="findList" resultType="Article">
 		SELECT 
-			(SELECT count(1) from cms_article c where c.weight &lt;=a.weight 
+			(SELECT count(1) from cms_article c where c.weight &lt;=a.weight AND c.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="category.id != null and category.id != ''">
 				AND c.category_id = #{category.id}
 			</if>
