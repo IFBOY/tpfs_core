@@ -47,7 +47,7 @@
 				<td><a href="javascript:" onclick="$('#categoryId').val('${article.category.id}');$('#categoryName').val('${article.category.name}');$('#searchForm').submit();return false;">${article.category.name}</a></td>
 				<td><a href="${ctx}/cms/article/form?id=${article.id}" title="${article.title}">${fns:abbr(article.title,40)}</a></td>
 				<td>${article.weight}</td>
-				<td>${(page.pageNo-1)*page.pageSize+index.count}</td>
+				<td>${article.sort}</td>
 				<td>${article.hits}</td>
 				<td>${article.shareNumber}</td>
 				<td>${article.user.name}</td>
