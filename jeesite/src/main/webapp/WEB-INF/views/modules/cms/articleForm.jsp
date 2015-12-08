@@ -5,6 +5,25 @@
 	<title>知识管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
+	var maxSort = ${article.page.count}; // 栏目下允许的最大序号
+	var categoryTreeselectCallBack = function(v,h,ids){
+		if (v=="ok" && ids.length>0){
+			var categoryId = ids[0];
+			$.ajax({
+			    type: 'POST',
+			    url: '${ctx}/cms/article/findMaxSort' ,
+			    data: {'categoryId' : categoryId, 'article.id' : '${article.id}'},
+			    dataType: 'json',
+			    success: function(data){
+			    	maxSort = data;
+			    	 if('${article.id}'=='' && data){
+                     	$("#sort").val(data);
+                     }
+			    }
+			});
+		}
+	}
+	
 		$(document).ready(function() {
             /* if($("#link").val()){
                 $('#linkBody').show();
@@ -13,9 +32,9 @@
 			$("#title").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){
-                   if ($("#sort").val()>${article.page.count} || $("#sort").val()==0){
+                   if ($("#sort").val()>maxSort || $("#sort").val()==0){
                     	$("#sort").focus();
-                        top.$.jBox.tip('序号必须连续，当前最大序号应为 : ${article.page.count}','warning');
+                        top.$.jBox.tip('序号必须连续，当前最大序号应为 : '+maxSort,'warning');
                     }else if (CKEDITOR.instances.content.getData()==""){
                         top.$.jBox.tip('请填写正文','warning');
                     }else{

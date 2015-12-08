@@ -36,9 +36,9 @@
 		// 正常打开	
 		top.$.jBox.open("iframe:${ctx}/tag/treeselect?url="+encodeURIComponent("${url}")+"&module=${module}&checked=${checked}&extId=${extId}&isAll=${isAll}", "选择${title}", 300, 420, {
 			ajaxData:{selectIds: $("#${id}Id").val()},buttons:{"确定":"ok", ${allowClear?"\"清除\":\"clear\", ":""}"关闭":true}, submit:function(v, h, f){
+				var ids = [], names = [], nodes = [];
 				if (v=="ok"){
 					var tree = h.find("iframe")[0].contentWindow.tree;//h.find("iframe").contents();
-					var ids = [], names = [], nodes = [];
 					if ("${checked}" == "true"){
 						nodes = tree.getCheckedNodes(true);
 					}else{
@@ -75,7 +75,7 @@
 					$("#${id}Name").val("");
                 }//</c:if>
 				if(typeof ${id}TreeselectCallBack == 'function'){
-					${id}TreeselectCallBack(v, h, f);
+					${id}TreeselectCallBack(v, h, ids);
 				}
 			}, loaded:function(h){
 				$(".jbox-content", top.document).css("overflow-y","hidden");

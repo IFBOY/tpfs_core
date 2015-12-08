@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
@@ -175,6 +177,22 @@ public class ArticleController extends BaseController {
 		return JsonMapper.nonDefaultMapper().toJson(list);
 	}
 
+	/**
+	 * 获取栏目下最大序号
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findMaxSort")
+	public Integer findMaxSort(Article article, String categoryId, HttpServletResponse response) {
+		response.setContentType("application/json; charset=UTF-8");
+		
+		article.setCategory(new Category(categoryId));
+		int maxSort = this.articleService.findSort(article);
+		if(StringUtils.isBlank(article.getId())){
+			maxSort = maxSort+1;
+		}
+		return maxSort;
+	}
+	
     private List<String> getTplContent() {
    		List<String> tplList = fileTplService.getNameListByPrefix(siteService.get(Site.getCurrentSiteId()).getSolutionPath());
    		tplList = TplUtils.tplTrim(tplList, Article.DEFAULT_TEMPLATE, "");
