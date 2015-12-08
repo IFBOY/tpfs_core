@@ -75,10 +75,19 @@
 		<form:hidden path="weight"/>
 		<sys:message content="${message}"/>
 		<div class="control-group">
-			<label class="control-label">归属栏目:</label>
+			<label class="control-label">栏目:</label>
 			<div class="controls">
-                <sys:treeselect id="category" name="category.id" value="${article.category.id}" labelName="category.name" labelValue="${article.category.name}"
-					title="栏目" url="/cms/category/treeData" module="article" selectScopeModule="true" notAllowSelectRoot="false" notAllowSelectParent="true" cssClass="required"/>&nbsp;
+			<c:choose>
+	   			<c:when test="${not empty article.id}">
+	    			<form:input path="category.name" htmlEscape="false" readonly="true" maxlength="200" class="input-xxlarge required"/>
+	   				<form:hidden path="category.id"/>
+	   			</c:when>
+	   			<c:otherwise>
+		   			<sys:treeselect id="category" name="category.id" value="${article.category.id}" labelName="category.name" labelValue="${article.category.name}"
+						title="栏目" url="/cms/category/treeData" module="article" selectScopeModule="true" notAllowSelectRoot="false" notAllowSelectParent="true" cssClass="required"/>&nbsp;
+	   			</c:otherwise>
+	   		</c:choose>
+                
                 <!-- <span>
                     <input id="url" type="checkbox" onclick="if(this.checked){$('#linkBody').show()}else{$('#linkBody').hide()}$('#link').val()"><label for="url">外部链接</label>
                 </span> -->
