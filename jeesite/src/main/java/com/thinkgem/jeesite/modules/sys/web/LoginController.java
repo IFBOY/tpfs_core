@@ -47,13 +47,6 @@ public class LoginController extends BaseController{
 	 */
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Principal principal = UserUtils.getPrincipal();
-//		// 默认页签模式
-//		String tabmode = CookieUtils.getCookie(request, "tabmode");
-//		if (tabmode == null){
-//			CookieUtils.setCookie(response, "tabmode", "1");
-//		}
-		
 		if (logger.isDebugEnabled()){
 			logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
 		}
@@ -63,20 +56,6 @@ public class LoginController extends BaseController{
 			CookieUtils.setCookie(response, "LOGINED", "false");
 		}
 		
-		// 如果已经登录，则跳转到管理首页
-		if(principal != null && !principal.isMobileLogin()){
-			if(UserUtils.getUser().getTypeUser().equals("学生")){
-				return "redirect:" + frontPath;
-			}else{
-				return "redirect:" + adminPath;
-			}
-		}
-//		String view;
-//		view = "/WEB-INF/views/modules/sys/sysLogin.jsp";
-//		view = "classpath:";
-//		view += "jar:file:/D:/GitHub/jeesite/src/main/webapp/WEB-INF/lib/jeesite.jar!";
-//		view += "/"+getClass().getName().replaceAll("\\.", "/").replace(getClass().getSimpleName(), "")+"view/sysLogin";
-//		view += ".jsp";
 		return "modules/sys/sysLogin";
 	}
 
@@ -85,17 +64,7 @@ public class LoginController extends BaseController{
 	 */
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
 	public String loginFail(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Principal principal = UserUtils.getPrincipal();
 		
-		// 如果已经登录，则跳转到管理首页
-		if(principal != null){
-			if(UserUtils.getUser().getTypeUser().equals("学生")){
-				return "redirect:" + frontPath;
-			}else{
-				return "redirect:" + adminPath;
-			}
-		}
-
 		String username = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_USERNAME_PARAM);
 		boolean rememberMe = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM);
 		boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
@@ -160,14 +129,11 @@ public class LoginController extends BaseController{
 		}
 		
 		// 如果已经登录，则跳转到管理首页
-		if(principal != null){
-			if(UserUtils.getUser().getTypeUser().equals("学生")){
-				return "redirect:" + frontPath;
-			}else{
-				return "redirect:" + adminPath;
-			}
+		if(UserUtils.getUser().getTypeUser().equals("学生")){
+			return "redirect:" + frontPath;
+		}else{
+			return "redirect:" + adminPath;
 		}
-		return "redirect:" + adminPath + "/login";
 	}
 	
 	/**
