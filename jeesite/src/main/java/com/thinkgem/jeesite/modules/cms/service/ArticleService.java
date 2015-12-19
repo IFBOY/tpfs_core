@@ -3,12 +3,15 @@
  */
 package com.thinkgem.jeesite.modules.cms.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,8 @@ import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.CacheUtils;
+import com.thinkgem.jeesite.common.utils.ContentBean;
+import com.thinkgem.jeesite.common.utils.SolrApi;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.cms.dao.ArticleDao;
 import com.thinkgem.jeesite.modules.cms.dao.ArticleDataDao;
@@ -40,6 +45,8 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	private ArticleDataDao articleDataDao;
 	@Autowired
 	private CategoryDao categoryDao;
+	@Autowired
+	private SolrApi solrApi;	
 	
 	@Transactional(readOnly = false)
 	public Page<Article> findPage(Page<Article> page, Article article, boolean isDataScopeFilter) {
@@ -97,19 +104,34 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
             article.setViewConfig(StringEscapeUtils.unescapeHtml4(article.getViewConfig()));
         }
         
-        ArticleData articleData = new ArticleData();;
+        ArticleData articleData = new ArticleData();
 		if (StringUtils.isBlank(article.getId())){
 			article.preInsert();
 			articleData = article.getArticleData();
 			articleData.setId(article.getId());
 			dao.insert(article);
 			articleDataDao.insert(articleData);
+			
 		}else{
 			article.preUpdate();
 			articleData = article.getArticleData();
 			articleData.setId(article.getId());
 			dao.update(article);
 			articleDataDao.update(article.getArticleData());
+		}
+        ContentBean ctx=new ContentBean();
+        ctx.setId(article.getId());
+        ctx.setContent(article.getArticleData().getContent());
+        ctx.setCreate_date(article.getCreateDate()==null?new Date():article.getCreateDate());
+        ctx.setDescription(article.getDescription());
+        ctx.setKeywords(article.getKeywords());
+		try {
+			solrApi.getInstance();
+			solrApi.addDoc(ctx);
+		} catch (IOException e) {			
+			e.printStackTrace();
+		} catch (SolrServerException e) {			
+			e.printStackTrace();
 		}
 	}
 	
@@ -257,5 +279,9 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 		
 		return page;
 	}
-	
+
+	public Map<String, Object> queryByParam(Page<ContentBean> page,String condition) throws SolrServerException, IOException {
+		solrApi.getInstance();
+		return solrApi.queryByParam(condition, page.getPageNo(), page.getPageSize());
+	}
 }

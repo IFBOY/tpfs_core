@@ -651,7 +651,16 @@
 			<artifactId>UserAgentUtils</artifactId>
 			<version>1.13</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>5.3.1</version>
+		</dependency>
 		<!-- 自定义jar依赖包
 		<dependency>
 			<groupId>com.thinkgem.jeesite</groupId>
