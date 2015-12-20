@@ -8,7 +8,6 @@
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
 <link href="${ctxStatic}/star/star.css" rel="stylesheet" type="text/css">
-
 </head>
 <body>
 
