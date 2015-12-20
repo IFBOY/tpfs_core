@@ -23,10 +23,8 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420" target="_blank">
-											<img
-											src="${ctxStatic}/front/1444077f35ca060283.jpg"
-											alt="课程管理" class="img-responsive">
+										<a href="http://demo.edusoho.com/course/420">
+											<img src="${ctxStaticTheme}/img/bank.png" title="银行" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -44,9 +42,7 @@
 									<div class="course-img">
 										<a href="http://demo.edusoho.com/course/283" target="_blank">
 											<span class="tags"> <span class="tag-live"></span>
-										</span> <img
-											src="${ctxStatic}/front/16101134ee27345254.jpg"
-											alt="EduSoho直播教室演示" class="img-responsive">
+										</span> <img src="${ctxStaticTheme}/img/xintuo.png" title="信托" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -65,9 +61,7 @@
 								<div class="course-item">
 									<div class="course-img">
 										<a href="http://demo.edusoho.com/course/225" target="_blank">
-											<img
-											src="${ctxStatic}/front/0929040703b5013404.jpg"
-											alt="考试系统（题库）体验" class="img-responsive">
+											 <img src="${ctxStaticTheme}/img/zhenquan2.png" title="证券" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -86,7 +80,7 @@
 								<div class="course-item">
 									<div class="course-img">
 										<a href="http://demo.edusoho.com/course/225" target="_blank">
-											<img src="${ctxStatic}/front/0929040703b5013404.jpg" alt="考试系统（题库）体验" class="img-responsive">
+											<img src="${ctxStaticTheme}/img/baoxian.png" title="保险" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -106,7 +100,7 @@
 								<div class="course-item">
 									<div class="course-img">
 										<a href="http://demo.edusoho.com/course/225" target="_blank">
-											<img src="${ctxStatic}/front/0929040703b5013404.jpg" alt="考试系统（题库）体验" class="img-responsive">
+											<img src="${ctxStaticTheme}/img/guquantouzhijigou.png" title="股权投资机构" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -125,9 +119,7 @@
 								<div class="course-item">
 									<div class="course-img">
 										<a href="http://demo.edusoho.com/course/420" target="_blank">
-											<img
-											src="${ctxStatic}/front/1444077f35ca060283.jpg"
-											alt="课程管理" class="img-responsive">
+											<img src="${ctxStaticTheme}/img/jianguan.png" title="监管机构" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -143,10 +135,8 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420" target="_blank">
-											<img
-											src="${ctxStatic}/front/1444077f35ca060283.jpg"
-											alt="课程管理" class="img-responsive">
+										<a href="http://demo.edusoho.com/course/420" >
+											<img src="${ctxStaticTheme}/img/jiaoyisuo.png" title="交易所" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -162,10 +152,8 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420" target="_blank">
-											<img
-											src="${ctxStatic}/front/1444077f35ca060283.jpg"
-											alt="课程管理" class="img-responsive">
+										<a href="http://demo.edusoho.com/course/420" >
+											<img src="${ctxStaticTheme}/img/feiyhjr.png" title="非银行金融" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
