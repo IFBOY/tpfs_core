@@ -362,14 +362,12 @@ h2, .h2 {
         笔者是北京市朝阳区某所重点小学从教多年的一线教师。近几年来，各方社会力量在互联网教育行业中投入越来越多，各类教育网站层出不穷。笔者作为教育行业的从业者，有些想法如鲠在喉，不吐不快。互联网教育，错位的盛宴判断一家教育类网站是否真的算是有用？是否真的对我们的教学有帮助，对孩子的成长有益处，笔者认为应该首...
       </div>
     </div>
-    <c:forEach items="${fnc:getArticleList(site.id, 6, 8, '')}" var="article">
-			<li><span class="pull-right"><fmt:formatDate value="${article.updateDate}" pattern="yyyy.MM.dd"/></span><a href="${article.url}" style="color:${article.color}">${fns:abbr(article.title,28)}</a></li>
-		</c:forEach>
+    
 </div>    
 				
 				</div>
+				<div class="pagination" style="padding-bottom:20px;">${page}</div>
 			</div>
-			
 		</div>
 
 		<div class="span3">

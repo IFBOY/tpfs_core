@@ -8,348 +8,60 @@
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
 <link href="${ctxStatic}/star/star.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="${ctxStatic}/star/star.js"></script>
-<style type="text/css">
-body {
-	background: #EEE none repeat scroll 0% 0%;
-	word-wrap: break-word;
-	text-rendering: optimizelegibility;
-}
 
-.panel-default {
-	padding: 0px 15px;
-	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-}
-
-.panel {
-	border: medium none;
-	margin-bottom: 20px;
-	background-color: #FFF;
-	border-radius: 2px;
-}
-
-.panel-default {
-	padding: 0 15px;
-	-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-}
-
-.panel-default>.panel-heading {
-	position: relative;
-	font-size: 16px;
-	padding: 5px 0;
-	background: #fff;
-	border-bottom: 1px solid #f5f5f5;
-}
-
-.panel-default>.panel-heading .panel-title {
-	color: #313131;
-}
-
-.panel-default>.panel-heading .panel-title>i {
-	display: none;
-}
-
-.panel-default>.panel-heading .more {
-	position: absolute;
-	top: 13px;
-	right: 0;
-	display: block;
-	color: #919191;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.3s ease;
-}
-
-.panel-default>.panel-heading .more:hover {
-	color: #616161;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.3s ease;
-}
-
-.panel-default>.panel-heading .panel-bar {
-	position: absolute;
-	top: 7px;
-	right: 0;
-	display: block;
-}
-
-.panel-default>.panel-footer {
-	padding: 15px 0;
-	background: none;
-}
-
-.panel-default>.panel-body {
-	position: relative;
-	padding: 15px 0;
-}
-
-.panel-primary>.panel-heading {
-	background-color: #46c37b;
-	color: #fff;
-}
-
-.panel-primary>.panel-body {
-	background: #fafafa;
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
-}
-
-.panel-default>.panel-heading .panel-title {
-	color: #313131;
-}
-
-.panel-title {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	font-size: 16px;
-	color: inherit;
-}
-
-.media-left,.media-right,.media-body {
-	display: table-cell;
-	vertical-align: top;
-}
-
-.media-left,.media>.pull-left {
-	padding-right: 10px;
-}
-
-.media-default .media-body>.title {
-	margin-bottom: 10px;
-}
-#content-container {
-    margin-top: 10px;
-}
-
-.article-list-mian .article-item {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #EFEFEF;
-}
-.article-metas {
-    overflow: hidden;
-}
-.pull-left {
-    float: left !important;
-}
-.article-metas .date .day {
-    margin-top: 2px;
-    font-size: 16px;
-    line-height: 1.2;
-}
-.article-metas .date .month {
-    font-size: 12px;
-}
-.article-metas .metas-body {
-    padding-left: 60px;
-}
-.article-metas .metas-body .title {
-    margin: 0px;
-    line-height: 36px;
-}
-.article-metas .metas-body .title a {
-    color: #616161;
-    transition: all 0.3s ease 0s;
-}
-.link-dark {
-    color: #313131 !important;
-    transition: all 0.3s ease 0s;
-}
-.article-list-mian .article-item .content {
-    margin-top: 15px;
-    color: #919191;
-}
-.article-metas .date {
-    height: 45px;
-    width: 45px;
-    margin-top: 10px;
-    text-align: center;
-    color: #E1E1E1;
-    border: 1px solid #E1E1E1;
-    border-radius: 50%;
-}
-h2, .h2 {
-    font-size: 18px;
-}
-.media.media-number, .media.media-number-o {
-    border-bottom: 1px solid #F5F5F5;
-    padding-bottom: 15px;
-}
-.mbl {
-    margin-bottom: 20px;
-}
-.input-group {
-    position: relative;
-    display: table;
-    border-collapse: separate;
-}
-.media.media-number .media-left .num, .media.media-number-o .media-left .num {
-    display: block;
-    width: 20px;
-    height: 20px;
-    line-height: 18px;
-    text-align: center;
-    border: 1px solid #919191;
-    border-radius: 50%;
-}
-.avatar-square-sm, .group-avatar-sm {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-    border: 1px solid #FFF;
-}
-.fsn {
-    font-size: 12px;
-}
-.text-success {
-    color: #70D445 !important;
-}
-.course-list .course-item .metas {
-    padding: 10px;
-    color: #C1C1C1;
-}
-.course-list .course-item .metas .num {
-    margin-right: 10px;
-}
-.course-list .course-item .metas .price {
-    float: right;
-    color: #E83D2C;
-    font-size: 14px;
-    margin-right: 0px;
-}
-.course-list .course-item .metas .red {
-    color: #E83D2C;
-    font-size: 14px;
-    margin-right: 0px;
-}
-.course-list .course-item .title {
-
-    margin-top: 10px;
-    padding: 0px 10px;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-
-}
-.course-list .course-item {
-    transition: all 0.3s ease 0s;
-}
-.course-list .course-item {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 30px;
-    border-radius: 2px;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-    background-color: #FFF;
-}
-.breadcrumb {
-    padding: 8px 15px;
-    margin-bottom: 20px;
-    list-style: outside none none;
-    border-radius: 2px;
-}
-.breadcrumb a {
-    color: #919191;
-    transition: all 0.3s ease 0s;
-}
-.breadcrumb > li + li::before {
-    content: "/ ";
-    padding: 0px 5px;
-    color: #CCC;
-}
-.es-section {
-    background: #FFF none repeat scroll 0% 0%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 2px;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
-}
-.article-metas .metas-body .sns {
-    color: #919191;
-    margin: 10px auto;
-}
-.article-metas .metas-body .sns span {
-    margin-right: 10px;
-}
-.article-metas .metas-body .sns span i {
-    margin-right: 5px;
-}
-.es-icon {
-    line-height: 1;
-}
-.es-icon {
-    font-family: "es-icon" !important;
-    font-size: 16px;
-    font-style: normal;
-}
-.x-top {
-    border-top: 1px solid #D8E4E6;
-    padding-top: 10px;
-    margin-top: 30px;
-}
-.zhs {
-    color: #CDCDCD;
-    font-weight: bold;
-    font-family: Arial,Helvetica,sans-serif;
-}
-.fy {
-    width: 50%;
-    overflow: hidden;
-    height: 25px;
-    font-size: 14px;
-}
-.f {
-    float: left;
-}
-.jg35 {
-    padding-left: 35px;
-}
-
-.txtRight {
-    text-align: right;
-}
-
-.PREVIOUS {
-    height: 25px;
-    padding-left: 35px;
-    background-image: url("${ctxStatic}/front/PREVIOUS.png");
-    background-repeat: no-repeat;
-    line-height: 25px;
-    background-position: left center;
-}
-.NEXT {
-    height: 25px;
-    background-image: url("${ctxStatic}/front/NEXT.png");
-    background-repeat: no-repeat;
-    line-height: 25px;
-    background-position: right center;
-    padding-right: 35px;
-}
-.jg352 {
-    padding-right: 35px;
-}
-.df {
-    clear: left;
-}
-.dr {
-    clear: right;
-}
-.fy a {
-    color: #337AB7;
-    text-decoration: none;
-}
-</style>
 </head>
 <body>
 
 	<div class="row" id="content-container">
+	
+	<div class="span3">
+		   <form class="form-search">
+		        <div class="input-append">
+		      <input class="span2" style="width: 160px;" placeholder="全站搜索"  id="appendedInputButton" type="text">
+		      <button class="btn" type="button">Go</button>
+		    </div>
+		    </form>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="media media-default">
+						<div class="media-left">
+							<img class="avatar-md"
+								src=" ${ctxStatic}/front/091008008a96767512.jpg">
+						</div>
+						<div class="media-body">
+							<div class="title">张三 20071302938</div>
+							<div class="content">西南财经大学</div>
+							<div class="content" style="padding-top:10px;"><button class="btn btn-success pull-right">注销</button></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="panel panel-default">
+			<div class="panel-heading">
+					<h3 class="panel-title">银行</h3>
+				</div>
+				<div class="panel-body" >
+				<div class="media media-number" >
+					<div class="media-title" >
+		               <a class="link-light" href="#" title="给提建议">1 累计学习累计知识点...  </a> 
+		            </div>
+		          </div>
+		         <div class="media media-number">
+		            <div class="media-body" >
+		              学习完成比例
+		            </div>
+		          </div>
+		          <div class="media media-number" style="padding-bottom: 0px;border-bottom: 1px solid #FFF;">
+		            <div class="media-body" >
+		              56分钟 / 学习总时长
+		            </div>
+		          </div>
+				</div>
+			</div>
+		</div>
+	
 		<div class="span9">
 			
 			<div class="panel panel-default">
@@ -498,64 +210,7 @@ h2, .h2 {
 				</div>
 			</div>
 		</div>
-
-		<div class="span3">
-		   <form class="form-search">
-		        <div class="input-append">
-		      <input class="span2" style="width: 160px;" placeholder="全站搜索"  id="appendedInputButton" type="text">
-		      <button class="btn" type="button">Go</button>
-		    </div>
-		    </form>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="media media-default">
-						<div class="media-left">
-							<img class="avatar-md"
-								src=" ${ctxStatic}/front/091008008a96767512.jpg">
-						</div>
-						<div class="media-body">
-							<div class="title">张三 20071302938</div>
-							<div class="content">西南财经大学</div>
-							<div class="content" style="padding-top:10px;"><button class="btn btn-success pull-right">注销</button></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			
-			<div class="panel panel-default">
-			<div class="panel-heading">
-					<h3 class="panel-title">银行</h3>
-				</div>
-				<div class="panel-body" >
-				<div class="media media-number" >
-					<div class="media-title" >
-		               <a class="link-light" href="#" title="给提建议">给提建议</a> 
-		            </div>
-		            <div class="media-body" >
-		               累计学习知识点累计知识点... 
-		            </div>
-		            
-		          </div>
-		         <div class="media media-number">
-		         <div class="media-title" >
-		               累计学习知识点 
-		            </div>
-		            <div class="media-body" >
-		              学习完成比例
-		            </div>
-		          </div>
-		          <div class="media media-number" style="padding-bottom: 0px;border-bottom: 1px solid #FFF;">
-		          <div class="media-title" >
-		               累计学习知识点 
-		            </div>
-		            <div class="media-body" >
-		              56分钟 / 学习总时长
-		            </div>
-		          </div>
-				</div>
-			</div>
-		</div>
 	</div>
+	<script type="text/javascript" src="${ctxStatic}/star/star.js"></script>
 </body>
 </html>
