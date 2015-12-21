@@ -61,7 +61,7 @@
 								<div class="course-item">
 									<div class="course-img">
 										<a href="http://demo.edusoho.com/course/225" target="_blank">
-											 <img src="${ctxStaticTheme}/img/zhenquan2.png" title="证券" class="img-responsive">
+											 <img src="${ctxStaticTheme}/img/zhenquan.png" title="证券" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
