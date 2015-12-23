@@ -4,7 +4,9 @@
 package com.thinkgem.jeesite.modules.cms.web.front;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +38,11 @@ import com.thinkgem.jeesite.modules.cms.service.CommentService;
 import com.thinkgem.jeesite.modules.cms.service.LinkService;
 import com.thinkgem.jeesite.modules.cms.service.SiteService;
 import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
+import com.thinkgem.jeesite.modules.learn.service.FavoriteService;
+import com.thinkgem.jeesite.modules.learn.service.LearnRecordsService;
+import com.thinkgem.jeesite.modules.sys.entity.User;
+import com.thinkgem.jeesite.modules.sys.service.SystemService;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 网站Controller
@@ -58,6 +65,12 @@ public class FrontController extends BaseController{
 	private CategoryService categoryService;
 	@Autowired
 	private SiteService siteService;
+	@Autowired
+	private SystemService systemService;
+	@Autowired
+	private FavoriteService favoriteService;
+	@Autowired
+	private LearnRecordsService learnRecordsService;
 	
 	/**
 	 * 网站首页
@@ -65,8 +78,15 @@ public class FrontController extends BaseController{
 	@RequestMapping
 	public String index(Model model) {
 		Site site = CmsUtils.getSite(Site.defaultSiteId());
+		User user=UserUtils.getUser();
 		model.addAttribute("site", site);
 		model.addAttribute("isIndex", true);
+		model.addAttribute("user", user);
+		Map<String,Object> param= new HashMap<String,Object>();
+		param.put("DEL_FLAG_NORMAL", "0");
+		param.put("USERID", user.getId());
+		model.addAttribute("favoriteList",favoriteService.findTopFive(param));
+		model.addAttribute("learnList",learnRecordsService.findTopFive(param));
 		return "modules/cms/front/themes/"+site.getTheme()+"/frontIndex";
 	}
 	

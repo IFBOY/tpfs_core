@@ -4,6 +4,7 @@
 package com.thinkgem.jeesite.modules.learn.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import com.thinkgem.jeesite.modules.learn.dao.FavoriteDao;
 
 /**
  * 收藏夹Service
+ * 
  * @author Alex
  * @version 2015-11-25
  */
@@ -25,23 +27,27 @@ public class FavoriteService extends CrudService<FavoriteDao, Favorite> {
 	public Favorite get(String id) {
 		return super.get(id);
 	}
-	
+
 	public List<Favorite> findList(Favorite favorite) {
 		return super.findList(favorite);
 	}
-	
+
+	public List<Favorite> findTopFive(Map<String, Object> param) {
+		return super.dao.findTopFive(param);
+	}
+
 	public Page<Favorite> findPage(Page<Favorite> page, Favorite favorite) {
 		return super.findPage(page, favorite);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void save(Favorite favorite) {
 		super.save(favorite);
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(Favorite favorite) {
 		super.delete(favorite);
 	}
-	
+
 }
