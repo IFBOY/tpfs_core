@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
+import com.thinkgem.jeesite.modules.learn.entity.LearnStaticData;
 import com.thinkgem.jeesite.modules.learn.entity.LearnStatistics;
 import com.thinkgem.jeesite.modules.learn.dao.LearnStatisticsDao;
 
@@ -42,6 +43,9 @@ public class LearnStatisticsService extends CrudService<LearnStatisticsDao, Lear
 	@Transactional(readOnly = false)
 	public void delete(LearnStatistics learnStatistics) {
 		super.delete(learnStatistics);
+	}
+	public List<LearnStaticData> getStaticsData(String userId){
+		return super.dao.getStaticsData(userId);
 	}
 	
 }

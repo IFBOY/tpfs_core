@@ -30,9 +30,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[6].learnCount }/${staticDataList[6].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -50,8 +50,8 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
+											<span class="red"> ${staticDataList[2].learnCount }/${staticDataList[2].articleCount }</span>
+											<span class="course-price-widget"> <span class="price">
 													<span class="text-success">继续学习</span>
 											</span>
 											</span>
@@ -69,9 +69,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[5].learnCount }/${staticDataList[5].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -88,9 +88,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[1].learnCount }/${staticDataList[1].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -108,9 +108,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[4].learnCount }/${staticDataList[4].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -127,9 +127,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[3].learnCount }/${staticDataList[3].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -146,9 +146,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[0].learnCount }/${staticDataList[0].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -165,9 +165,9 @@
 									</div>
 									<div class="course-info">
 										<div class="metas clearfix">
-											<span class="red"> 24/345 </span> <span
-												class="course-price-widget"> <span class="price">
-													<span class="text-success">继续学习</span>
+											<span class="red"> ${staticDataList[7].learnCount }/${staticDataList[7].articleCount }
+											</span> <span class="course-price-widget"> <span
+												class="price"> <span class="text-success">继续学习</span>
 											</span>
 											</span>
 										</div>
@@ -191,8 +191,14 @@
 							<div class="article-metas clearfix">
 								<div class="pull-left">
 									<div class="date">
-										<div class="day"><fmt:formatDate value="${learnRecords.updateDate}" pattern="dd"/></div>
-										<div class="month"><fmt:formatDate value="${learnRecords.updateDate}" pattern="MMMM"/></div>
+										<div class="day">
+											<fmt:formatDate value="${learnRecords.updateDate}"
+												pattern="dd" />
+										</div>
+										<div class="month">
+											<fmt:formatDate value="${learnRecords.updateDate}"
+												pattern="MMMM" />
+										</div>
 									</div>
 								</div>
 								<div class="metas-body">
@@ -247,14 +253,14 @@
 				<div class="panel-body">
 
 					<div class="media media-number">
-						<div class="media-body">623 / 累计学习知识点</div>
+						<div class="media-body">${userLearnArticls}/ 累计学习知识点</div>
 					</div>
 					<div class="media media-number">
-						<div class="media-body">45% / 学习完成比例</div>
+						<div class="media-body">${learnedPercent}/ 学习完成比例</div>
 					</div>
 					<div class="media media-number"
 						style="padding-bottom: 0px; border-bottom: 1px solid #FFF;">
-						<div class="media-body">56分钟 / 学习总时长</div>
+						<div class="media-body">${userLearnTotalTime}分钟/ 学习总时长</div>
 					</div>
 				</div>
 			</div>

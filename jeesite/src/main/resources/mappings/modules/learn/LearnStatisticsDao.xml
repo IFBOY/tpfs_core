@@ -1,64 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.learn.dao.LearnStatisticsDao">
-    
+	<resultMap type="com.thinkgem.jeesite.modules.learn.entity.LearnStaticData" id="StaticResult">
+		<id column="id" property="categoryId" />
+		<result column="name" property="name" />
+		<result column="learn_count" property="learnCount" />
+		<result column="total_minutes" property="totalMinutes" />
+		<result column="article_count" property="articleCount" />
+	</resultMap>
 	<sql id="learnStatisticsColumns">
 		a.id AS "id",
 		a.user_id AS "user.id",
-		a.knocate_id AS "knocate.id",
+		a.knocate_id AS
+		"knocate.id",
 		a.leaning_count AS "leaningCount",
-		a.learn_total_hours AS "learnTotalHours",
+		a.learn_total_hours AS
+		"learnTotalHours",
 		a.last_learned_cms_id AS "article.id",
-		a.create_by AS "createBy.id",
+		a.create_by AS
+		"createBy.id",
 		a.create_date AS "createDate",
-		a.update_by AS "updateBy.id",
+		a.update_by AS
+		"updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
 		u2.name AS "user.name",
-		cc.name AS "knocate.name",
+		cc.name AS
+		"knocate.name",
 		ca.title AS "article.title",
 		u3.name AS "createBy.name",
 		u4.name AS "updateBy.name"
 	</sql>
-	
+
 	<sql id="learnStatisticsJoins">
 		LEFT JOIN sys_user u2 ON u2.id = a.user_id
-		LEFT JOIN cms_category cc ON cc.id = a.knocate_id
-	    LEFT JOIN cms_article ca ON ca.id = a.last_learned_cms_id
-		LEFT JOIN sys_user u3 ON u3.id = a.create_by
-		LEFT JOIN sys_user u4 ON u4.id = a.update_by		
+		LEFT JOIN
+		cms_category cc ON cc.id = a.knocate_id
+		LEFT JOIN cms_article ca ON
+		ca.id = a.last_learned_cms_id
+		LEFT JOIN
+		sys_user u3 ON u3.id =
+		a.create_by
+		LEFT JOIN sys_user u4 ON u4.id =
+		a.update_by
 	</sql>
-    
+
 	<select id="get" resultType="LearnStatistics">
-		SELECT 
-			<include refid="learnStatisticsColumns"/>
+		SELECT
+		<include refid="learnStatisticsColumns" />
 		FROM cms_learn_statistics a
-		<include refid="learnStatisticsJoins"/>
+		<include refid="learnStatisticsJoins" />
 		WHERE a.id = #{id}
 	</select>
-	
+
 	<select id="findList" resultType="LearnStatistics">
-		SELECT 
-			<include refid="learnStatisticsColumns"/>
+		SELECT
+		<include refid="learnStatisticsColumns" />
 		FROM cms_learn_statistics a
-		<include refid="learnStatisticsJoins"/>
+		<include refid="learnStatisticsJoins" />
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="user != null and user.name != null and user.name != ''">
-				AND u2.name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{user.name}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{user.name}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{user.name},'%')</if>
+				AND u2.name LIKE
+				<if test="dbName == 'oracle'">'%'||#{user.name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{user.name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{user.name},'%')</if>
 			</if>
 			<if test="knocate != null and knocate.name != null and knocate.name != ''">
-				AND cc.name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{knocate.name}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{knocate.name}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{knocate.name},'%')</if>
+				AND cc.name LIKE
+				<if test="dbName == 'oracle'">'%'||#{knocate.name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{knocate.name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{knocate.name},'%')</if>
 			</if>
-			<if test="beginUpdateDate != null and endUpdateDate != null and beginUpdateDate != '' and endUpdateDate != ''">
-				AND a.update_date BETWEEN #{beginUpdateDate} AND #{endUpdateDate}
+			<if
+				test="beginUpdateDate != null and endUpdateDate != null and beginUpdateDate != '' and endUpdateDate != ''">
+				AND a.update_date BETWEEN #{beginUpdateDate} AND
+				#{endUpdateDate}
 			</if>
 		</where>
 		<choose>
@@ -70,15 +88,15 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="findAllList" resultType="LearnStatistics">
-		SELECT 
-			<include refid="learnStatisticsColumns"/>
+		SELECT
+		<include refid="learnStatisticsColumns" />
 		FROM cms_learn_statistics a
-		<include refid="learnStatisticsJoins"/>
+		<include refid="learnStatisticsJoins" />
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-		</where>		
+		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
@@ -88,54 +106,81 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<insert id="insert">
 		INSERT INTO cms_learn_statistics(
-			id,
-			user_id,
-			knocate_id,
-			leaning_count,
-			learn_total_hours,
-			last_learned_cms_id,
-			create_by,
-			create_date,
-			update_by,
-			update_date,
-			remarks,
-			del_flag
+		id,
+		user_id,
+		knocate_id,
+		leaning_count,
+		learn_total_hours,
+		last_learned_cms_id,
+		create_by,
+		create_date,
+		update_by,
+		update_date,
+		remarks,
+		del_flag
 		) VALUES (
-			#{id},
-			#{user.id},
-			#{knocate.id},
-			#{leaningCount},
-			#{learnTotalHours},
-			#{article.id},
-			#{createBy.id},
-			#{createDate},
-			#{updateBy.id},
-			#{updateDate},
-			#{remarks},
-			#{delFlag}
+		#{id},
+		#{user.id},
+		#{knocate.id},
+		#{leaningCount},
+		#{learnTotalHours},
+		#{article.id},
+		#{createBy.id},
+		#{createDate},
+		#{updateBy.id},
+		#{updateDate},
+		#{remarks},
+		#{delFlag}
 		)
 	</insert>
-	
+
 	<update id="update">
-		UPDATE cms_learn_statistics SET 	
-			user_id = #{user.id},
-			knocate_id = #{knocate.id},
-			leaning_count = #{leaningCount},
-			learn_total_hours = #{learnTotalHours},
-			last_learned_cms_id = #{article.id},
-			update_by = #{updateBy.id},
-			update_date = #{updateDate},
-			remarks = #{remarks}
+		UPDATE cms_learn_statistics SET
+		user_id = #{user.id},
+		knocate_id = #{knocate.id},
+		leaning_count = #{leaningCount},
+		learn_total_hours = #{learnTotalHours},
+		last_learned_cms_id =
+		#{article.id},
+		update_by = #{updateBy.id},
+		update_date = #{updateDate},
+		remarks = #{remarks}
 		WHERE id = #{id}
 	</update>
-	
+
 	<update id="delete">
-		UPDATE cms_learn_statistics SET 
-			del_flag = #{DEL_FLAG_DELETE}
+		UPDATE cms_learn_statistics SET
+		del_flag =
+		#{DEL_FLAG_DELETE}
 		WHERE id = #{id}
 	</update>
-	
+	<select id="getStaticsData" resultMap="StaticResult" parameterType="java.lang.String">
+		SELECT
+		CC.ID,
+		CC.NAME,
+		IFNULL(TMP.LEARN_COUNT, 0) AS LEARN_COUNT,
+		IFNULL(TMP.TOTAL_HOURS, 0) AS TOTAL_MINUTES,
+		(SELECT COUNT(1)
+		FROM
+		CMS_ARTICLE CA
+		WHERE CATEGORY_ID= CC.ID) AS ARTICLE_COUNT
+		FROM
+		CMS_CATEGORY CC
+		LEFT JOIN(
+		SELECT CS.KNOCATE_ID, SUM(CS.LEANING_COUNT)
+		AS LEARN_COUNT,
+		SUM(CS.LEARN_TOTAL_HOURS) AS TOTAL_HOURS
+		FROM
+		CMS_LEARN_STATISTICS CS
+		WHERE CS.USER_ID=#{userId}
+		GROUP BY CS.KNOCATE_ID) TMP ON
+		CC.ID= TMP.KNOCATE_ID
+		WHERE CC.DEL_FLAG= '0'
+		AND CC.PARENT_ID!='0'
+		ORDER
+		BY CC.NAME ASC
+	</select>
 </mapper>
