@@ -8,6 +8,43 @@
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
 <link href="${ctxStatic}/star/star.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+		$(document).ready(function() {
+				$("#addFavoriteA").click(function(){
+					var favoriteId = $('#favoriteIdInput').val();
+					if(favoriteId){
+						$.ajax({
+						    type: 'POST',
+						    url: '${ctxAdmin}/learn/favorite/delFavorite' ,
+						    data: {'favoriteId' : favoriteId },
+						    dataType: 'json',
+						    success: function(data){
+						    	if(data){
+						    		$('#favoriteIdInput').val('');
+						    		$("#addFavoriteA").text('收藏');
+						    	}
+						    }
+						});
+					}else{
+						$.ajax({
+						    type: 'POST',
+						    url: '${ctxAdmin}/learn/favorite/addFavorite' ,
+						    data: { 'articleId' : '${article.id}'},
+						    dataType: 'json',
+						    success: function(data){
+						    	if(data && data.id){
+						    		$('#favoriteIdInput').val(data.id)
+						    		$("#addFavoriteA").text('取消收藏');
+						    	}
+						    },
+						    error : function() {  
+						    	           alert("异常！");  
+						    	} 
+						});
+					}
+			});
+		});
+	</script>
 </head>
 <body>
 
@@ -66,9 +103,10 @@
 			<div class="panel panel-default">
 			<div class="panel-heading">
 				<ol class="breadcrumb">
-				  <li><a href="/article">首页</a></li>
+				<cms:frontCurrentPosition category="${category}"/>
+				  <!-- <li><a href="/article">首页</a></li>
 				      <li><a href="/article/category/edusoho">银行</a></li>
-				    <li class="active">正文</li>
+				    <li class="active">正文</li> -->
 				</ol>
 			</div>
 			
@@ -77,78 +115,37 @@
         <div class="article-metas">
   <div class="pull-left">
     <div class="date">
-      <div class="day">13</div>
-      <div class="month">01月</div>
+      <div class="day"><fmt:formatDate value="${article.createDate}" pattern="dd"/></div>
+      <div class="month"><fmt:formatDate value="${article.createDate}" pattern="MM"/>月</div>
     </div>
   </div>
   <div class="metas-body">
     <h2 class="title">
-      2014年教育信息化十大新闻评出
+     ${article.title}
     </h2>
     <div class="sns">
       <span class="views-num">
-        阅读次数：945
+        阅读次数： ${article.hits}
       </span>
      <span class="views-num">
-        收藏次数：945
+        分享次数：${article.shareNumber}
       </span>
       <span class="pull-right">
-        收藏 分享
+        <a href="javascript:void(0);"  id="addFavoriteA">${not empty favorite.id?'取消':''}收藏</a> 分享
       </span>
     </div>
   </div>
 </div>        
         <div class="article-text">
-  <table style="color:#000000;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:14px;background-color:#FFFFFF;">
-	<tbody>
-		<tr>
-			<td>
-				<div class="TRS_Editor" style="margin:0px;padding:0px;">
-					<div class="Custom_UnionStyle" style="margin:0px;padding:0px;">
-						<div style="margin:0px;padding:0px;">
-							<div style="margin:0px;padding:0px;">
-								<div style="margin:0px;padding:0px;">
-									<p>
-										在深化教育领域综合改革开局之年的2014年，着眼于2020年基本实现教育现代化、基本形成学习型社会，我国对教育信息化进行了全面部署，在技术变革教育教学、信息技术促进学习型社会建设等方面集中发力，使信息技术对教与学的双重影响更加凸显。在广泛征求业内专家意见和系统梳理教育信息化重大进展、典型经验的基础上，《中国教育报》信息化专刊、中国教育技术协会、《中国电化教育》杂志社、教育技术学科网、江苏省教育信息化工程技术研究中心联合评选推出2014年度“教育信息化十大新闻”：
-									</p>
-									<p>
-										<strong>一、百项教育信息化成果获国家级教学成果奖</strong>
-									</p>
-									<p>
-										2014年是教育信息化成果的展示之年，有百项教育信息化成果获评国家级教学成果奖。这充分体现了信息技术对我国教育教学改革的巨大推动作用。
-									</p>
-									<p>
-										<strong>二、信息惠民工程推出优质教育信息惠民行动计划</strong>
-									</p>
-									<p>
-										教育部等十二部门联合发出《关于加快实施信息惠民工程有关工作的通知》，启动信息惠民工程，以重点解决社保、医疗、教育、养老、就业、公共安全、食品药品安全、社区服务、家庭服务等九大领域的突出问题。
-									</p>
-									<p>
-										<strong>三、构建利用信息化扩大优质资源覆盖面新机制</strong>
-									</p>
-									<p>
-										教育部、财政部、国家发展改革委、工业和信息化部、中国人民银行五部门于2014年11月16日联合推出《构建利用信息化手段扩大优质教育资源覆盖面有效机制的实施方案》，未来6年我国教育信息化之路有了“施工路线图”和“时间表”。
-									</p>
-									<p>
-										<strong>四、开展“一师一优课 一课一名师”活动</strong>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</td>
-		</tr>
-	</tbody>
-</table>
+  ${article.articleData.content}
 </div>
 				</div>
 				
 			<ul class="x-top" style="padding-left:0px">
                             <div class="fy f zhs"><span class="jg35">PREVIOUS</span></div>
                             <div class="fy f txtRight zhs"><span class="jg352">NEXT</span></div>
-                            <div class="fy f"><a class="PREVIOUS" href="http://www.jq22.com/jquery-info461"> jQuery布局插件GridManager </a> </div>
-                            <div class="fy f txtRight"><a class="NEXT" href="http://www.jq22.com/jquery-info459"> jQuery滚动鼠标图像淡入淡出插件crossfade.js </a> </div>
+                            <div class="fy f"><a class="PREVIOUS"  href="${articlePre.url}" style="color:${articlePre.color}">${fns:abbr(articlePre.title,28)}</a></div>
+                            <div class="fy f txtRight"><a class="NEXT"  href="${articleNext.url}" style="color:${articleNext.color}">${fns:abbr(articleNext.title,28)}</a></div>
                             <div class="dr"></div>
                             <div class="df"></div>
                         </ul>				
@@ -159,7 +156,7 @@
 				<div class="panel-body" >
 				<div class="media media-number" >
 		            <div class="media-body" >
-		              <input id="helpfull" name="helpfull" value="3" type="hidden">
+		              <input id="helpfull" name="helpfull" value="0" type="hidden">
 						帮助： <span class="Select"> 
 						<a onMouseOver="javascript:setProfix('helpfull_');showStars(1,'helpfull');"
 						onMouseOut="javascript:setProfix('helpfull_');clearStars('helpfull');" 
@@ -182,7 +179,7 @@
 						href="javascript:setProfix('helpfull_');setStars(5,'helpfull');">
 						<img id="helpfull_5" title="非常大(5)" src="${ctxStatic}/star/img/icon_star_1.gif"></a></span>
 						<br/>
-						<input id="difficulty" name="difficulty" value="3" type="hidden">
+						<input id="difficulty" name="difficulty" value="0" type="hidden">
 						难度： <span class="Select"> 
 						<a onMouseOver="javascript:setProfix('difficulty_');showStars(1,'difficulty');"
 						onMouseOut="javascript:setProfix('difficulty_');clearStars('difficulty');" 
@@ -211,5 +208,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${ctxStatic}/star/star.js"></script>
+	<input type="hidden" id="favoriteIdInput" value="${favorite.id}">
+	
 </body>
 </html>
