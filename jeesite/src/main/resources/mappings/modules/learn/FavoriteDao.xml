@@ -106,6 +106,7 @@
 		u.name AS "user.name",
 		a.article_id AS "article.id",
 		m.title AS "article.title",
+		m.category_id AS "article.category.id",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
