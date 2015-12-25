@@ -66,8 +66,8 @@
 						</div>
 						<div class="media-body">
 							<div class="title">${fns:getUser().name} ${fns:getUser().no}</div>
-							<div class="content">西南财经大学</div>
-							<div class="content" style="padding-top:10px;"><button class="btn btn-success pull-right">注销</button></div>
+							<div class="content">${fns:getUser().company.name}</div>
+							<div class="content" style="padding-top:10px;"><a href="${ctxAdmin}/logout" class="btn btn-success pull-right">注销</a></div>
 						</div>
 					</div>
 				</div>
