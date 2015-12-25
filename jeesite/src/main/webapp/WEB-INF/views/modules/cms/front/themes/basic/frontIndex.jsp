@@ -273,7 +273,7 @@
 					<c:forEach items="${favoriteList}" var="favorite">
 						<div class="media media-number">
 							<div class="media-title">
-								<a class="link-light" href="#" title=${favorite.article.title }>${favorite.article.title }</a>
+								<a class="link-light" href="${favorite.article.url}" title=${favorite.article.title }>${favorite.article.title }</a>
 							</div>
 							<div class="media-body">${favorite.article.description }</div>
 
