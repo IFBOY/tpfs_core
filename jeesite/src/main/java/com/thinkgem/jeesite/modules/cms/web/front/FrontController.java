@@ -62,8 +62,6 @@ public class FrontController extends BaseController {
 	@Autowired
 	private ArticleDataService articleDataService;
 	@Autowired
-	private FavoriteService favoriteService;
-	@Autowired
 	private LinkService linkService;
 	@Autowired
 	private CommentService commentService;
