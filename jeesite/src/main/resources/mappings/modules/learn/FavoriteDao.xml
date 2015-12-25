@@ -66,6 +66,22 @@
 		</choose>
 	</select>
 	
+	<select id="getByFavorite" resultType="Favorite">
+		SELECT 
+			<include refid="favoriteColumns"/>
+		FROM cms_favorite a
+		<include refid="favoriteJoins"/>
+		<where>
+			a.del_flag = 0
+			<if test="user != null and user.id != null and user.id != ''">
+				AND a.user_id = #{user.id}
+			</if>
+			<if test="article != null and article.id != null and article.id != ''">
+				AND a.article_id =  #{article.id}
+			</if>
+		</where>
+	</select>
+	
 	<select id="findAllList" resultType="Favorite">
 		SELECT 
 			<include refid="favoriteColumns"/>
@@ -140,8 +156,7 @@
 	</update>
 	
 	<update id="delete">
-		UPDATE cms_favorite SET 
-			del_flag = #{DEL_FLAG_DELETE}
+		DELETE FROM cms_favorite 
 		WHERE id = #{id}
 	</update>
 	

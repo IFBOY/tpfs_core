@@ -6,13 +6,14 @@ package com.thinkgem.jeesite.modules.learn.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
-import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 import com.thinkgem.jeesite.modules.learn.dao.FavoriteDao;
+import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 
 /**
  * 收藏夹Service
@@ -24,10 +25,19 @@ import com.thinkgem.jeesite.modules.learn.dao.FavoriteDao;
 @Transactional(readOnly = true)
 public class FavoriteService extends CrudService<FavoriteDao, Favorite> {
 
+	/**
+	 * 持久层对象
+	 */
+	@Autowired
+	protected FavoriteDao dao;
+	
 	public Favorite get(String id) {
 		return super.get(id);
 	}
 
+	public Favorite getByFavorite(Favorite favorite) {
+		return dao.getByFavorite(favorite);
+	}
 	public List<Favorite> findList(Favorite favorite) {
 		return super.findList(favorite);
 	}

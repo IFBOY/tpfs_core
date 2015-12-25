@@ -3,6 +3,9 @@
  */
 package com.thinkgem.jeesite.modules.learn.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,14 +16,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
+import com.thinkgem.jeesite.common.mapper.JsonMapper;
 import com.thinkgem.jeesite.common.persistence.Page;
-import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
+import com.thinkgem.jeesite.common.web.BaseController;
+import com.thinkgem.jeesite.modules.cms.entity.Article;
 import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 import com.thinkgem.jeesite.modules.learn.service.FavoriteService;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 收藏夹Controller
@@ -72,6 +79,34 @@ public class FavoriteController extends BaseController {
 		return "redirect:"+Global.getAdminPath()+"/learn/favorite/?repage";
 	}
 	
+	/**
+	 * ajax 添加
+	 */
+	@ResponseBody
+	@RequiresPermissions("learn:favorite:edit")
+	@RequestMapping(value = "addFavorite")
+	public String addFavorite(String articleId, Model model, HttpServletResponse response) {
+		response.setContentType("application/json; charset=UTF-8");
+		Favorite favorite = new Favorite();
+		favorite.setArticle(new Article(articleId));
+		favorite.setUser(UserUtils.getUser());
+		favoriteService.save(favorite);
+		Map<String, String> result = new HashMap<String,String>();
+		result.put("id", favorite.getId());
+		return JsonMapper.toJsonString(result);
+	}
+	
+	/**
+	 * ajax 删除
+	 */
+	@ResponseBody
+	@RequiresPermissions("learn:favorite:edit")
+	@RequestMapping(value = "delFavorite")
+	public String delFavorite(String favoriteId, Model model, HttpServletResponse response) {
+		response.setContentType("application/json; charset=UTF-8");
+		favoriteService.delete(new Favorite(favoriteId));
+		return "1";
+	}
 	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "delete")
 	public String delete(Favorite favorite, RedirectAttributes redirectAttributes) {

@@ -221,6 +221,23 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	 * 根据Weight和分类ID获取序号
 	 * @param article
 	 * @return
+	 */ 
+	@Transactional(readOnly = false)
+	public List<Article> findBetweenList(Article article) {
+		Integer sort = article.getSort();
+		int firstResult = sort == 1 ? 0 : sort-2;
+		Page<Article> page = new Page<Article>();
+		page.setPageSize(3);
+		page.setFirstResult(firstResult);
+		article.setPage(page);
+		List<Article> articleList = dao.findBetweenList(article);
+		return articleList;
+	}
+	
+	/**
+	 * 根据Weight和分类ID获取序号
+	 * @param article
+	 * @return
 	 */
 	@Transactional(readOnly = false)
 	public Integer findSort(Article article) {

@@ -19,4 +19,6 @@ import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 @MyBatisDao
 public interface FavoriteDao extends CrudDao<Favorite> {
 	public List<Favorite> findTopFive(Map<String, Object> param);
+	public Favorite getByFavorite(Favorite favorite);
+	
 }

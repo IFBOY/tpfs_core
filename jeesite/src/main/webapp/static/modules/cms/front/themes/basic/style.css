@@ -237,21 +237,6 @@ h2, .h2 {
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
     background-color: #FFF;
 }
-.breadcrumb {
-    padding: 8px 15px;
-    margin-bottom: 20px;
-    list-style: outside none none;
-    border-radius: 2px;
-}
-.breadcrumb a {
-    color: #919191;
-    transition: all 0.3s ease 0s;
-}
-.breadcrumb > li + li::before {
-    content: "/ ";
-    padding: 0px 5px;
-    color: #CCC;
-}
 .es-section {
     background: #FFF none repeat scroll 0% 0%;
     padding: 15px;

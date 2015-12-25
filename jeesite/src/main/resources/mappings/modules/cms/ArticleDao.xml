@@ -36,6 +36,8 @@
     
 	<select id="get" resultType="Article">
 		SELECT 
+		(SELECT count(1) from cms_article c where c.weight &lt;=a.weight AND c.del_flag = 0 AND c.category_id = a.category_id
+			) as sort,
 			<include refid="cmsArticleColumns"/>
 		FROM cms_article a
 		<include refid="cmsArticleJoins"/>
@@ -101,6 +103,7 @@
 			<if test="createBy != null and createBy.id != null and createBy.id != ''">
 				AND a.create_by  = #{createBy.id}
 			</if>
+			AND a.del_flag = #{DEL_FLAG_NORMAL} 
 			<!-- ${sqlMap.dsf}-->
 		</where>
 		<choose>
