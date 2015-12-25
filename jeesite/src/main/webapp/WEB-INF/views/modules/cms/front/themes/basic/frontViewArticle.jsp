@@ -65,7 +65,7 @@
 								src=" ${ctxStatic}/front/091008008a96767512.jpg">
 						</div>
 						<div class="media-body">
-							<div class="title">张三 20071302938</div>
+							<div class="title">${fns:getUser().name} ${fns:getUser().no}</div>
 							<div class="content">西南财经大学</div>
 							<div class="content" style="padding-top:10px;"><button class="btn btn-success pull-right">注销</button></div>
 						</div>
