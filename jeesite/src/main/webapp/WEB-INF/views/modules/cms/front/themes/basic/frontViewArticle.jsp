@@ -77,12 +77,6 @@ var nowTime = new Date();
 	<div class="row" id="content-container">
 	
 	<div class="span3">
-		   <form class="form-search">
-		        <div class="input-append">
-		      <input class="span2" style="width: 160px;" placeholder="全站搜索"  id="appendedInputButton" type="text">
-		      <button class="btn" type="button">Go</button>
-		    </div>
-		    </form>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="media media-default">
@@ -161,15 +155,15 @@ var nowTime = new Date();
       </span>
     </div>
   </div>
-</div>        
+</div>
         <div class="article-text">
   ${article.articleData.content}
 </div>
 				</div>
 				
 			<ul class="x-top" style="padding-left:0px">
-                            <div class="fy f zhs"><span class="jg35">PREVIOUS</span></div>
-                            <div class="fy f txtRight zhs"><span class="jg352">NEXT</span></div>
+                            <div class="fy f zhs"><span class="jg35">上一篇</span></div>
+                            <div class="fy f txtRight zhs"><span class="jg352">下一篇</span></div>
                             <div class="fy f"><a class="PREVIOUS"  href="${articlePre.url}" style="color:${articlePre.color}">${fns:abbr(articlePre.title,28)}</a></div>
                             <div class="fy f txtRight"><a class="NEXT"  href="${articleNext.url}" style="color:${articleNext.color}">${fns:abbr(articleNext.title,28)}</a></div>
                             <div class="dr"></div>

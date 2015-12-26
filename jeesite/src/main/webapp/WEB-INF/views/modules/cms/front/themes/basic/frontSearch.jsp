@@ -7,15 +7,36 @@
 <meta name="decorator" content="cms_default_${site.theme}" />
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
-
+<style type="text/css">
+.breadcrumb {
+    padding: 8px 15px;
+    margin: 0px 0px 20px;
+    list-style: outside none none;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+}
+.breadcrumb > li {
+    display: inline-block;
+    text-shadow: 0px 1px 0px #FFF;
+}
+.breadcrumb > li > .divider {
+    padding: 0px 5px;
+    color: #CCC;
+}
+</style>
 </head>
 <body>
 
 	<div class="row" id="content-container">
-		<div class="span9">
+		<div class="span12">
 			
 			<div class="panel panel-default">
 			<div class="panel-heading">
+			<ol class="breadcrumb">
+				  <li><a href="/article">首页</a></li>
+				      <li><a href="/article/category/edusoho">搜索</a></li>
+		
+				</ol>
 				<form class="form-search">
 		        <div class="input-append">
 		      <input class="span8"  placeholder="全站搜索"  id="appendedInputButton" type="text">
@@ -115,85 +136,7 @@
 			</div>
 		</div>
 
-		<div class="span3">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="media media-default">
-						<div class="media-left">
-							<img class="avatar-md"
-								src=" ${ctxStatic}/front/091008008a96767512.jpg">
-						</div>
-						<div class="media-body">
-							<div class="title">张三 20071302938</div>
-							<div class="content">西南财经大学</div>
-							<div class="content" style="padding-top:10px;"><button class="btn btn-success pull-right">注销</button></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="panel panel-default">
-			<div class="panel-heading">
-					<h3 class="panel-title">学习进度</h3>
-				</div>
-				<div class="panel-body" >
-					
-				<div class="media media-number" >
-		            <div class="media-body" >
-		              623 / 累计学习知识点
-		            </div>
-		          </div>
-		         <div class="media media-number">
-		            <div class="media-body" >
-		              45% / 学习完成比例
-		            </div>
-		          </div>
-		          <div class="media media-number" style="padding-bottom: 0px;border-bottom: 1px solid #FFF;">
-		            <div class="media-body" >
-		              56分钟 / 学习总时长
-		            </div>
-		          </div>
-				</div>
-			</div>
-			
-			<div class="panel panel-default">
-			<div class="panel-heading">
-					<h3 class="panel-title">我的收藏</h3>
-				</div>
-				<div class="panel-body" >
-				<div class="media media-number" >
-					<div class="media-title" >
-		               <a class="link-light" href="#" title="给提建议">给提建议</a> 
-		            </div>
-		            <div class="media-body" >
-		               累计学习知识点累计知识点... 
-		            </div>
-		            
-		            <span class="text-success pull-right">2015/12/17</span>
-		          </div>
-		         <div class="media media-number">
-		         <div class="media-title" >
-		               累计学习知识点 
-		            </div>
-		            <div class="media-body" >
-		              学习完成比例
-		            </div>
-		            <span class="text-success pull-right">2015/12/17</span>
-		          </div>
-		          <div class="media media-number" style="padding-bottom: 0px;border-bottom: 1px solid #FFF;">
-		          <div class="media-title" >
-		               累计学习知识点 
-		            </div>
-		            <div class="media-body" >
-		              56分钟 / 学习总时长
-		            </div>
-		            <span class="text-success pull-right">2015/12/17</span>
-		          </div>
-				</div>
-			</div>
-			
-			
-		</div>
+		
 	</div>
 </body>
 </html>
