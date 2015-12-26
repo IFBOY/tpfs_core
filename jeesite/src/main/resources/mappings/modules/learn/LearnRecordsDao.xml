@@ -87,12 +87,13 @@
 			</otherwise>
 		</choose>
 	</select>
-	<select id="findTopFive" resultType="java.util.Map">
+	<select id="findTopFive" resultType="LearnRecords">
 		SELECT 
 		a.id AS "id",
 		a.user_id AS "user.id",
 		a.article_id AS "article.id",
 		m.title AS "article.title",
+		m.category_id AS "article.category.id",
 		m.description AS "article.description",
 	    (select cc.name from cms_category cc where cc.id=m.category_id)as "article.category.name",		
 		a.difficulty_degree AS "difficultyDegree",

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thinkgem.jeesite.common.config.Global;
@@ -21,6 +22,7 @@ import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.learn.entity.LearnRecords;
 import com.thinkgem.jeesite.modules.learn.service.LearnRecordsService;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 学习记录Controller
@@ -70,6 +72,19 @@ public class LearnRecordsController extends BaseController {
 		learnRecordsService.save(learnRecords);
 		addMessage(redirectAttributes, "保存学习记录成功");
 		return "redirect:"+Global.getAdminPath()+"/learn/learnRecords/?repage";
+	}
+	
+	/**
+	 * ajax 添加
+	 */
+	@ResponseBody
+	@RequiresPermissions("learn:learnRecords:edit")
+	@RequestMapping(value = "saveLearnRecords")
+	public String saveLearnRecords(LearnRecords learnRecords, Model model, HttpServletResponse response) {
+		response.setContentType("application/json; charset=UTF-8");
+		learnRecords.setUser(UserUtils.getUser());
+		learnRecordsService.save(learnRecords);
+		return "1";
 	}
 	
 	@RequiresPermissions("learn:learnRecords:edit")
