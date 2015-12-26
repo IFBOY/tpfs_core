@@ -3,27 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>首页</title>
+<title>搜索</title>
 <meta name="decorator" content="cms_default_${site.theme}" />
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
-<style type="text/css">
-.breadcrumb {
-    padding: 8px 15px;
-    margin: 0px 0px 20px;
-    list-style: outside none none;
-    background-color: #F5F5F5;
-    border-radius: 4px;
-}
-.breadcrumb > li {
-    display: inline-block;
-    text-shadow: 0px 1px 0px #FFF;
-}
-.breadcrumb > li > .divider {
-    padding: 0px 5px;
-    color: #CCC;
-}
-</style>
 </head>
 <body>
 
@@ -33,9 +16,8 @@
 			<div class="panel panel-default">
 			<div class="panel-heading">
 			<ol class="breadcrumb">
-				  <li><a href="/article">首页</a></li>
-				      <li><a href="/article/category/edusoho">搜索</a></li>
-		
+				  <li><strong>当前位置：</strong><a href="${ctx} ">首页</a><span class="divider">/</span></li>
+				      <li>搜索</li>
 				</ol>
 				<form class="form-search">
 		        <div class="input-append">
