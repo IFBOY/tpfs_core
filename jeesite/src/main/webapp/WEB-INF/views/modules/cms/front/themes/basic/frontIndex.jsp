@@ -23,7 +23,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420"> <img
+										<a href="${staticDataList[6].article.url}"> <img
 											src="${ctxStaticTheme}/img/bank.png" title="银行"
 											class="img-responsive">
 										</a>
@@ -42,7 +42,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/283" target="_blank">
+										<a href="${staticDataList[2].article.url}" target="_blank">
 											<span class="tags"> <span class="tag-live"></span>
 										</span> <img src="${ctxStaticTheme}/img/xintuo.png" title="信托"
 											class="img-responsive">
@@ -62,7 +62,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/225" target="_blank">
+										<a href="${staticDataList[5].article.url}" target="_blank">
 											<img src="${ctxStaticTheme}/img/zhenquan.png" title="证券"
 											class="img-responsive">
 										</a>
@@ -81,7 +81,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/225" target="_blank">
+										<a href="${staticDataList[1].article.url}" target="_blank">
 											<img src="${ctxStaticTheme}/img/baoxian.png" title="保险"
 											class="img-responsive">
 										</a>
@@ -101,7 +101,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/225" target="_blank">
+										<a href="${staticDataList[4].article.url}" target="_blank">
 											<img src="${ctxStaticTheme}/img/guquantouzhijigou.png"
 											title="股权投资机构" class="img-responsive">
 										</a>
@@ -120,7 +120,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420" target="_blank">
+										<a href="${staticDataList[3].article.url}" target="_blank">
 											<img src="${ctxStaticTheme}/img/jianguan.png" title="监管机构"
 											class="img-responsive">
 										</a>
@@ -139,7 +139,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420"> <img
+										<a href="${staticDataList[0].article.url}"> <img
 											src="${ctxStaticTheme}/img/jiaoyisuo.png" title="交易所"
 											class="img-responsive">
 										</a>
@@ -158,7 +158,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="http://demo.edusoho.com/course/420"> <img
+										<a href="${staticDataList[7].article.url}"> <img
 											src="${ctxStaticTheme}/img/feiyhjr.png" title="非银行金融"
 											class="img-responsive">
 										</a>
@@ -236,10 +236,10 @@
 								src=" ${ctxStatic}/front/091008008a96767512.jpg">
 						</div>
 						<div class="media-body">
-							<div class="title">张三 20071302938</div>
-							<div class="content">西南财经大学</div>
+							<div class="title">${user.name} ${user.loginName}</div>
+							<div class="content">${user.company.name }</div>
 							<div class="content" style="padding-top: 10px;">
-								<button class="btn btn-success pull-right">注销</button>
+								<button class="btn btn-success pull-right"><a href="${fns:getAdminPath()}/logout">注销</a></button>
 							</div>
 						</div>
 					</div>

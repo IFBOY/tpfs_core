@@ -296,4 +296,9 @@
 			order by cp.sort, cp.id, c.sort, c.id
 		</where>		
 	</select>
+	<select id="getFirstContentIdByCatetory" resultType="java.lang.String" parameterType="java.lang.String">
+	SELECT CM.ID FROM CMS_ARTICLE CM WHERE
+	CM.CATEGORY_ID =#{categoryId} AND CM.DEL_FLAG
+	='0' ORDER BY WEIGHT ASC LIMIT 1
+</select>
 </mapper>

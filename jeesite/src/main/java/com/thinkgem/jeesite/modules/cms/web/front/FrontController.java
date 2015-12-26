@@ -314,7 +314,9 @@ public class FrontController extends BaseController {
 						.getParent().getId(), category.getSite().getId());
 			}
 			// 获取文章内容
-			Article article = articleService.get(contentId);
+			Article article = articleService
+					.get("null".equals(contentId) ? categoryService
+							.getArticleIdByCategory(categoryId) : contentId);
 			if (article == null
 					|| !Article.DEL_FLAG_NORMAL.equals(article.getDelFlag())) {
 				return "error/404";
@@ -322,25 +324,28 @@ public class FrontController extends BaseController {
 			// 文章阅读次数+1
 			articleService.updateHitsAddOne(contentId);
 			// 获取推荐文章列表
-			//List<Object[]> relationList = articleService.findByIds(articleDataService.get(article.getId()).getRelation());
-			
+			// List<Object[]> relationList =
+			// articleService.findByIds(articleDataService.get(article.getId()).getRelation());
+
 			Article articlePre = null;
 			Article articleNext = null;
-			List<Article> articleBetweenList = articleService.findBetweenList(article);
-			for(Article ar : articleBetweenList){
-				if(ar.getWeight()>article.getWeight() && articleNext==null){
+			List<Article> articleBetweenList = articleService
+					.findBetweenList(article);
+			for (Article ar : articleBetweenList) {
+				if (ar.getWeight() > article.getWeight() && articleNext == null) {
 					articleNext = ar;
-					articleNext.setSort(article.getSort()+1);
-				}else if(ar.getWeight()<article.getWeight() && articlePre==null){
+					articleNext.setSort(article.getSort() + 1);
+				} else if (ar.getWeight() < article.getWeight()
+						&& articlePre == null) {
 					articlePre = ar;
-					articlePre.setSort(article.getSort()-1);
+					articlePre.setSort(article.getSort() - 1);
 				}
 			}
 			Favorite favoriteParm = new Favorite();
 			favoriteParm.setUser(UserUtils.getUser());
 			favoriteParm.setArticle(article);
 			Favorite favorite = favoriteService.getByFavorite(favoriteParm);
-			if(favorite==null){
+			if (favorite == null) {
 				favorite = favoriteParm;
 			}
 			// 将数据传递到视图
@@ -349,16 +354,18 @@ public class FrontController extends BaseController {
 			model.addAttribute("categoryList", categoryList);
 			article.setArticleData(articleDataService.get(article.getId()));
 			model.addAttribute("article", article);
-			//model.addAttribute("relationList", relationList); 
-			model.addAttribute("articlePre", articlePre); 
-			model.addAttribute("articleNext", articleNext); 
+			// model.addAttribute("relationList", relationList);
+			model.addAttribute("articlePre", articlePre);
+			model.addAttribute("articleNext", articleNext);
 			model.addAttribute("favorite", favorite);
-            CmsUtils.addViewConfigAttribute(model, article.getCategory());
-            CmsUtils.addViewConfigAttribute(model, article.getViewConfig());
-            Site site = siteService.get(category.getSite().getId());
-            model.addAttribute("site", site);
-//			return "modules/cms/front/themes/"+category.getSite().getTheme()+"/"+getTpl(article);
-            return "modules/cms/front/themes/"+site.getTheme()+"/"+getTpl(article);
+			CmsUtils.addViewConfigAttribute(model, article.getCategory());
+			CmsUtils.addViewConfigAttribute(model, article.getViewConfig());
+			Site site = siteService.get(category.getSite().getId());
+			model.addAttribute("site", site);
+			// return
+			// "modules/cms/front/themes/"+category.getSite().getTheme()+"/"+getTpl(article);
+			return "modules/cms/front/themes/" + site.getTheme() + "/"
+					+ getTpl(article);
 		}
 		return "error/404";
 	}

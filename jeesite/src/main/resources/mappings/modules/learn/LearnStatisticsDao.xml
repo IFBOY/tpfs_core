@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thinkgem.jeesite.modules.learn.dao.LearnStatisticsDao">
 	<resultMap type="com.thinkgem.jeesite.modules.learn.entity.LearnStaticData" id="StaticResult">
-		<id column="id" property="categoryId" />
-		<result column="name" property="name" />
+		<id column="id" property="article.category.id" />
+		<result column="name" property="article.category.name" />
 		<result column="learn_count" property="learnCount" />
 		<result column="total_minutes" property="totalMinutes" />
 		<result column="article_count" property="articleCount" />
+		<result column="article_id" property="article.id" />		
 	</resultMap>
 	<sql id="learnStatisticsColumns">
 		a.id AS "id",
@@ -161,6 +162,8 @@
 		SELECT
 		CC.ID,
 		CC.NAME,
+	    (SELECT CL.LAST_LEARNED_CMS_ID  FROM CMS_LEARN_STATISTICS CL 
+	    WHERE CL.USER_ID =#{USERID} AND CL.KNOCATE_ID =CC.ID)AS ARTICLE_ID,		
 		IFNULL(TMP.LEARN_COUNT, 0) AS LEARN_COUNT,
 		IFNULL(TMP.TOTAL_HOURS, 0) AS TOTAL_MINUTES,
 		(SELECT COUNT(1)

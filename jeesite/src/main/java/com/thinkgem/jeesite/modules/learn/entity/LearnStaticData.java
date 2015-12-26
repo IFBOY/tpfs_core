@@ -2,6 +2,8 @@ package com.thinkgem.jeesite.modules.learn.entity;
 
 import java.io.Serializable;
 
+import com.thinkgem.jeesite.modules.cms.entity.Article;
+
 /**
  * 统计知识数据实体
  * 
@@ -14,27 +16,10 @@ import java.io.Serializable;
 public class LearnStaticData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String categoryId;
-	private String name;
 	private int learnCount;
 	private int totalMinutes;
 	private int articleCount;
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private Article article;
 
 	public int getLearnCount() {
 		return learnCount;
@@ -58,6 +43,14 @@ public class LearnStaticData implements Serializable {
 
 	public void setArticleCount(int articleCount) {
 		this.articleCount = articleCount;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 }
