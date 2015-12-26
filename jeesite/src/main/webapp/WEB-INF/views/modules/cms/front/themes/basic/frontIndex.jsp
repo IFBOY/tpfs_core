@@ -183,7 +183,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">最近学习</h3>
+					<h3 class="panel-title">最近学f习</h3>
 				</div>
 				<div class="panel-body article-list-mian">
 					<c:forEach items="${learnList}" var="learnRecords">
@@ -204,7 +204,7 @@
 								<div class="metas-body">
 									<p>${learnRecords.article.category.name}</p>
 									<h2 class="title">
-										<a class="link-dark" href="/article/17">${learnRecords.article.title }</a>
+										<a class="link-dark" href="${learnRecords.article.url }">${learnRecords.article.title }</a>
 									</h2>
 								</div>
 							</div>

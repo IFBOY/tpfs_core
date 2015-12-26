@@ -9,7 +9,33 @@
 <meta name="keywords" content="JeeSite ${site.keywords}" />
 <link href="${ctxStatic}/star/star.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
+var nowTime = new Date();
 		$(document).ready(function() {
+			$("#learnRecordBtn").click(function(){
+				var difficulty = $('#difficulty').val();
+				var helpfull = $('#helpfull').val();
+				if(difficulty<1 || helpfull<1){
+					alert("请选择难易度和帮助度。")
+					return;
+				}
+				//var learnMinutes = ((new Date()).getTime()-nowTime.getTime() )/1000*60;
+				$.ajax({
+				    type: 'POST',
+				    url: '${ctxAdmin}/learn/learnRecords/saveLearnRecords' ,
+				    data: {
+				    	'difficultyDegree' : difficulty,
+				    	'helpDegree' : helpfull,
+				    	'learnMinutes' : 5,
+				    	'article.id' : '${article.id}'
+				    },
+				    dataType: 'json',
+				    success: function(data){
+				    	if(data){
+				    		alert("促成成功！")
+				    	}
+				    }
+				});
+			});
 				$("#addFavoriteA").click(function(){
 					var favoriteId = $('#favoriteIdInput').val();
 					if(favoriteId){
@@ -201,7 +227,9 @@
 						onMouseOut="javascript:setProfix('difficulty_');clearStars('difficulty');" 
 						href="javascript:setProfix('difficulty_');setStars(5,'difficulty');">
 						<img id="difficulty_5" title="非常难(5)" src="${ctxStatic}/star/img/icon_star_1.gif"></a></span>
+						
 		            </div>
+		          <div class="pull-right"><input id="learnRecordBtn" class="btn btn-primary" type="button" value="提 交"/></div>
 		          </div>
 				</div>
 			</div>
