@@ -39,13 +39,15 @@ import com.thinkgem.jeesite.modules.cms.service.LinkService;
 import com.thinkgem.jeesite.modules.cms.service.SiteService;
 import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
 import com.thinkgem.jeesite.modules.learn.entity.Favorite;
-import com.thinkgem.jeesite.modules.learn.service.FavoriteService;
-import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
+import com.thinkgem.jeesite.modules.learn.entity.LearnRecords;
 import com.thinkgem.jeesite.modules.learn.entity.LearnStaticData;
+import com.thinkgem.jeesite.modules.learn.entity.LearnStatistics;
+import com.thinkgem.jeesite.modules.learn.service.FavoriteService;
 import com.thinkgem.jeesite.modules.learn.service.LearnRecordsService;
 import com.thinkgem.jeesite.modules.learn.service.LearnStatisticsService;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
+import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 网站Controller
@@ -306,13 +308,13 @@ public class FrontController extends BaseController {
 		model.addAttribute("site", category.getSite());
 		if ("article".equals(category.getModule())) {
 			// 如果没有子栏目，并父节点为跟节点的，栏目列表为当前栏目。
-			List<Category> categoryList = Lists.newArrayList();
+			/*List<Category> categoryList = Lists.newArrayList();
 			if (category.getParent().getId().equals("1")) {
 				categoryList.add(category);
 			} else {
 				categoryList = categoryService.findByParentId(category
 						.getParent().getId(), category.getSite().getId());
-			}
+			}*/
 			// 获取文章内容
 			Article article = articleService
 					.get("null".equals(contentId) ? categoryService
@@ -324,8 +326,8 @@ public class FrontController extends BaseController {
 			// 文章阅读次数+1
 			articleService.updateHitsAddOne(contentId);
 			// 获取推荐文章列表
-			// List<Object[]> relationList =
-			// articleService.findByIds(articleDataService.get(article.getId()).getRelation());
+			/*List<Object[]> relationList =
+			articleService.findByIds(articleDataService.get(article.getId()).getRelation());*/
 
 			Article articlePre = null;
 			Article articleNext = null;
@@ -348,12 +350,48 @@ public class FrontController extends BaseController {
 			if (favorite == null) {
 				favorite = favoriteParm;
 			}
+			
+			Page<Article> page = new Page<Article>(1, 500);
+			page = articleService.findPage(page, new Article(category),false);
+			model.addAttribute("page", page);
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("DEL_FLAG_NORMAL", "0");
+			User user = UserUtils.getUser();
+			param.put("USERID", user.getId());
+			param.put("ARTICLEID", article.getId());
+			LearnRecords learnRecords = learnRecordsService.findLearnRecords(param);
+			if(learnRecords == null){
+				learnRecords = new LearnRecords();
+				learnRecords.setArticle(article);
+				learnRecords.setLearnMinutes(0);
+				learnRecords.setUser(user);
+				learnRecords.setDifficultyDegree("0");
+				learnRecords.setHelpDegree("0");
+				learnRecordsService.save(learnRecords);
+				
+				param.put("CATEGORYID", article.getCategory().getId());
+				LearnStatistics learnStatistics = learnStatisService.findLearnStatistics(param);
+				if(learnStatistics == null){
+					learnStatistics = new LearnStatistics();
+					learnStatistics.setArticle(article);
+					learnStatistics.setCategory(article.getCategory());
+					learnStatistics.setUser(user);
+					learnStatistics.setLeaningCount(0);
+					learnStatistics.setLearnTotalHours(0);
+					learnStatisService.save(learnStatistics);
+				}
+				
+				learnStatistics.setLeaningCount(learnStatistics.getLeaningCount()+1);
+				learnStatisService.save(learnStatistics);
+			}
+			
 			// 将数据传递到视图
-			model.addAttribute("category",
-					categoryService.get(article.getCategory().getId()));
-			model.addAttribute("categoryList", categoryList);
+			model.addAttribute("category",categoryService.get(article.getCategory().getId()));
+			//model.addAttribute("categoryList", categoryList);
 			article.setArticleData(articleDataService.get(article.getId()));
 			model.addAttribute("article", article);
+			model.addAttribute("learnRecords", learnRecords);
 			// model.addAttribute("relationList", relationList);
 			model.addAttribute("articlePre", articlePre);
 			model.addAttribute("articleNext", articleNext);

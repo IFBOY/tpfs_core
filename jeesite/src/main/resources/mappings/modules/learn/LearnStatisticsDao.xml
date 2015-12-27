@@ -12,14 +12,11 @@
 	<sql id="learnStatisticsColumns">
 		a.id AS "id",
 		a.user_id AS "user.id",
-		a.knocate_id AS
-		"knocate.id",
+		a.knocate_id AS "category.id",
 		a.leaning_count AS "leaningCount",
-		a.learn_total_hours AS
-		"learnTotalHours",
+		a.learn_total_hours AS "learnTotalHours",
 		a.last_learned_cms_id AS "article.id",
-		a.create_by AS
-		"createBy.id",
+		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS
 		"updateBy.id",
@@ -27,8 +24,7 @@
 		a.remarks AS "remarks",
 		a.del_flag AS "delFlag",
 		u2.name AS "user.name",
-		cc.name AS
-		"knocate.name",
+		cc.name AS "category.name",
 		ca.title AS "article.title",
 		u3.name AS "createBy.name",
 		u4.name AS "updateBy.name"
@@ -55,6 +51,17 @@
 		WHERE a.id = #{id}
 	</select>
 
+	<select id="findLearnStatistics" resultType="LearnStatistics">
+		SELECT
+		<include refid="learnStatisticsColumns" />
+		FROM cms_learn_statistics a
+		<include refid="learnStatisticsJoins" />
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and a.knocate_id=#{CATEGORYID}
+			and a.user_id=#{USERID}
+		</where>
+	</select>
 	<select id="findList" resultType="LearnStatistics">
 		SELECT
 		<include refid="learnStatisticsColumns" />
@@ -68,11 +75,11 @@
 				<if test="dbName == 'mssql'">'%'+#{user.name}+'%'</if>
 				<if test="dbName == 'mysql'">concat('%',#{user.name},'%')</if>
 			</if>
-			<if test="knocate != null and knocate.name != null and knocate.name != ''">
+			<if test="category != null and category.name != null and category.name != ''">
 				AND cc.name LIKE
-				<if test="dbName == 'oracle'">'%'||#{knocate.name}||'%'</if>
-				<if test="dbName == 'mssql'">'%'+#{knocate.name}+'%'</if>
-				<if test="dbName == 'mysql'">concat('%',#{knocate.name},'%')</if>
+				<if test="dbName == 'oracle'">'%'||#{category.name}||'%'</if>
+				<if test="dbName == 'mssql'">'%'+#{category.name}+'%'</if>
+				<if test="dbName == 'mysql'">concat('%',#{category.name},'%')</if>
 			</if>
 			<if
 				test="beginUpdateDate != null and endUpdateDate != null and beginUpdateDate != '' and endUpdateDate != ''">
@@ -125,7 +132,7 @@
 		) VALUES (
 		#{id},
 		#{user.id},
-		#{knocate.id},
+		#{category.id},
 		#{leaningCount},
 		#{learnTotalHours},
 		#{article.id},
@@ -141,7 +148,7 @@
 	<update id="update">
 		UPDATE cms_learn_statistics SET
 		user_id = #{user.id},
-		knocate_id = #{knocate.id},
+		knocate_id = #{category.id},
 		leaning_count = #{leaningCount},
 		learn_total_hours = #{learnTotalHours},
 		last_learned_cms_id =

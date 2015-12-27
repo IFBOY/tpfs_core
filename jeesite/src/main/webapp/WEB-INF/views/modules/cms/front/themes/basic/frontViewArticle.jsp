@@ -23,6 +23,7 @@ var nowTime = new Date();
 				    type: 'POST',
 				    url: '${ctxAdmin}/learn/learnRecords/saveLearnRecords' ,
 				    data: {
+				    	"id":'${learnRecords.id}',
 				    	'difficultyDegree' : difficulty,
 				    	'helpDegree' : helpfull,
 				    	'learnMinutes' : 5,
@@ -31,7 +32,7 @@ var nowTime = new Date();
 				    dataType: 'json',
 				    success: function(data){
 				    	if(data){
-				    		alert("促成成功！")
+				    		alert("保存成功！")
 				    	}
 				    }
 				});
@@ -92,28 +93,19 @@ var nowTime = new Date();
 					</div>
 				</div>
 			</div>
-			
-			
 			<div class="panel panel-default">
 			<div class="panel-heading">
-					<h3 class="panel-title">银行</h3>
+					<h3 class="panel-title">${category.name}</h3>
 				</div>
 				<div class="panel-body" >
-				<div class="media media-number" >
-					<div class="media-title" >
-		               <a class="link-light" href="#" title="给提建议">1 累计学习累计知识点...  </a> 
-		            </div>
-		          </div>
-		         <div class="media media-number">
-		            <div class="media-body" >
-		              学习完成比例
-		            </div>
-		          </div>
-		          <div class="media media-number" style="padding-bottom: 0px;border-bottom: 1px solid #FFF;">
-		            <div class="media-body" >
-		              56分钟 / 学习总时长
-		            </div>
-		          </div>
+				
+				<c:forEach items="${page.list}" var="article">
+					<div class="media media-number" >
+						<div class="media-title" >
+			               <a class="link-light" href="${ctx}/view-${article.category.id}-${article.id}${urlSuffix}">${article.sort} ${article.title}</a> 
+			            </div>
+			         </div>
+				</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -124,9 +116,6 @@ var nowTime = new Date();
 			<div class="panel-heading">
 				<ol class="breadcrumb">
 				<cms:frontCurrentPosition category="${category}"/>
-				  <!-- <li><a href="/article">首页</a></li>
-				      <li><a href="/article/category/edusoho">银行</a></li>
-				    <li class="active">正文</li> -->
 				</ol>
 			</div>
 			
@@ -176,7 +165,7 @@ var nowTime = new Date();
 				<div class="panel-body" >
 				<div class="media media-number" >
 		            <div class="media-body" >
-		              <input id="helpfull" name="helpfull" value="0" type="hidden">
+		              <input id="helpfull" name="helpfull" value="${learnRecords.helpDegree}" type="hidden">
 						帮助： <span class="Select"> 
 						<a onMouseOver="javascript:setProfix('helpfull_');showStars(1,'helpfull');"
 						onMouseOut="javascript:setProfix('helpfull_');clearStars('helpfull');" 
@@ -199,7 +188,7 @@ var nowTime = new Date();
 						href="javascript:setProfix('helpfull_');setStars(5,'helpfull');">
 						<img id="helpfull_5" title="非常大(5)" src="${ctxStatic}/star/img/icon_star_1.gif"></a></span>
 						<br/>
-						<input id="difficulty" name="difficulty" value="0" type="hidden">
+						<input id="difficulty" name="difficulty" value="${learnRecords.difficultyDegree}"" type="hidden">
 						难度： <span class="Select"> 
 						<a onMouseOver="javascript:setProfix('difficulty_');showStars(1,'difficulty');"
 						onMouseOut="javascript:setProfix('difficulty_');clearStars('difficulty');" 
@@ -230,6 +219,10 @@ var nowTime = new Date();
 		</div>
 	</div>
 	<script type="text/javascript" src="${ctxStatic}/star/star.js"></script>
+	<script type="text/javascript">
+	setProfix('helpfull_');setStars(${learnRecords.helpDegree},'helpfull');
+	setProfix('difficulty_');setStars(${learnRecords.helpDegree},'difficulty');
+	</script>
 	<input type="hidden" id="favoriteIdInput" value="${favorite.id}">
 	
 </body>

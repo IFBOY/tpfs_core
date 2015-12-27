@@ -29,6 +29,10 @@ public class LearnRecordsService extends
 		return super.get(id);
 	}
 
+	public LearnRecords findLearnRecords(Map<String, Object> param) {
+		return super.dao.findLearnRecords(param);
+	}
+	
 	public List<LearnRecords> findList(LearnRecords learnRecords) {
 		return super.findList(learnRecords);
 	}

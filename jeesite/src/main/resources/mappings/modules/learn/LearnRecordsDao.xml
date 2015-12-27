@@ -87,6 +87,25 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	<select id="findLearnRecords" resultType="LearnRecords">
+		SELECT 
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.article_id AS "article.id",
+		m.category_id AS "article.category.id",
+		a.difficulty_degree AS "difficultyDegree",
+		a.help_degree AS "helpDegree",
+		a.learn_minutes AS "learnMinutes"
+		FROM cms_learn_records a
+		JOIN cms_article m ON m.id = a.article_id 	
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and a.user_id=#{USERID}
+			and a.article_id=#{ARTICLEID}
+		</where>
+	</select>
+	
 	<select id="findTopFive" resultType="LearnRecords">
 		SELECT 
 		a.id AS "id",

@@ -20,4 +20,6 @@ import com.thinkgem.jeesite.modules.learn.entity.LearnRecords;
 public interface LearnRecordsDao extends CrudDao<LearnRecords> {
 	public List<LearnRecords> findTopFive(Map<String, Object> param);
 
+	public LearnRecords findLearnRecords(Map<String, Object> param);
+
 }

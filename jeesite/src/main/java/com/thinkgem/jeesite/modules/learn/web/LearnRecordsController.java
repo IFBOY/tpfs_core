@@ -3,6 +3,9 @@
  */
 package com.thinkgem.jeesite.modules.learn.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +24,10 @@ import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.modules.learn.entity.LearnRecords;
+import com.thinkgem.jeesite.modules.learn.entity.LearnStatistics;
 import com.thinkgem.jeesite.modules.learn.service.LearnRecordsService;
+import com.thinkgem.jeesite.modules.learn.service.LearnStatisticsService;
+import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
@@ -35,6 +41,9 @@ public class LearnRecordsController extends BaseController {
 
 	@Autowired
 	private LearnRecordsService learnRecordsService;
+	
+	@Autowired
+	private LearnStatisticsService learnStatisService;
 	
 	@ModelAttribute
 	public LearnRecords get(@RequestParam(required=false) String id) {
@@ -83,7 +92,19 @@ public class LearnRecordsController extends BaseController {
 	public String saveLearnRecords(LearnRecords learnRecords, Model model, HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");
 		learnRecords.setUser(UserUtils.getUser());
+		int learnMinutes = learnRecords.getLearnMinutes();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("DEL_FLAG_NORMAL", "0");
+		User user = UserUtils.getUser();
+		param.put("USERID", user.getId());
+		param.put("ARTICLEID", learnRecords.getArticle().getId());
+		LearnRecords learnRec = learnRecordsService.findLearnRecords(param);
+		learnRecords.setLearnMinutes(learnRec.getLearnMinutes()+learnMinutes);
 		learnRecordsService.save(learnRecords);
+		param.put("CATEGORYID", learnRec.getArticle().getCategory().getId());
+		LearnStatistics learnStatistics = learnStatisService.findLearnStatistics(param);
+		learnStatistics.setLearnTotalHours(learnStatistics.getLearnTotalHours()+learnMinutes);
+		learnStatisService.save(learnStatistics);
 		return "1";
 	}
 	

@@ -4,9 +4,12 @@
 package com.thinkgem.jeesite.modules.learn.entity;
 
 import com.thinkgem.jeesite.modules.sys.entity.User;
+
 import javax.validation.constraints.NotNull;
-import com.thinkgem.jeesite.modules.knowledge.entity.KnoCate;
+
 import com.thinkgem.jeesite.modules.cms.entity.Article;
+import com.thinkgem.jeesite.modules.cms.entity.Category;
+
 import java.util.Date;
 
 import com.thinkgem.jeesite.common.persistence.DataEntity;
@@ -20,7 +23,7 @@ public class LearnStatistics extends DataEntity<LearnStatistics> {
 	
 	private static final long serialVersionUID = 1L;
 	private User user;		// 用户ID
-	private KnoCate knocate;		// 范畴ID
+	private Category category;		// 范畴ID
 	private Integer leaningCount;		// 学习文章数
 	private Integer learnTotalHours;		// 学书总时长
 	private Article article;		// 最近学习文章
@@ -42,14 +45,6 @@ public class LearnStatistics extends DataEntity<LearnStatistics> {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-	
-	public KnoCate getKnocate() {
-		return knocate;
-	}
-
-	public void setKnocate(KnoCate knocate) {
-		this.knocate = knocate;
 	}
 	
 	public Integer getLeaningCount() {
@@ -90,6 +85,14 @@ public class LearnStatistics extends DataEntity<LearnStatistics> {
 
 	public void setEndUpdateDate(Date endUpdateDate) {
 		this.endUpdateDate = endUpdateDate;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 		
 }
