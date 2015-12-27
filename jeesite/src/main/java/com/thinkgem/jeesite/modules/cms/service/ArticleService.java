@@ -121,6 +121,7 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 		}
         ContentBean ctx=new ContentBean();
         ctx.setId(article.getId());
+        ctx.setTitle(article.getTitle());
         ctx.setContent(article.getArticleData().getContent());
         ctx.setCreate_date(article.getCreateDate()==null?new Date():article.getCreateDate());
         ctx.setDescription(article.getDescription());
@@ -297,8 +298,13 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 		return page;
 	}
 
-	public Map<String, Object> queryByParam(Page<ContentBean> page,String condition) throws SolrServerException, IOException {
+	@SuppressWarnings("unchecked")
+	public Page<ContentBean> queryByParam(Page<ContentBean> page,ContentBean con) throws SolrServerException, IOException {
 		solrApi.getInstance();
-		return solrApi.queryByParam(condition, page.getPageNo(), page.getPageSize());
+		Map<String, Object> map=solrApi.queryByParam(con.getQ(), page.getPageNo(), page.getPageSize());
+		con.setPage(page);
+		page.setList((List<ContentBean>)map.get("data"));
+		page.setCount((Long)map.get("rows"));
+		return page;
 	}
 }

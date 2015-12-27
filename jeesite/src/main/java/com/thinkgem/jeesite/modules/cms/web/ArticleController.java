@@ -3,9 +3,7 @@
  */
 package com.thinkgem.jeesite.modules.cms.web;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -201,15 +199,17 @@ public class ArticleController extends BaseController {
    		return tplList;
    	}
     
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "search")
 	public String queryByParam(HttpServletRequest request,HttpServletResponse response,String condition,
 			Model model) throws SolrServerException, IOException {
-		Map<String, Object> map = articleService.queryByParam(new Page<ContentBean>(request, response,10),condition);
-		Page<ContentBean> page=new Page<ContentBean>(request, response);
-		page.setList((List<ContentBean>) map.get("data"));
-		page.setCount((Long)map.get("rows"));
+		ContentBean con=new ContentBean();
+		con.setQ((condition==null||"".equals(condition))?"*":condition);
+		Page<ContentBean> page = articleService.queryByParam(new Page<ContentBean>(request, response,10),con);
+		//Page<ContentBean> page=new Page<ContentBean>(request, response);
+		//page.setList((List<ContentBean>) map.get("data"));
+		//page.setCount((Long)map.get("rows"));
 		model.addAttribute("page", page);
+		model.addAttribute("condition",condition);
 		return "modules/cms/articleSearchList";
 	}
 

@@ -135,12 +135,12 @@ public class SolrApi {
 						.getFieldValue("keywords").toString());
 				bean.setTitle(d.getFieldValue("title") == null ? "" : d
 						.getFieldValue("title").toString());
-				bean.setTitle(d.getFieldValue("create_date") == null ? ""
-						: DateUtils.formatDateTime((Date) d
-								.getFieldValue("create_date")));
+				bean.setCreate_date(d.getFieldValue("create_date") == null ? null
+						: (Date)d.getFieldValue("create_date"));
 				Article article = articleDao.get(d.getFieldValue("id")
 						.toString());
 				bean.setHits(article == null ? 0 : article.getHits());
+				bean.setCategory(article.getCategory()==null?null:article.getCategory());
 				datalist.add(bean);
 			}
 			result.put("rows", list.getNumFound());

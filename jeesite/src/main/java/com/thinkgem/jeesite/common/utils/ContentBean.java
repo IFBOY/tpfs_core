@@ -1,9 +1,13 @@
 package com.thinkgem.jeesite.common.utils;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.solr.client.solrj.beans.Field;
+
+import com.thinkgem.jeesite.common.persistence.BaseEntity;
+import com.thinkgem.jeesite.modules.cms.entity.Article;
+import com.thinkgem.jeesite.modules.cms.entity.Category;
+import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
 
 /**
  * 分词实体类
@@ -14,7 +18,7 @@ import org.apache.solr.client.solrj.beans.Field;
  * 
  * @date 2015年12月16日
  */
-public class ContentBean implements Serializable {
+public class ContentBean extends BaseEntity<ContentBean> {
 	private static final long serialVersionUID = 1L;
 	@Field
 	private String id;
@@ -27,6 +31,8 @@ public class ContentBean implements Serializable {
 	@Field
 	private String content;
 	private int hits;
+	private String q;
+	private Category category;
 	@Field
 	private Date create_date;
 
@@ -86,4 +92,35 @@ public class ContentBean implements Serializable {
 		this.create_date = create_date;
 	}
 
+	@Override
+	public void preInsert() {
+
+	}
+
+	@Override
+	public void preUpdate() {
+	}
+
+	public String getQ() {
+		return q;
+	}
+
+	public void setQ(String q) {
+		this.q = q;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getUrl() {
+		Article article = new Article();
+		article.setCategory(this.category);
+		article.setId(this.id);
+		return CmsUtils.getUrlDynamic(article);
+	}
 }

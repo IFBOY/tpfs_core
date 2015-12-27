@@ -4,9 +4,11 @@
 package com.thinkgem.jeesite.modules.cms.web.front;
 
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thinkgem.jeesite.common.persistence.Page;
+import com.thinkgem.jeesite.common.utils.ContentBean;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
-import com.thinkgem.jeesite.modules.cms.entity.Article;
 import com.thinkgem.jeesite.modules.cms.entity.Guestbook;
 import com.thinkgem.jeesite.modules.cms.entity.Site;
 import com.thinkgem.jeesite.modules.cms.service.ArticleService;
@@ -37,7 +39,7 @@ public class FrontSearchController extends BaseController{
 	private ArticleService articleService;
 	@Autowired
 	private GuestbookService guestbookService;
-	
+		
 	/**
 	 * 全站搜索
 	 */
@@ -79,9 +81,19 @@ public class FrontSearchController extends BaseController{
 			}
 			// 文章检索
 			if (StringUtils.isBlank(t) || "article".equals(t)){
-				Page<Article> page = articleService.search(new Page<Article>(request, response), qStr, cid, bd, ed);
-				page.setMessage("匹配结果，共耗时 " + (System.currentTimeMillis() - start) + "毫秒。");
-				model.addAttribute("page", page);
+				Page<ContentBean> page;
+				try {ContentBean bean=new ContentBean();
+				bean.setQ("".equals(q)?"*":q);
+					page = articleService.queryByParam(new Page<ContentBean>(request, response),bean);
+					page.setMessage("匹配结果，共耗时 " + (System.currentTimeMillis() - start) + "毫秒。");
+					model.addAttribute("page", page);
+					model.addAttribute("condition",q);
+				} catch (SolrServerException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 			}
 			// 留言检索
 			else if ("guestbook".equals(t)){
@@ -98,5 +110,4 @@ public class FrontSearchController extends BaseController{
 		model.addAttribute("cid", cid);// 搜索类型
 		return "modules/cms/front/themes/"+site.getTheme()+"/frontSearch";
 	}
-	
 }

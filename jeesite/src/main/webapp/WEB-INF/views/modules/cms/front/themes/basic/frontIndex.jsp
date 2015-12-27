@@ -183,7 +183,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">最近学f习</h3>
+					<h3 class="panel-title">最近学习</h3>
 				</div>
 				<div class="panel-body article-list-mian">
 					<c:forEach items="${learnList}" var="learnRecords">
@@ -221,11 +221,12 @@
 		</div>
 
 		<div class="span3">
-			<form class="form-search">
+			<form class="form-search" action="${fns:getFrontPath()}/search">
 				<div class="input-append">
 					<input class="span2" style="width: 160px;" placeholder="全站搜索"
-						id="appendedInputButton" type="text">
-					<button class="btn" type="button">Go</button>
+						id="appendedInputButton" type="text" name="q">
+					<input name="t" value="article" type="hidden"/>
+					<button class="btn" type="submit">Go</button>
 				</div>
 			</form>
 			<div class="panel panel-default">
