@@ -103,6 +103,7 @@ public class LearnRecordsController extends BaseController {
 		learnRecordsService.save(learnRecords);
 		param.put("CATEGORYID", learnRec.getArticle().getCategory().getId());
 		LearnStatistics learnStatistics = learnStatisService.findLearnStatistics(param);
+		learnStatistics.setArticle(learnRec.getArticle());
 		learnStatistics.setLearnTotalHours(learnStatistics.getLearnTotalHours()+learnMinutes);
 		learnStatisService.save(learnStatistics);
 		return "1";
