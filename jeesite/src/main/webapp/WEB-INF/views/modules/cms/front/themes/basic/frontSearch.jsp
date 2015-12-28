@@ -20,7 +20,7 @@
 							class="divider">/</span></li>
 						<li>搜索</li>
 					</ol>
-					<form class="form-search" action="${fns:getFrontPath()}/search">
+					<form class="form-search" action="${ctx}/search">
 						<div class="input-append">
 							<input class="span8" placeholder="全站搜索" id="appendedInputButton"
 								type="text" name="q"> <input type="hidden" name="t"

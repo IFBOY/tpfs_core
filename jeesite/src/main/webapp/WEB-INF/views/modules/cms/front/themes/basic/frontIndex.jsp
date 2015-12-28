@@ -221,7 +221,7 @@
 		</div>
 
 		<div class="span3">
-			<form class="form-search" action="${fns:getFrontPath()}/search">
+			<form class="form-search" action="${ctx}/search">
 				<div class="input-append">
 					<input class="span2" style="width: 160px;" placeholder="全站搜索"
 						id="appendedInputButton" type="text" name="q">
