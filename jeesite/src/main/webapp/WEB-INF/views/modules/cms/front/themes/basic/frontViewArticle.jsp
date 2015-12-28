@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/modules/cms/front/include/taglib.jsp"%>
+<%
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,7 @@
 <meta name="keywords" content="JeeSite ${site.keywords}" />
 <link href="${ctxStatic}/star/star.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-var nowTime = new Date();
+	var startTime = new Date().getTime();
 		$(document).ready(function() {
 			$("#learnRecordBtn").click(function(){
 				var difficulty = $('#difficulty').val();
@@ -18,7 +21,7 @@ var nowTime = new Date();
 					alert("请选择难易度和帮助度。")
 					return;
 				}
-				//var learnMinutes = ((new Date()).getTime()-nowTime.getTime() )/1000*60;
+				var learnMinutes =Math.ceil((new Date().getTime()-startTime )/1000/60);
 				$.ajax({
 				    type: 'POST',
 				    url: '${ctxAdmin}/learn/learnRecords/saveLearnRecords' ,
@@ -26,7 +29,7 @@ var nowTime = new Date();
 				    	"id":'${learnRecords.id}',
 				    	'difficultyDegree' : difficulty,
 				    	'helpDegree' : helpfull,
-				    	'learnMinutes' : 5,
+				    	'learnMinutes' : learnMinutes,
 				    	'article.id' : '${article.id}'
 				    },
 				    dataType: 'json',
@@ -136,13 +139,21 @@ var nowTime = new Date();
       <span class="views-num">
         阅读次数： ${article.hits}
       </span>
-     <span class="views-num">
+    <%--  <span class="views-num">
         分享次数：${article.shareNumber}
-      </span>
+      </span> --%>
       <span class="pull-right">
-        <a href="javascript:void(0);"  id="addFavoriteA">${not empty favorite.id?'取消':''}收藏</a> 分享
+        <a href="javascript:void(0);"  id="addFavoriteA">${not empty favorite.id?'取消':''}收藏</a> 
       </span>
     </div>
+    <div class="bdsharebuttonbox pull-right" >
+			<a title="分享到QQ空间" class="bds_qzone" href="#" data-cmd="qzone"></a>
+			<a title="分享到腾讯微博" class="bds_tqq" href="#" data-cmd="tqq"></a>
+			<a title="分享到新浪微博" class="bds_tsina" href="#" data-cmd="tsina"></a>
+			<a title="分享到微信" class="bds_weixin" href="#" data-cmd="weixin"></a>
+		</div>
+		<script>
+		window._bd_share_config={"common":{"bdSnsKey":{},"bdUrl":"<%=basePath%>${ctx}/shareView-${article.id}.html","bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tqq","renren","tsina","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
   </div>
 </div>
         <div class="article-text">

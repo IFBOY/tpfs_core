@@ -407,7 +407,23 @@ public class FrontController extends BaseController {
 		}
 		return "error/404";
 	}
+	
+	/**
+	 * 显示内容
+	 */
+	@RequestMapping(value = "shareView-{contentId}${urlSuffix}")
+	public String shareView(@PathVariable String contentId, Model model) {
+			Article article = articleService.get(contentId);
+			if (article == null
+					|| !Article.DEL_FLAG_NORMAL.equals(article.getDelFlag())) {
+				return "error/404";
+			}
 
+			article.setArticleData(articleDataService.get(article.getId()));
+			model.addAttribute("article", article);
+			return "modules/cms/front/themes/basic/frontViewArticleShare";
+	}
+	
 	/**
 	 * 内容评论
 	 */
