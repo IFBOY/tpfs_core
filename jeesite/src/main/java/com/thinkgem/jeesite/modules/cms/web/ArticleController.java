@@ -204,7 +204,7 @@ public class ArticleController extends BaseController {
 			Model model) throws SolrServerException, IOException {
 		ContentBean con=new ContentBean();
 		con.setQ((condition==null||"".equals(condition))?"*":condition);
-		Page<ContentBean> page = articleService.queryByParam(new Page<ContentBean>(request, response,10),con);
+		Page<ContentBean> page = articleService.queryByParam(new Page<ContentBean>(request, response),con);
 		//Page<ContentBean> page=new Page<ContentBean>(request, response);
 		//page.setList((List<ContentBean>) map.get("data"));
 		//page.setCount((Long)map.get("rows"));

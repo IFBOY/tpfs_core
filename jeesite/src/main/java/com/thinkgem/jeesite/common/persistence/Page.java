@@ -521,9 +521,9 @@ public class Page<T> {
 			return firstResult;
 		}
 		firstResult = (getPageNo() - 1) * getPageSize();
-		if (firstResult >= getCount()) {
+	/*	if (firstResult >= getCount()) {
 			firstResult = 0;
-		}
+		}*/
 		return firstResult;
 	}
 	

@@ -301,10 +301,11 @@ public class ArticleService extends CrudService<ArticleDao, Article> {
 	@SuppressWarnings("unchecked")
 	public Page<ContentBean> queryByParam(Page<ContentBean> page,ContentBean con) throws SolrServerException, IOException {
 		solrApi.getInstance();
-		Map<String, Object> map=solrApi.queryByParam(con.getQ(), page.getPageNo(), page.getPageSize());
+		Map<String, Object> map=solrApi.queryByParam(con.getQ(), page.getFirstResult(), page.getPageSize());
 		con.setPage(page);
-		page.setList((List<ContentBean>)map.get("data"));
 		page.setCount((Long)map.get("rows"));
+		page.setList((List<ContentBean>)map.get("data"));
+		//page = new Page<ContentBean>(page.getPageNo(),page.getPageSize(),(Long)map.get("rows"),(List<ContentBean>)map.get("data"));
 		return page;
 	}
 }
