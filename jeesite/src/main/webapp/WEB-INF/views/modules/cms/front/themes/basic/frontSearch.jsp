@@ -14,6 +14,17 @@
 			$("#searchForm").submit();
         	return false;
         }
+		
+		$(document).ready(function() {
+			var queryInput = $('#appendedInputButton');
+			queryInput.change(function(v){
+				if(queryInput.val()=='${condition}'){
+					$('#pageNo').val(${page.pageNo});
+				}else{
+					$('#pageNo').val(1);
+				}
+			});
+		});
 	</script>
 </head>
 <body>
@@ -32,9 +43,8 @@
 					<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 					<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 						<div class="input-append">
-							<input class="span8" placeholder="全站搜索" id="appendedInputButton"
-								type="text" name="q"> <input type="hidden" name="t"
-								value="article" />
+							<input class="span8" placeholder="全站搜索" id="appendedInputButton" value="${condition}" type="text" name="q">
+							 <input type="hidden" name="t" value="article" />
 							<button class="btn" type="submit">Go</button>
 						</div>
 					</form>
