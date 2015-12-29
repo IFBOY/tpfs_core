@@ -20,5 +20,6 @@ import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 public interface FavoriteDao extends CrudDao<Favorite> {
 	public List<Favorite> findTopFive(Map<String, Object> param);
 	public Favorite getByFavorite(Favorite favorite);
+	public List<Favorite> findListByUserId(Favorite favorite);
 	
 }

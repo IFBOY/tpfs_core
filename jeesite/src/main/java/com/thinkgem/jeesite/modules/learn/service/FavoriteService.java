@@ -30,7 +30,7 @@ public class FavoriteService extends CrudService<FavoriteDao, Favorite> {
 	 */
 	@Autowired
 	protected FavoriteDao dao;
-	
+
 	public Favorite get(String id) {
 		return super.get(id);
 	}
@@ -38,6 +38,7 @@ public class FavoriteService extends CrudService<FavoriteDao, Favorite> {
 	public Favorite getByFavorite(Favorite favorite) {
 		return dao.getByFavorite(favorite);
 	}
+
 	public List<Favorite> findList(Favorite favorite) {
 		return super.findList(favorite);
 	}
@@ -48,6 +49,13 @@ public class FavoriteService extends CrudService<FavoriteDao, Favorite> {
 
 	public Page<Favorite> findPage(Page<Favorite> page, Favorite favorite) {
 		return super.findPage(page, favorite);
+	}
+
+	public Page<Favorite> findPageByUserId(Page<Favorite> page,
+			Favorite favorite) {
+		favorite.setPage(page);
+		page.setList(dao.findListByUserId(favorite));
+		return page;
 	}
 
 	@Transactional(readOnly = false)

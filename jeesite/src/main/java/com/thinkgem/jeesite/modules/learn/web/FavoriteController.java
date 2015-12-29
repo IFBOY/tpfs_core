@@ -31,6 +31,7 @@ import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 收藏夹Controller
+ * 
  * @author Alex
  * @version 2015-11-25
  */
@@ -40,25 +41,36 @@ public class FavoriteController extends BaseController {
 
 	@Autowired
 	private FavoriteService favoriteService;
-	
+
 	@ModelAttribute
-	public Favorite get(@RequestParam(required=false) String id) {
+	public Favorite get(@RequestParam(required = false) String id) {
 		Favorite entity = null;
-		if (StringUtils.isNotBlank(id)){
+		if (StringUtils.isNotBlank(id)) {
 			entity = favoriteService.get(id);
 		}
-		if (entity == null){
+		if (entity == null) {
 			entity = new Favorite();
 		}
 		return entity;
 	}
-	
+
 	@RequiresPermissions("learn:favorite:view")
-	@RequestMapping(value = {"list", ""})
-	public String list(Favorite favorite, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<Favorite> page = favoriteService.findPage(new Page<Favorite>(request, response), favorite); 
+	@RequestMapping(value = { "list", "" })
+	public String list(Favorite favorite, HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		Page<Favorite> page = favoriteService.findPage(new Page<Favorite>(
+				request, response), favorite);
 		model.addAttribute("page", page);
 		return "modules/learn/favoriteList";
+	}
+
+	@RequestMapping(value = { "listByUser", "" })
+	public String listByUser(Favorite favorite, HttpServletRequest request,
+			HttpServletResponse response, Model model) {
+		Page<Favorite> page = favoriteService.findPageByUserId(
+				new Page<Favorite>(request, response), favorite);
+		model.addAttribute("page", page);
+		return "modules/learn/favoriteListForUser";
 	}
 
 	@RequiresPermissions("learn:favorite:view")
@@ -70,49 +82,54 @@ public class FavoriteController extends BaseController {
 
 	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "save")
-	public String save(Favorite favorite, Model model, RedirectAttributes redirectAttributes) {
-		if (!beanValidator(model, favorite)){
+	public String save(Favorite favorite, Model model,
+			RedirectAttributes redirectAttributes) {
+		if (!beanValidator(model, favorite)) {
 			return form(favorite, model);
 		}
 		favoriteService.save(favorite);
 		addMessage(redirectAttributes, "保存收藏夹成功");
-		return "redirect:"+Global.getAdminPath()+"/learn/favorite/?repage";
+		return "redirect:" + Global.getAdminPath() + "/learn/favorite/?repage";
 	}
-	
+
 	/**
 	 * ajax 添加
 	 */
 	@ResponseBody
 	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "addFavorite")
-	public String addFavorite(String articleId, Model model, HttpServletResponse response) {
+	public String addFavorite(String articleId, Model model,
+			HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");
 		Favorite favorite = new Favorite();
 		favorite.setArticle(new Article(articleId));
 		favorite.setUser(UserUtils.getUser());
 		favoriteService.save(favorite);
-		Map<String, String> result = new HashMap<String,String>();
+		Map<String, String> result = new HashMap<String, String>();
 		result.put("id", favorite.getId());
 		return JsonMapper.toJsonString(result);
 	}
-	
+
 	/**
 	 * ajax 删除
 	 */
 	@ResponseBody
 	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "delFavorite")
-	public String delFavorite(String favoriteId, Model model, HttpServletResponse response) {
+	public String delFavorite(String favoriteId, Model model,
+			HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");
 		favoriteService.delete(new Favorite(favoriteId));
 		return "1";
 	}
+
 	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "delete")
-	public String delete(Favorite favorite, RedirectAttributes redirectAttributes) {
+	public String delete(Favorite favorite,
+			RedirectAttributes redirectAttributes) {
 		favoriteService.delete(favorite);
 		addMessage(redirectAttributes, "删除收藏夹成功");
-		return "redirect:"+Global.getAdminPath()+"/learn/favorite/?repage";
+		return "redirect:" + Global.getAdminPath() + "/learn/favorite/?repage";
 	}
 
 }

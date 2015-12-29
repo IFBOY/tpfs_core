@@ -123,16 +123,19 @@ public class SolrApi {
 		SolrDocumentList list = client.query(params).getResults();
 		if (list != null && list.size() > 0) {
 			List<ContentBean> datalist = new ArrayList<ContentBean>();
+			if("*".equals(condition)){
+				condition="";
+			}
 			for (SolrDocument d : list) {
 				ContentBean bean = new ContentBean();
 				bean.setContent(d.getFieldValue("content") == null ? "" : d
-						.getFieldValue("content").toString());
+						.getFieldValue("content").toString().replaceAll(condition, "<font color='red'>"+condition+"</font>"));
 				bean.setDescription(d.getFieldValue("description") == null ? ""
-						: d.getFieldValue("description").toString());
+						: d.getFieldValue("description").toString().replaceAll(condition, "<font color='red'>"+condition+"</font>"));
 				bean.setId(d.getFieldValue("id") == null ? "" : d
 						.getFieldValue("id").toString());
 				bean.setKeywords(d.getFieldValue("keywords") == null ? "" : d
-						.getFieldValue("keywords").toString());
+						.getFieldValue("keywords").toString().replaceAll(condition, "<font color='red'>"+condition+"</font>"));
 				bean.setTitle(d.getFieldValue("title") == null ? "" : d
 						.getFieldValue("title").toString());
 				bean.setCreate_date(d.getFieldValue("create_date") == null ? null

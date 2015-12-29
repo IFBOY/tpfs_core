@@ -8,8 +8,8 @@
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
 <style type="text/css">
-.btn-success a{
-	color:#FFF;
+.btn-success a {
+	color: #FFF;
 }
 </style>
 </head>
@@ -229,8 +229,8 @@
 			<form class="form-search" action="${ctx}/search">
 				<div class="input-append">
 					<input class="span2" style="width: 160px;" placeholder="全站搜索"
-						id="appendedInputButton" type="text" name="q">
-					<input name="t" value="article" type="hidden"/>
+						id="appendedInputButton" type="text" name="q"> <input
+						name="t" value="article" type="hidden" />
 					<button class="btn" type="submit">Go</button>
 				</div>
 			</form>
@@ -242,10 +242,12 @@
 								src=" ${ctxStatic}/front/091008008a96767512.jpg">
 						</div>
 						<div class="media-body">
-							<div class="title">${user.name} ${user.loginName}</div>
+							<div class="title">${user.name}${user.loginName}</div>
 							<div class="content">${user.company.name }</div>
 							<div class="content" style="padding-top: 10px;">
-								<button class="btn btn-success pull-right"><a href="${fns:getAdminPath()}/logout">注销</a></button>
+								<button class="btn btn-success pull-right">
+									<a href="${fns:getAdminPath()}/logout">注销</a>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -259,14 +261,14 @@
 				<div class="panel-body">
 
 					<div class="media media-number">
-						<div class="media-body">${userLearnArticls}/ 累计学习知识点</div>
+						<div class="media-body">${userLearnArticls}/累计学习知识点</div>
 					</div>
 					<div class="media media-number">
-						<div class="media-body">${learnedPercent}/ 学习完成比例</div>
+						<div class="media-body">${learnedPercent}/学习完成比例</div>
 					</div>
 					<div class="media media-number"
 						style="padding-bottom: 0px; border-bottom: 1px solid #FFF;">
-						<div class="media-body">${userLearnTotalTime}分钟/ 学习总时长</div>
+						<div class="media-body">${userLearnTotalTime}分钟/学习总时长</div>
 					</div>
 				</div>
 			</div>
@@ -279,7 +281,8 @@
 					<c:forEach items="${favoriteList}" var="favorite">
 						<div class="media media-number">
 							<div class="media-title">
-								<a class="link-light" href="${favorite.article.url}" title=${favorite.article.title }>${favorite.article.title }</a>
+								<a class="link-light" href="${favorite.article.url}"
+									title=${favorite.article.title }>${favorite.article.title }</a>
 							</div>
 							<div class="media-body">${favorite.article.description }</div>
 
@@ -288,6 +291,11 @@
 						</div>
 					</c:forEach>
 				</div>
+				<div style="float: right">
+					<a class="link-light"
+						href="${ctxAdmin}/learn/favorite/listByUser?user.id=${user.id}">更多</a>
+				</div>
+
 			</div>
 
 
