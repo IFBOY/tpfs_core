@@ -7,6 +7,11 @@
 <meta name="decorator" content="cms_default_${site.theme}" />
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
+<style type="text/css">
+.btn-success a{
+	color:#FFF;
+}
+</style>
 </head>
 <body>
 
