@@ -7,6 +7,14 @@
 <meta name="decorator" content="cms_default_${site.theme}" />
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
+<script type="text/javascript">
+		function page(n,s){
+			$("#pageNo").val(n);
+			$("#pageSize").val(s);
+			$("#searchForm").submit();
+        	return false;
+        }
+	</script>
 </head>
 <body>
 
@@ -20,7 +28,9 @@
 							class="divider">/</span></li>
 						<li>搜索</li>
 					</ol>
-					<form class="form-search" action="${ctx}/search">
+					<form class="form-search" action="${ctx}/search" id="searchForm">
+					<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
+					<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 						<div class="input-append">
 							<input class="span8" placeholder="全站搜索" id="appendedInputButton"
 								type="text" name="q"> <input type="hidden" name="t"
