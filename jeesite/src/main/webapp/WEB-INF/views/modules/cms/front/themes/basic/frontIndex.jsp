@@ -11,13 +11,23 @@
 .btn-success a {
 	color: #FFF;
 }
+.progess{
+	font-size: 18px;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
 
 	<div class="row" id="content-container">
 		<div class="span9">
-
+			<form class="form-search" action="${ctx}/search">
+				<div class="input-append">
+					<input class="span8" style="width:644px;"  placeholder="全站搜索" id="appendedInputButton" type="text" name="q"> <input
+						name="t" value="article" type="hidden" />
+					<button class="btn" type="submit">Go</button>
+				</div>
+			</form>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">金融栏目</h3>
@@ -49,8 +59,7 @@
 									<div class="course-img">
 										<a href="${staticDataList[2].article.url}"> <span
 											class="tags"> <span class="tag-live"></span>
-										</span> <img src="${ctxStaticTheme}/img/xintuo.png" title="信托"
-											class="img-responsive">
+										</span> <img src="${ctxStaticTheme}/img/xintuo.png" title="信托" class="img-responsive">
 										</a>
 									</div>
 									<div class="course-info">
@@ -195,7 +204,7 @@
 						<div class="article-item">
 							<div class="article-metas clearfix">
 								<div class="pull-left">
-									<div class="date">
+									<div class="date" title="<fmt:formatDate value="${learnRecords.updateDate}" pattern="yyyy-MM-dd"/>">
 										<div class="day">
 											<fmt:formatDate value="${learnRecords.updateDate}"
 												pattern="dd" />
@@ -226,14 +235,6 @@
 		</div>
 
 		<div class="span3">
-			<form class="form-search" action="${ctx}/search">
-				<div class="input-append">
-					<input class="span2" style="width: 160px;" placeholder="全站搜索"
-						id="appendedInputButton" type="text" name="q"> <input
-						name="t" value="article" type="hidden" />
-					<button class="btn" type="submit">Go</button>
-				</div>
-			</form>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="media media-default">
@@ -242,7 +243,7 @@
 								src=" ${ctxStatic}/front/091008008a96767512.jpg">
 						</div>
 						<div class="media-body">
-							<div class="title">${user.name}${user.loginName}</div>
+							<div class="title">${user.name} ${user.loginName}</div>
 							<div class="content">${user.company.name }</div>
 							<div class="content" style="padding-top: 10px;">
 								<button class="btn btn-success pull-right">
@@ -261,14 +262,14 @@
 				<div class="panel-body">
 
 					<div class="media media-number">
-						<div class="media-body">${userLearnArticls}/累计学习知识点</div>
+						<div class="media-body"><span class="progess">${userLearnArticls}</span> / 累计学习知识点</div>
 					</div>
 					<div class="media media-number">
-						<div class="media-body">${learnedPercent}/学习完成比例</div>
+						<div class="media-body"><span class="progess">${learnedPercent}</span> / 学习完成比例</div>
 					</div>
 					<div class="media media-number"
 						style="padding-bottom: 0px; border-bottom: 1px solid #FFF;">
-						<div class="media-body">${userLearnTotalTime}分钟/学习总时长</div>
+						<div class="media-body"><span class="progess">${userLearnTotalTime}</span> 分钟 / 学习总时长</div>
 					</div>
 				</div>
 			</div>
