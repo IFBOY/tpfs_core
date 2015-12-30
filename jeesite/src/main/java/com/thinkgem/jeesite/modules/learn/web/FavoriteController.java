@@ -70,7 +70,7 @@ public class FavoriteController extends BaseController {
 		Page<Favorite> page = favoriteService.findPageByUserId(
 				new Page<Favorite>(request, response), favorite);
 		model.addAttribute("page", page);
-		return "modules/learn/favoriteListForUser";
+		return "modules/cms/front/themes/basic/frontFavorite";
 	}
 
 	@RequiresPermissions("learn:favorite:view")

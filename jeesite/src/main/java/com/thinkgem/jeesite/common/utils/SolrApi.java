@@ -126,14 +126,18 @@ public class SolrApi {
 			for (SolrDocument d : list) {
 				ContentBean bean = new ContentBean();
 				Map<String, List<String>> map = lightMap.get(d.getFieldValue("id").toString());
-				bean.setContent((map.get("content") == null || "".equals(condition)) ? d.getFieldValue("content")
-						.toString() : map.get("content").get(0));
-				bean.setDescription((map.get("description") == null || "".equals(condition)) ? d.getFieldValue(
-						"description").toString() : map.get("description").get(0));
+				bean.setContent((map.get("content") == null || "".equals(condition)) ? d.getFieldValue("content") == null ? ""
+						: d.getFieldValue("content").toString()
+						: map.get("content").get(0));
+				bean.setDescription((map.get("description") == null || "".equals(condition)) ? d
+						.getFieldValue("description") == null ? "" : d.getFieldValue("description").toString() : map
+						.get("description").get(0));
 				bean.setId(d.getFieldValue("id").toString());
-				bean.setKeywords((map.get("keywords") == null || "".equals(condition)) ? d.getFieldValue("keywords")
-						.toString() : map.get("keywords").get(0));
-				bean.setTitle((map.get("title") == null || "".equals(condition)) ? d.getFieldValue("title").toString()
+				bean.setKeywords((map.get("keywords") == null || "".equals(condition)) ? d.getFieldValue("keywords") == null ? ""
+						: d.getFieldValue("keywords").toString()
+						: map.get("keywords").get(0));
+				bean.setTitle((map.get("title") == null || "".equals(condition)) ? d.getFieldValue("title") == null ? ""
+						: d.getFieldValue("title").toString()
 						: map.get("title").get(0));
 				bean.setCreate_date(d.getFieldValue("create_date") == null ? null : (Date) d
 						.getFieldValue("create_date"));

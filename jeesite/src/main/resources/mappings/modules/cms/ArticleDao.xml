@@ -166,8 +166,8 @@
 		a.id as "id",
 		a.title as "title",
 		a.keywords as "keywords",
-		a.description "as description",
-		a.create_date "as createDate",
+		a.description as "description",
+		a.create_date as "createDate",
 		ad.content as "articleData.content"
 		FROM
 		cms_article a,cms_article_data ad
