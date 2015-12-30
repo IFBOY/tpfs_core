@@ -35,7 +35,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<ol class="breadcrumb">
-						<li><strong>当前位置：</strong><a href="${ctx} ">首页</a><span
+						<li><span>当前位置：</span><a href="${ctx} ">首页</a><span
 							class="divider">/</span></li>
 						<li>搜索</li>
 					</ol>

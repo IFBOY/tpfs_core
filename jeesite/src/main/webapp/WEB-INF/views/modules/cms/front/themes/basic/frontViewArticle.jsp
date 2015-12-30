@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var difficulty = $('#difficulty').val();
 				var helpfull = $('#helpfull').val();
 				if(difficulty<1 || helpfull<1){
-					alert("请选择难易度和帮助度。")
+					showTip("请选择难易度和帮助度。");
 					return;
 				}
 				var learnMinutes =Math.ceil((new Date().getTime()-startTime )/1000/60);
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    dataType: 'json',
 				    success: function(data){
 				    	if(data){
-				    		alert("保存成功！")
+				    		showTip("保存成功！");
 				    	}
 				    }
 				});
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div>
         <div class="article-metas">
   <div class="pull-left">
-    <div class="date">
+    <div class="date" title="<fmt:formatDate value="${article.createDate}" pattern="yyyy-MM-dd"/>">
       <div class="day"><fmt:formatDate value="${article.createDate}" pattern="dd"/></div>
       <div class="month"><fmt:formatDate value="${article.createDate}" pattern="MM"/>月</div>
     </div>
@@ -162,12 +162,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				
 			<ul class="x-top" style="padding-left:0px">
-                            <div class="fy f zhs"><span class="jg35">上一篇</span></div>
-                            <div class="fy f txtRight zhs"><span class="jg352">下一篇</span></div>
-                            <div class="fy f"><a class="PREVIOUS"  href="${articlePre.url}" style="color:${articlePre.color}">${fns:abbr(articlePre.title,28)}</a></div>
-                            <div class="fy f txtRight"><a class="NEXT"  href="${articleNext.url}" style="color:${articleNext.color}">${fns:abbr(articleNext.title,28)}</a></div>
-                            <div class="dr"></div>
-                            <div class="df"></div>
+                        <div class="fy f zhs"><span class="jg35">上一篇</span></div>
+                        <div class="fy f txtRight zhs"><span class="jg352">下一篇</span></div>
+                        <div class="fy f"><a class="PREVIOUS"  href="${articlePre.url}" style="color:${articlePre.color}">${fns:abbr(articlePre.title,28)}</a></div>
+                        <div class="fy f txtRight"><a class="NEXT"  href="${articleNext.url}" style="color:${articleNext.color}">${fns:abbr(articleNext.title,28)}</a></div>
+                        <div class="dr"></div>
+                        <div class="df"></div>
                         </ul>				
 			</div>
 			

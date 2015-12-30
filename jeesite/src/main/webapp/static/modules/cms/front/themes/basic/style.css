@@ -318,3 +318,12 @@ h2, .h2 {
     color: #337AB7;
     text-decoration: none;
 }
+
+.breadcrumb {
+	font-size: 14px;
+	color: #919191;
+}
+.breadcrumb a {
+    color: #157AB5;
+    transition: all 0.3s ease 0s;
+}
