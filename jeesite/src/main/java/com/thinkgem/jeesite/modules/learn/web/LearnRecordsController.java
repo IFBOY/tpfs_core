@@ -87,7 +87,6 @@ public class LearnRecordsController extends BaseController {
 	 * ajax 添加
 	 */
 	@ResponseBody
-	@RequiresPermissions("learn:learnRecords:edit")
 	@RequestMapping(value = "saveLearnRecords")
 	public String saveLearnRecords(LearnRecords learnRecords, Model model, HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");

@@ -96,7 +96,6 @@ public class FavoriteController extends BaseController {
 	 * ajax 添加
 	 */
 	@ResponseBody
-	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "addFavorite")
 	public String addFavorite(String articleId, Model model,
 			HttpServletResponse response) {
@@ -114,7 +113,6 @@ public class FavoriteController extends BaseController {
 	 * ajax 删除
 	 */
 	@ResponseBody
-	@RequiresPermissions("learn:favorite:edit")
 	@RequestMapping(value = "delFavorite")
 	public String delFavorite(String favoriteId, Model model,
 			HttpServletResponse response) {
