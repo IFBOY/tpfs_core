@@ -47,7 +47,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="${staticDataList[2].article.url}" target="_blank">
+										<a href="${staticDataList[2].article.url}">
 											<span class="tags"> <span class="tag-live"></span>
 										</span> <img src="${ctxStaticTheme}/img/xintuo.png" title="信托"
 											class="img-responsive">
@@ -67,7 +67,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="${staticDataList[5].article.url}" target="_blank">
+										<a href="${staticDataList[5].article.url}">
 											<img src="${ctxStaticTheme}/img/zhenquan.png" title="证券"
 											class="img-responsive">
 										</a>
@@ -86,7 +86,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="${staticDataList[1].article.url}" target="_blank">
+										<a href="${staticDataList[1].article.url}">
 											<img src="${ctxStaticTheme}/img/baoxian.png" title="保险"
 											class="img-responsive">
 										</a>
@@ -106,7 +106,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="${staticDataList[4].article.url}" target="_blank">
+										<a href="${staticDataList[4].article.url}">
 											<img src="${ctxStaticTheme}/img/guquantouzhijigou.png"
 											title="股权投资机构" class="img-responsive">
 										</a>
@@ -125,7 +125,7 @@
 							<div class="span2">
 								<div class="course-item">
 									<div class="course-img">
-										<a href="${staticDataList[3].article.url}" target="_blank">
+										<a href="${staticDataList[3].article.url}">
 											<img src="${ctxStaticTheme}/img/jianguan.png" title="监管机构"
 											class="img-responsive">
 										</a>
