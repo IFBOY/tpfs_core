@@ -3,7 +3,8 @@
  */
 package com.thinkgem.jeesite.modules.cms.web;
 
-import java.io.IOException;import java.util.List;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,7 @@ import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 文章Controller
+ * 
  * @author ThinkGem
  * @version 2013-3-23
  */
@@ -51,33 +53,33 @@ public class ArticleController extends BaseController {
 	private ArticleDataService articleDataService;
 	@Autowired
 	private CategoryService categoryService;
-    @Autowired
-   	private FileTplService fileTplService;
-    @Autowired
-   	private SiteService siteService;
-	
+	@Autowired
+	private FileTplService fileTplService;
+	@Autowired
+	private SiteService siteService;
+
 	@ModelAttribute
-	public Article get(@RequestParam(required=false) String id) {
-		if (StringUtils.isNotBlank(id)){
+	public Article get(@RequestParam(required = false) String id) {
+		if (StringUtils.isNotBlank(id)) {
 			return articleService.get(id);
-		}else{
+		} else {
 			return new Article();
 		}
 	}
-	
+
 	@RequiresPermissions("cms:article:view")
-	@RequestMapping(value = {"list", ""})
+	@RequestMapping(value = { "list", "" })
 	public String list(Article article, HttpServletRequest request, HttpServletResponse response, Model model) {
-//		for (int i=0; i<10000000; i++){
-//			Article a = new Article();
-//			a.setCategory(new Category(article.getCategory().getId()));
-//			a.setTitle("测试测试测试测试测试测试测试测试"+a.getCategory().getId());
-//			a.setArticleData(new ArticleData());
-//			a.getArticleData().setContent(a.getTitle());
-//			articleService.save(a);
-//		}
-        Page<Article> page = articleService.findPage(new Page<Article>(request, response), article, true); 
-        model.addAttribute("page", page);
+		// for (int i=0; i<10000000; i++){
+		// Article a = new Article();
+		// a.setCategory(new Category(article.getCategory().getId()));
+		// a.setTitle("测试测试测试测试测试测试测试测试"+a.getCategory().getId());
+		// a.setArticleData(new ArticleData());
+		// a.getArticleData().setContent(a.getTitle());
+		// articleService.save(a);
+		// }
+		Page<Article> page = articleService.findPage(new Page<Article>(request, response), article, true);
+		model.addAttribute("page", page);
 		return "modules/cms/articleList";
 	}
 
@@ -85,34 +87,37 @@ public class ArticleController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(Article article, Model model) {
 		// 如果当前传参有子节点，则选择取消传参选择
-		if (article.getCategory()!=null && StringUtils.isNotBlank(article.getCategory().getId())){
-			List<Category> list = categoryService.findByParentId(article.getCategory().getId(), Site.getCurrentSiteId());
-			if (list.size() > 0){
+		if (article.getCategory() != null && StringUtils.isNotBlank(article.getCategory().getId())) {
+			List<Category> list = categoryService
+					.findByParentId(article.getCategory().getId(), Site.getCurrentSiteId());
+			if (list.size() > 0) {
 				article.setCategory(null);
-			}else{
+			} else {
 				article.setCategory(categoryService.get(article.getCategory().getId()));
 			}
 		}
 		article.setArticleData(articleDataService.get(article.getId()));
-//		if (article.getCategory()=null && StringUtils.isNotBlank(article.getCategory().getId())){
-//			Category category = categoryService.get(article.getCategory().getId());
-//		}
-		
+		// if (article.getCategory()=null &&
+		// StringUtils.isNotBlank(article.getCategory().getId())){
+		// Category category =
+		// categoryService.get(article.getCategory().getId());
+		// }
+
 		Integer sort = articleService.findSort(article);
-		article.setSort(sort+1);
-		
-		//获取总记录数，加1后即为下一个序号，保存到page的count，用于在前台验证
+		article.setSort(sort + 1);
+
+		// 获取总记录数，加1后即为下一个序号，保存到page的count，用于在前台验证
 		Article countArt = new Article();
 		countArt.setWeight(0.0);
 		countArt.setCategory(article.getCategory());
 		Integer nextSort = articleService.findSort(countArt);
-		if(StringUtils.isBlank(article.getId())){
-			nextSort = nextSort+1;
+		if (StringUtils.isBlank(article.getId())) {
+			nextSort = nextSort + 1;
 		}
-		article.setPage(new Page<Article>(1,1,nextSort));
-		
-        model.addAttribute("contentViewList",getTplContent());
-        model.addAttribute("article_DEFAULT_TEMPLATE",Article.DEFAULT_TEMPLATE);
+		article.setPage(new Page<Article>(1, 1, nextSort));
+
+		model.addAttribute("contentViewList", getTplContent());
+		model.addAttribute("article_DEFAULT_TEMPLATE", Article.DEFAULT_TEMPLATE);
 		model.addAttribute("article", article);
 		CmsUtils.addViewConfigAttribute(model, article.getCategory());
 		return "modules/cms/articleForm";
@@ -121,39 +126,40 @@ public class ArticleController extends BaseController {
 	@RequiresPermissions("cms:article:edit")
 	@RequestMapping(value = "save")
 	public String save(Article article, Model model, RedirectAttributes redirectAttributes) {
-		if (!beanValidator(model, article)){
+		if (!beanValidator(model, article)) {
 			return form(article, model);
 		}
-		if(StringUtils.isBlank(article.getId())){ //添加
+		if (StringUtils.isBlank(article.getId())) { // 添加
 			Double wei = articleService.findWeight(article);
 			article.setWeight(wei);
-		}else{//修改
-			if(article.getWeight() !=null && article.getWeight()==-1.0){  //序号往后调
-				article.setSort(article.getSort()+1); //
+		} else {// 修改
+			if (article.getWeight() != null && article.getWeight() == -1.0) { // 序号往后调
+				article.setSort(article.getSort() + 1); //
 				Double wei = articleService.findWeight(article);
 				article.setWeight(wei);
-			}else if(article.getWeight() !=null && article.getWeight()==0.0){
+			} else if (article.getWeight() != null && article.getWeight() == 0.0) {
 				Double wei = articleService.findWeight(article);
 				article.setWeight(wei);
 			}
 		}
-		
+
 		articleService.save(article);
-		addMessage(redirectAttributes, "保存文章'" + StringUtils.abbr(article.getTitle(),50) + "'成功");
-		String categoryId = article.getCategory()!=null?article.getCategory().getId():null;
-		return "redirect:" + adminPath + "/cms/article/?repage&category.id="+(categoryId!=null?categoryId:"");
+		addMessage(redirectAttributes, "保存文章'" + StringUtils.abbr(article.getTitle(), 50) + "'成功");
+		String categoryId = article.getCategory() != null ? article.getCategory().getId() : null;
+		return "redirect:" + adminPath + "/cms/article/?repage&category.id=" + (categoryId != null ? categoryId : "");
 	}
-	
+
 	@RequiresPermissions("cms:article:edit")
 	@RequestMapping(value = "delete")
-	public String delete(Article article, String categoryId, @RequestParam(required=false) Boolean isRe, RedirectAttributes redirectAttributes) {
+	public String delete(Article article, String categoryId, @RequestParam(required = false) Boolean isRe,
+			RedirectAttributes redirectAttributes) {
 		// 如果没有审核权限，则不允许删除或发布。
-		if (!UserUtils.getSubject().isPermitted("cms:article:audit")){
+		if (!UserUtils.getSubject().isPermitted("cms:article:audit")) {
 			addMessage(redirectAttributes, "你没有删除或发布权限");
 		}
 		articleService.delete(article, isRe);
-		addMessage(redirectAttributes, (isRe!=null&&isRe?"发布":"删除")+"文章成功");
-		return "redirect:" + adminPath + "/cms/article/?repage&category.id="+(categoryId!=null?categoryId:"");
+		addMessage(redirectAttributes, (isRe != null && isRe ? "发布" : "删除") + "文章成功");
+		return "redirect:" + adminPath + "/cms/article/?repage&category.id=" + (categoryId != null ? categoryId : "");
 	}
 
 	/**
@@ -162,10 +168,10 @@ public class ArticleController extends BaseController {
 	@RequiresPermissions("cms:article:view")
 	@RequestMapping(value = "selectList")
 	public String selectList(Article article, HttpServletRequest request, HttpServletResponse response, Model model) {
-        list(article, request, response, model);
+		list(article, request, response, model);
 		return "modules/cms/articleSelectList";
 	}
-	
+
 	/**
 	 * 通过编号获取文章标题
 	 */
@@ -184,33 +190,44 @@ public class ArticleController extends BaseController {
 	@RequestMapping(value = "findMaxSort")
 	public Integer findMaxSort(Article article, String categoryId, HttpServletResponse response) {
 		response.setContentType("application/json; charset=UTF-8");
-		
+
 		article.setCategory(new Category(categoryId));
 		int maxSort = this.articleService.findSort(article);
-		if(StringUtils.isBlank(article.getId())){
-			maxSort = maxSort+1;
+		if (StringUtils.isBlank(article.getId())) {
+			maxSort = maxSort + 1;
 		}
 		return maxSort;
 	}
-	
-    private List<String> getTplContent() {
-   		List<String> tplList = fileTplService.getNameListByPrefix(siteService.get(Site.getCurrentSiteId()).getSolutionPath());
-   		tplList = TplUtils.tplTrim(tplList, Article.DEFAULT_TEMPLATE, "");
-   		return tplList;
-   	}
-    
+
+	private List<String> getTplContent() {
+		List<String> tplList = fileTplService.getNameListByPrefix(siteService.get(Site.getCurrentSiteId())
+				.getSolutionPath());
+		tplList = TplUtils.tplTrim(tplList, Article.DEFAULT_TEMPLATE, "");
+		return tplList;
+	}
+
 	@RequestMapping(value = "search")
-	public String queryByParam(HttpServletRequest request,HttpServletResponse response,String condition,
-			Model model) throws SolrServerException, IOException {
-		ContentBean con=new ContentBean();
-		con.setQ((condition==null||"".equals(condition))?"*":condition);
-		Page<ContentBean> page = articleService.queryByParam(new Page<ContentBean>(request, response),con);
-		//Page<ContentBean> page=new Page<ContentBean>(request, response);
-		//page.setList((List<ContentBean>) map.get("data"));
-		//page.setCount((Long)map.get("rows"));
+	public String queryByParam(HttpServletRequest request, HttpServletResponse response, String condition, Model model)
+			throws SolrServerException, IOException {
+		ContentBean con = new ContentBean();
+		con.setQ((condition == null || "".equals(condition)) ? "*" : condition);
+		Page<ContentBean> page = articleService.queryByParam(new Page<ContentBean>(request, response), con);
 		model.addAttribute("page", page);
-		model.addAttribute("condition",condition);
+		model.addAttribute("condition", condition);
 		return "modules/cms/articleSearchList";
 	}
 
+	/**
+	 * 初始化分词服务器
+	 * 
+	 * @param request
+	 * @param response
+	 * @param model
+	 */
+	@RequestMapping(value ="initSolr")
+	public void initSolr(HttpServletRequest request, HttpServletResponse response) {
+
+		articleService.initSolrWords();
+
+	}
 }
