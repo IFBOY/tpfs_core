@@ -42,9 +42,11 @@ import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 import com.thinkgem.jeesite.modules.learn.entity.LearnRecords;
 import com.thinkgem.jeesite.modules.learn.entity.LearnStaticData;
 import com.thinkgem.jeesite.modules.learn.entity.LearnStatistics;
+import com.thinkgem.jeesite.modules.learn.entity.SearchHistory;
 import com.thinkgem.jeesite.modules.learn.service.FavoriteService;
 import com.thinkgem.jeesite.modules.learn.service.LearnRecordsService;
 import com.thinkgem.jeesite.modules.learn.service.LearnStatisticsService;
+import com.thinkgem.jeesite.modules.learn.service.SearchHistoryService;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -79,6 +81,8 @@ public class FrontController extends BaseController {
 	private LearnRecordsService learnRecordsService;
 	@Autowired
 	private LearnStatisticsService learnStatisService;
+	@Autowired
+	private SearchHistoryService searchHistoryService;
 
 	/**
 	 * 网站首页
@@ -95,6 +99,7 @@ public class FrontController extends BaseController {
 		param.put("USERID", user.getId());
 		model.addAttribute("favoriteList", favoriteService.findTopFive(param));
 		model.addAttribute("learnList", learnRecordsService.findTopFive(param));
+		model.addAttribute("searchHisPage", searchHistoryService.findPage(new Page<SearchHistory>(1, 5),new SearchHistory()));
 		List<LearnStaticData> staticData = learnStatisService
 				.getStaticsData(user.getId());
 		if (staticData != null && staticData.size() > 0) {

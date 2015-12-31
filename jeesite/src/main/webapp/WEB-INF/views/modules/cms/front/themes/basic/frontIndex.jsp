@@ -16,17 +16,29 @@
 	font-weight: bold;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+	var hotSearchA = $('.hotSearchA');
+	hotSearchA.click(function(){
+		$('#appendedInputButton').val($(this).text());
+		$("#searchForm").submit();
+	});
+});
+</script>
 </head>
 <body>
 
 	<div class="row" id="content-container">
 		<div class="span9">
-			<form class="form-search" action="${ctx}/search">
+			<form class="form-search" action="${ctx}/search" id="searchForm">
 				<div class="input-append">
-					<input class="span8" style="width:644px;"  placeholder="全站搜索" id="appendedInputButton" type="text" name="q"> <input
-						name="t" value="article" type="hidden" />
+					<input class="span8" style="width:644px;"  placeholder="全站搜索" id="appendedInputButton" type="text" name="q">
+					 <input name="t" value="article" type="hidden" />
 					<button class="btn" type="submit">Go</button>
 				</div>
+			<div>热门搜索：<c:forEach items="${searchHisPage.list}" var="searchHistory">
+				<a href="javascript:void(0);"  class="hotSearchA">${searchHistory.name}</a> 
+			</c:forEach></div>
 			</form>
 			<div class="panel panel-default">
 				<div class="panel-heading">

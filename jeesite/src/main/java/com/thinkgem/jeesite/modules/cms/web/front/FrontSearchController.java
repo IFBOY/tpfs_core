@@ -5,6 +5,7 @@ package com.thinkgem.jeesite.modules.cms.web.front;
 
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +25,8 @@ import com.thinkgem.jeesite.modules.cms.entity.Site;
 import com.thinkgem.jeesite.modules.cms.service.ArticleService;
 import com.thinkgem.jeesite.modules.cms.service.GuestbookService;
 import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
+import com.thinkgem.jeesite.modules.learn.entity.SearchHistory;
+import com.thinkgem.jeesite.modules.learn.service.SearchHistoryService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 /**
@@ -39,7 +42,9 @@ public class FrontSearchController extends BaseController{
 	private ArticleService articleService;
 	@Autowired
 	private GuestbookService guestbookService;
-		
+	@Autowired
+	private SearchHistoryService searchHistoryService;
+	
 	/**
 	 * 全站搜索
 	 */
@@ -103,6 +108,10 @@ public class FrontSearchController extends BaseController{
 			}
 			
 		}
+		
+		SearchHistory searchHistory = new SearchHistory();
+		searchHistory.setName(q);
+		searchHistoryService.save(searchHistory);
 		model.addAttribute("t", t);// 搜索类型
 		model.addAttribute("q", q);// 搜索关键字
 		model.addAttribute("qand", qand);// 包含以下全部的关键词
