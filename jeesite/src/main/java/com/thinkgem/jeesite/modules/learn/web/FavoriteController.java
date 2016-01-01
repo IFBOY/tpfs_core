@@ -25,6 +25,8 @@ import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.utils.StringUtils;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.modules.cms.entity.Article;
+import com.thinkgem.jeesite.modules.cms.entity.Site;
+import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
 import com.thinkgem.jeesite.modules.learn.entity.Favorite;
 import com.thinkgem.jeesite.modules.learn.service.FavoriteService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -67,9 +69,14 @@ public class FavoriteController extends BaseController {
 	@RequestMapping(value = { "listByUser", "" })
 	public String listByUser(Favorite favorite, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
+		long start = System.currentTimeMillis();
+		Site site = CmsUtils.getSite(Site.defaultSiteId());
+		model.addAttribute("site", site);
 		Page<Favorite> page = favoriteService.findPageByUserId(
 				new Page<Favorite>(request, response), favorite);
 		model.addAttribute("page", page);
+		page.setMessage("匹配结果，共耗时 " + (System.currentTimeMillis() - start) + "毫秒。");
+		
 		return "modules/cms/front/themes/basic/frontFavorite";
 	}
 
