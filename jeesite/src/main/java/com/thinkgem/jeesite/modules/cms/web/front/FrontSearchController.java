@@ -112,6 +112,8 @@ public class FrontSearchController extends BaseController{
 		SearchHistory searchHistory = new SearchHistory();
 		searchHistory.setName(q);
 		searchHistoryService.save(searchHistory);
+		
+		model.addAttribute("searchHisPage", searchHistoryService.findPage(new Page<SearchHistory>(1, 5),new SearchHistory()));
 		model.addAttribute("t", t);// 搜索类型
 		model.addAttribute("q", q);// 搜索关键字
 		model.addAttribute("qand", qand);// 包含以下全部的关键词
