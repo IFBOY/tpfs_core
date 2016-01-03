@@ -30,7 +30,7 @@
 					title="用户" url="/sys/office/treeData?type=3" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/>
 			</li>
 			<li><label>范畴名称：</label>
-		    <form:input path="knocate.name" htmlEscape="false" maxlength="64" class="input-medium"/>
+		    <form:input path="category.name" htmlEscape="false" maxlength="64" class="input-medium"/>
 			</li>
 			<li><label>更新时间：</label>
 				<input name="beginUpdateDate" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate"
@@ -68,7 +68,7 @@
 					${learnStatistics.user.name}
 				</a></td>
 				<td>
-					${learnStatistics.knocate.name}
+					${learnStatistics.category.name}
 				</td>
 				<td>
 					${learnStatistics.leaningCount}

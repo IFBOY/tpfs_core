@@ -66,7 +66,7 @@ public class FavoriteController extends BaseController {
 		return "modules/learn/favoriteList";
 	}
 
-	@RequestMapping(value = { "listByUser", "" })
+	@RequestMapping(value = "listByUser")
 	public String listByUser(Favorite favorite, HttpServletRequest request,
 			HttpServletResponse response, Model model) {
 		long start = System.currentTimeMillis();
