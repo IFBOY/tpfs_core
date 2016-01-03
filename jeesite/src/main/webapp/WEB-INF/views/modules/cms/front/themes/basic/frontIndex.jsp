@@ -15,6 +15,10 @@
 	font-size: 18px;
 	font-weight: bold;
 }
+.hotSearch{
+	font-size: 13px;
+	color: #555;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -36,7 +40,7 @@ $(document).ready(function() {
 					 <input name="t" value="article" type="hidden" />
 					<button class="btn" type="submit">Go</button>
 				</div>
-			<div>热门搜索：<c:forEach items="${searchHisPage.list}" var="searchHistory">
+			<div class="hotSearch">热门搜索：<c:forEach items="${searchHisPage.list}" var="searchHistory">
 				<a href="javascript:void(0);"  class="hotSearchA">${searchHistory.name}</a> 
 			</c:forEach></div>
 			</form>

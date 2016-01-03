@@ -7,6 +7,12 @@
 <meta name="decorator" content="cms_default_${site.theme}" />
 <meta name="description" content="JeeSite ${site.description}" />
 <meta name="keywords" content="JeeSite ${site.keywords}" />
+<style type="text/css">
+.hotSearch{
+	font-size: 13px;
+	color: #555;
+}
+</style>
 <script type="text/javascript">
 		function page(n,s){
 			$("#pageNo").val(n);
@@ -23,6 +29,12 @@
 				}else{
 					$('#pageNo').val(1);
 				}
+			});
+			
+			var hotSearchA = $('.hotSearchA');
+			hotSearchA.click(function(){
+				$('#appendedInputButton').val($(this).text());
+				$("#searchForm").submit();
 			});
 		});
 	</script>
@@ -47,8 +59,11 @@
 							 <input type="hidden" name="t" value="article" />
 							<button class="btn" type="submit">Go</button>
 						</div>
+						<div class="hotSearch">热门搜索：<c:forEach items="${searchHisPage.list}" var="searchHistory">
+							<a href="javascript:void(0);"  class="hotSearchA">${searchHistory.name}</a> 
+						</c:forEach></div>
 					</form>
-					<div class="link-dark">搜索"${condition}"，找到相关内容${page.count}篇</div>
+					<div class="link-dark">搜索"<span style="color:red;">${condition}</span>"，找到相关内容${page.count}篇</div>
 				</div>
 				<div class="panel-body article-list-mian">
 					<c:forEach items="${page.list }" var="contentBean">
