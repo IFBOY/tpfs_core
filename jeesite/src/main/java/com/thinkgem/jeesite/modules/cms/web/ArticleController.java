@@ -209,6 +209,7 @@ public class ArticleController extends BaseController {
 	@RequestMapping(value = "search")
 	public String queryByParam(HttpServletRequest request, HttpServletResponse response, String condition, Model model)
 			throws SolrServerException, IOException {
+		response.setContentType("application/json; charset=UTF-8");
 		ContentBean con = new ContentBean();
 		con.setQ((condition == null || "".equals(condition)) ? "*" : condition);
 		Page<ContentBean> page = articleService.queryByParam(new Page<ContentBean>(request, response), con);

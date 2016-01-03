@@ -259,7 +259,7 @@ $(document).ready(function() {
 							<div class="content">${user.company.name }</div>
 							<div class="content" style="padding-top: 10px;">
 								<button class="btn btn-success pull-right">
-									<a href="${fns:getAdminPath()}/logout">注销</a>
+									<a href="${ctxAdmin}/logout">注销</a>
 								</button>
 							</div>
 						</div>

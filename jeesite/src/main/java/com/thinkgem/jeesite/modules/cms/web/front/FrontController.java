@@ -114,9 +114,7 @@ public class FrontController extends BaseController {
 			model.addAttribute("staticDataList", staticData);
 			model.addAttribute("userLearnArticls", userLearnArticls);
 			model.addAttribute("userLearnTotalTime", userLearnTotalTime);
-			model.addAttribute("learnedPercent", (userLearnArticls * 1.0
-					/ totalArticles * 1.0 * 100)
-					+ "%");
+			model.addAttribute("learnedPercent", Math.round((userLearnArticls * 1.0)/(totalArticles*1.0))/100.0+ "%");
 		}
 		return "modules/cms/front/themes/" + site.getTheme() + "/frontIndex";
 	}
